@@ -1,0 +1,19 @@
+Supervisor Meeting #1
+Date: 31/01/2025
+Time: 14:30
+Duration: 1hr 10min
+
+Attendees:
+-Declan Wadsworth | drw8
+-Chuan Lu | cul
+
+Meeting Notes:
+
+1. Discussion was made regarding the proposed news solution, involving points of authenticity of AI summarisation, relatable
+expertise to the field as well as the different types of news that would or could be involved.
+
+2. Regarding expertise, Chaun suggested a game coach instead, to which Declan suggested Destiny 2, a game of which he 
+has multiple years of experience and therefore has the necessary expertise as to what are correct answers from the chatbot. 
+The expertise also gives weight to implementation and possible features.
+
+3. Declan said he would investigate the Destiny 2 proposition
