@@ -1,0 +1,39 @@
+Project Title: MMP Chatbot
+Supervisor Meeting #2
+Date: 07/02/2025
+Time: 15:30
+Duration: 40min
+Location: Llandinam, E43
+
+Attendees:
+-Declan Wadsworth | drw8
+-Chuan Lu | cul
+
+Meeting Notes:
+
+1. Declan said he had investigated the Destiny 2 proposition and came up with the idea
+for a coach aimed at new players, noting that the game is famously difficult for newer
+players to learn. He has looked at the Bungie API documentation as well as alternate
+implementations of it, such as a python wrapper that exists for the API ("aiobungie")
+on github that would allow for easier implementation. Declan says he prefers this idea 
+to the news one. He briefly described the game and its mechanics and the features it could
+involve, these being:
+
+-Suggest builds for certain activities
+-Suggest new activities and weapons based on players history
+-Knowledge base for each effect that a chatbot can explain clearer than the game does
+-Live suggestions based on where a player is currently in the game
+
+2. Chaun notes it is good he is thinking ahead about implementation but made notes on the
+target platform, that being a web-based deployment should be considered, which could target
+both mobile and desktop users due to in-built responsive design for html. 
+
+3. Chaun also mentioned "langchain" as an API that can help format input and responses from the chatbot
+into something more easily digestable by the backend, reducing the need for complex algorithms that
+breakdown chatbot responses into something useful. Declan said he will investigate this further.
+
+New Business(In no specific order):
+
+-Investigate possible langchain implementation and useful
+-Further define features
+-Create a final version project outline
