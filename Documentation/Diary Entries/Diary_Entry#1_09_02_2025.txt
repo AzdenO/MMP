@@ -1,0 +1,20 @@
+Project Title: AI-Driven Destiny 2 Player Coach
+Diary Entry: 1
+Date: 09/02/2025
+Author: Declan Roy Alan Wadsworth (drw8)
+
+Contents:
+
+1. Created the final version of the project outline document, leading to 4
+unreleased versions and a single full release.
+
+2. Created a document for the project plan as per the waterfall methodology.
+
+3. Created and began designing the first draft of the requirements specification
+document.
+
+Next Day Business:
+
+1. Continue with requirements specification document, focusing on offical functional
+and non-functional requirements as well as looking into target platform and 
+development environment sections
