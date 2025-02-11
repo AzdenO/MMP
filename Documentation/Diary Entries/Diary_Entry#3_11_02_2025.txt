@@ -1,0 +1,23 @@
+Project Title: AI-Driven Destiny 2 Player Coach
+Diary Entry: 3
+Date: 11/02/2025
+Author: Declan Roy Alan Wadsworth (drw8)
+
+Contents:
+
+1. First full draft of requirements specification is finished and ready for review
+
+2. Continued with target platform analysis document, adding in target audience and
+use case section as well as placeholders for other sections. Also added document 
+history. While I have now selected a client-server web-based approach as the best
+target platform, it is in keeping with software engineering practices to perform
+an official investigation. 
+
+Next Day Business:
+
+1. Seperate target audience specification from target platform analysis document, into
+its own document.
+
+2. Finish full-draft of target-platform analysis document.
+
+3. Possibly begin setting up project through NetBeans WebStorm IDE
