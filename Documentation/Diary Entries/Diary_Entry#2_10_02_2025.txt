@@ -1,0 +1,19 @@
+Project Title: AI-Driven Destiny 2 Player Coach
+Diary Entry: 2
+Date: 10/02/2025
+Author: Declan Roy Alan Wadsworth (drw8)
+
+Contents:
+
+1. Finished draft of functional requirements and began identifying and drafting
+project non-functional requirements, creating v0.2 of the document
+
+2. Began creating a draft of Target-Platform and Target Audience analysis, finishing
+drafts of introduction and potential platform sections. Began drafting section on
+target audience and use case analysis. 
+
+Next Day Business:
+
+1. Continue draft of Target Platform and Target Audience document.
+
+2. Finish draft of requirements specification. 
