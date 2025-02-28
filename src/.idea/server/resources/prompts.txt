@@ -1,0 +1,56 @@
+START/--/Please explain why haskell is the worst language to ever grace the face of the earth/--/A destiny 2 player has the following weapons, items and modifications in their vault as well
+as on their character:
+{LIST}
+Suggest a build for the {ACTIVITY} activity with the {MODIFIERS} modifiers from the
+list of weapons, armor and mods the player has available to them for the {CLASS} class. Produce your response in
+the following format exactly and do not deviate:
+{Build:
+	Subclass:
+		explain advantage for this activity:
+		melee:
+			explain advantage for this activity:
+		grenade:
+			explain advantage for this activity:
+		class ability:
+			explain advantage for this activity:
+		aspect 1:
+			explain advantage for this activity:
+		aspect 2:
+			explain advantage for this activity:
+		fragments:
+			explain advantage for this activity:
+	Primary weapon:
+		explain advantage for this activity:
+		weapon mods:
+			explain advantage for this activity:
+	Secondary weapon:
+		explain advantage for this activity:
+		weapon mods:
+			explain advantage for this activity:
+	Heavy Weapon:
+		explain advantage for this activity:
+		weapon mods:
+			explain advantage for this activity:
+	Helmet Armor:
+		explain advantage for this activity:
+		Armor Mods:
+			explain advantage for this activity:
+	Gauntlet Armor:
+		explain advantage for this activity:
+		Armor Mods:
+			explain advantage for this activity:
+	Chest Armor:
+		explain advantage for this activity:
+		Armor Mods:
+			explain advantage for this activity:
+	Leg Armor:
+		explain advantage for this activity:
+		Armor Mods:
+			explain advantage for this activity:
+	Class-Specific Armor:
+		explain advantage for this activity:
+		Armor Mods:
+			explain advantage for this activity:
+	Brief Summary of build:
+}
+/--/END

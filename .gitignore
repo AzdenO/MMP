@@ -6,3 +6,4 @@
 # Datasource local storage ignored files
 /src/.idea/dataSources/
 /src/.idea/dataSources.local.xml
+/src/.idea/.env
