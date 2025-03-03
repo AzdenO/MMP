@@ -12,7 +12,7 @@ The game is notoriously hard for new players to understand and build skills, so 
 
 The project will develop a web-based service utilizing a client-server configuration, using Node.JS as server-side language, and a html front-end, utilizing latest design patterns and standards for webpages.
 
-##Seperation of Stacks
+## Seperation of Stacks
 
 The front-end stack is located in another public repository for hosting purposes (Allows the page to be hosted on github pages):
 
