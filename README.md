@@ -16,7 +16,7 @@ The project will develop a web-based service utilizing a client-server configura
 
 The front-end stack is located in another public repository for hosting purposes (Allows the page to be hosted on github pages):
 
--Accessible Repo: https://github.com/AzdenO/VanguardMentorClient
--Accessible Client App: https://AzdenO.github.io/VanguardMentorClient/
+- Accessible Repo: https://github.com/AzdenO/VanguardMentorClient
+- Accessible Client App: https://AzdenO.github.io/VanguardMentorClient/
 
 At the current place in development, functionality of the front-end is limited, merely representative of its stage in development. 
