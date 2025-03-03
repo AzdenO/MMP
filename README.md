@@ -1,4 +1,4 @@
-# MMP: Chatbot Project
+# MMP: Destiny 2 Player Coach (Vanguard Mentor)
 
 The remote repository for the MMP project.
 
@@ -10,4 +10,13 @@ The project currently proposes creating a Destiny 2 player coach that can sugges
 
 The game is notoriously hard for new players to understand and build skills, so the proposed piece of software aims to make this process easier and more digestable to new, beginner and intermediary players. 
 
-The project will develop a web-based service utilizing a client-server configuration, using Node.JS as server-side language, and a react front-end
+The project will develop a web-based service utilizing a client-server configuration, using Node.JS as server-side language, and a html front-end, utilizing latest design patterns and standards for webpages.
+
+##Seperation of Stacks
+
+The front-end stack is located in another public repository for hosting purposes (Allows the page to be hosted on github pages):
+
+-Accessible Repo: https://github.com/AzdenO/VanguardMentorClient
+-Accessible Client App: https://AzdenO.github.io/VanguardMentorClient/
+
+At the current place in development, functionality of the front-end is limited, merely representative of its stage in development. 
