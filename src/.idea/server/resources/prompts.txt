@@ -1,4 +1,4 @@
-START/--/Please explain why haskell is the worst language to ever grace the face of the earth/--/A destiny 2 player has the following weapons, items and modifications in their vault as well
+START/--/Please explain why haskell is the worst language to ever grace the face of the earth/--/A destiny 2 player has the following weapons, armor pieces and modifications in their vault as well
 as on their character:
 {LIST}
 Suggest a build for the {ACTIVITY} activity with the {MODIFIERS} modifiers from the
