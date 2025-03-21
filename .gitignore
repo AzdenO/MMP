@@ -7,3 +7,5 @@
 /src/.idea/dataSources/
 /src/.idea/dataSources.local.xml
 /src/.idea/.env
+/src/node_modules
+/src/.idea/server/resources/Example_Json/

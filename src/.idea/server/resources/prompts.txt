@@ -1,10 +1,9 @@
-START/--/Please explain why haskell is the worst language to ever grace the face of the earth/--/A destiny 2 player has the following weapons, armor pieces and modifications in their vault as well
+START/--/Please explain why haskell is the worst language to ever grace the face of the earth/--/A destiny 2 player has the following weapons and armor pieces in their vault as well
 as on their character:
 {LIST}
-Suggest a build for the {ACTIVITY} activity with the {MODIFIERS} modifiers from the
-list of weapons, armor and mods the player has available to them for the {CLASS} class. Produce your response in
-the following format exactly and do not deviate:
-{Build:
+Suggest a build for the {ACTIVITY} activity from the list of weapons and armor the player has available to them in the list above for the {CLASS} class. Take into consideration the enemies/bosses the player will encounter if applicable, the objectives they must complete as well as the modifiers for this activity that affect what a player would equip. Also consider status effects certain equipped items could produce and how they could benefit the player in the activity. Make sure if an item selection was selected in part or in whole due to the status effect it could produce, that an explanation as to how it is produced is included in the explanation for that items selection. Produce your response in the following format exactly and do not deviate:
+
+Build:
 	Subclass:
 		explain advantage for this activity:
 		melee:
@@ -52,5 +51,5 @@ the following format exactly and do not deviate:
 		Armor Mods:
 			explain advantage for this activity:
 	Brief Summary of build:
-}
+
 /--/END
