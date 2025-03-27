@@ -1,61 +1,17 @@
-const destiny = (await import("./bungie_access.mjs")).default;//wait for module to instantiate, needed for flow to main server module
 
 export default class Coach{
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    constructor(reasoner, auth_token=null,refresh_token=null) {
+    constructor(reasoner,service) {
         this.reasoner = reasoner;//gemini api wrapper class/object
-        this.membershipid = null;
-        this.accountID = null;
-        this.access_token = null;
-        this.refresh_token = refresh_token;
-    }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    async initialise(auth_token){
-        const success = await this.#initBungieAccess(auth_token);
-        return success;
-    }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    async #initBungieAccess(auth) {
-        ///////////////////////////Get Access and Refresh tokens////////////////////////////////////////////////////////
-        console.log("Initializing Bungie Access");
-        const data = await destiny.getUserAccess(null,auth);
-        if(data=="error"){
-            return "error";
-        }
-        console.log("Destiny access granted\n////////////////////////////////////////")
-        /////////////////////////////////////////////Get account specific data//////////////////////////////////////////
-        this.accountID = data.membership_id;
-        console.log("Member ID: "+this.accountID);
-        this.access_token = data.access_token;
-        this.refresh_token = data.refresh_token;
-        const accountdata = await destiny.getAccountSpecificData(this.access_token);
-        if(accountdata=="error"){
-            return "error";
-        }
-        this.membershipid = accountdata.Response.destinyMemberships[0].membershipId;
-        this.membertype = accountdata.Response.destinyMemberships[0].membershipType;
-        this.displayname = accountdata.Response.destinyMemberships[0].bungieGlobalDisplayName+accountdata.Response.destinyMemberships[0].bungieGlobalDisplayNameCode.toString();
-        console.log("Primary Membership ID: "+this.membershipid);
-        /////////////////////////////////////////////Get User Characters////////////////////////////////////////////////
-        const characterlist = await destiny.getAccountCharacters(this.access_token,this.membershipid,this.membertype);
-        if(characterlist=="error"){
-            return "error";
-        }
-        this.characters = characterlist;
-        console.log(this.characters);
-        this.items = destiny.getCharacterInventoryItemsAndVault(this.access_token,this.characters[0][0],this.membershipid,this.membertype);
-        //this.get_suggestions_by_activity("Nether, Private Explore");
-        return "success";
-
+        this.userservice = service;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    async get_suggestions_by_activity(activity_id) {
-        this.reasoner.act_build(activity_id, this.#parseUserItems(), "Warlock");
+    async get_suggestions_by_activity(activity_id,character) {
+        this.reasoner.act_build(activity_id, this.#parseUserItems(), character);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,6 +38,38 @@ export default class Coach{
         return parsed;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getDisplayName(){
+        return this.details.displayname;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getCharacters(){
+        return this.details.characters;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getRefreshToken(){
+        return this.details.refreshToken;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getAccessToken(){
+        return this.details.accessToken;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getRefreshExpiry(){
+        return this.details.refresh_expiry;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getMemberType(){
+        return this.details.membertype;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getMembershipId(){
+        return this.details.membershipid;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getCharacterIds(){
+        return this.details.characters.characters[0][0];
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

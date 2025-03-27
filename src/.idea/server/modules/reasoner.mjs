@@ -11,7 +11,7 @@ export default class Reasoner{
         env.config();
         const generator = new GoogleGenerativeAI(process.env.AI_API_KEY);
         this.bot = generator.getGenerativeModel({model: "gemini-2.0-flash"});
-        this.prompts = this.#loadPrompts();
+        this.#loadPrompts();
 
     }
 
@@ -19,7 +19,7 @@ export default class Reasoner{
 
     #loadPrompts(){
         const promptstream = fs.readFileSync("O:/Dev/Level_4/VanguardMentorServer/src/.idea/server/resources/prompts.txt", "utf8");
-        return promptstream.split("/--/");
+        this.prompts = promptstream.split("/--/");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

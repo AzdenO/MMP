@@ -1,6 +1,9 @@
 //////////////////////////////////////////REQUIRED MODULES////////////////////////////////////////////////
 import env from "dotenv";//safely storing of secrets
+import dayjs from "dayjs";
 import fs from "node:fs";//for writing to files, not technically necessary apart from when saving responses from bungie to look at more easily
+var user_db = null;
+import {AuthError} from "./utils/errors.mjs";
 env.config();
 /////////////////////////////////////////LOAD API ENVIRONMENT VARIABLES///////////////////////////////////
 const apikey = process.env.D2_API_KEY;
@@ -9,7 +12,8 @@ const clientsecret = process.env.D2_CLIENT_SECRET;
 /////////////////////////////////////////COMMON ENDPOINTS/////////////////////////////////////////////////
 const base_domain="https://www.bungie.net";
 const user_access_token = "https://www.bungie.net/Platform/App/oauth/token/";//pass an auth code from OAuth2 to receive access and refresh tokens
-const user_inventory_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/?components=201,202,205,300";
+const user_inventory_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/?components=102,201,205,300";
+const user_vault_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/?components=102,300";
 const user_account_data = "https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/";
 const user_data_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/?components=COMPONENTS";//for getting characters, vault data, etc.
 const item_data_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Item/ITEMID/?components=300,302,304,305";
@@ -30,11 +34,33 @@ const logbreak = "////////////////////";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
-* CREATE A NEW USER - IMPLEMENTED AT A LATER DATE FOR BETTER USER INSTANTIATION FLOW (NEW AND CURRENT USERS)
+* QUERY BUNGIE API FOR DETAILS ON A NEW APPLICATION USER
 * Function called by the coach that encompasses all necessary function calls, and returns all data in an object the coach
 * object will store as an attribute
 */
-async function createNewUser(){
+async function getNewUser(auth_code, userObj){
+    var userDetails = {};
+
+    const data = await getUserAccess(null, auth_code);
+    if(data=="error"){
+        throw new AuthError("Error in acquiring bungie access with provided auth code","1001");
+    }
+    userDetails.accountID = data.membership_id;
+    userDetails.accessToken = data.access_token;
+    userDetails.refreshToken = data.refresh_token;
+    userDetails.refresh_expiry = dayjs().add(data.refresh_expires_in, "seconds").format("DD-MM-YYYY HH:mm:ss");
+
+    const accountdata = await getAccountSpecificData(userDetails.accessToken);
+    if(accountdata=="error"){
+        throw new AuthError("Error in acquiring user specific details","1002");
+    }
+    userDetails.membershipid = accountdata.Response.destinyMemberships[0].membershipId;
+    userDetails.membertype = accountdata.Response.destinyMemberships[0].membershipType;
+    userDetails.displayname = accountdata.Response.destinyMemberships[0].bungieGlobalDisplayName+accountdata.Response.destinyMemberships[0].bungieGlobalDisplayNameCode.toString();
+
+    userDetails.characters = await getAccountCharacters(userDetails.accessToken,userDetails.membershipid,userDetails.membertype);
+
+    userObj.details = userDetails;
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +70,7 @@ async function createNewUser(){
 * or if the user is already in the server database, using their refresh token to exchange this for an active access token.
 * If the refresh token is at its default, this is interpreted as a new server user
 */
-async function getUserAccess(refreshToken=null,auth_code) {
+async function getUserAccess(refreshToken=null,auth_code=null) {
     if(refreshToken==null){//if this is a new user, therefore a refresh token does not exist
 
         const request_body = new URLSearchParams({//convert authorization attributes into URL encoded format
@@ -64,13 +90,11 @@ async function getUserAccess(refreshToken=null,auth_code) {
             });
             if(!res.ok){
                 const consumed = await res.json();//convert response into JSON object
-                console.log("Token Request Bad:\n///////////////////////////////////////////////////////////////////////////")
                 console.log(consumed.message);//log message bungie returns for more detail on what went wrong
                 return "error";
             }
             else{
                 const consumed = await res.json();
-                console.log("Token Request Good:\n//////////////////////////////////////////////////////////////////////////")
                 //console.log(consumed);
                 return consumed;
             }
@@ -92,8 +116,8 @@ async function getUserAccess(refreshToken=null,auth_code) {
 */
 async function getAccountSpecificData(access_token){
 
-    console.log(logbreak+"\nRetrieving user account data\n"+logbreak);
-    console.log("Making request to: "+user_account_data);
+    console.log("Bungie:// Retrieving user account data");
+    console.log("\tMaking request to: "+user_account_data);
 
     const response = await protectedRequest(access_token,user_account_data,"Account Data Request");
     return response;
@@ -105,18 +129,18 @@ async function getAccountSpecificData(access_token){
 */
 async function getAccountCharacters(access_token,membershipid,membertype){
 
-    console.log(logbreak+"\nRetrieving user characters\n"+logbreak);
+    console.log("Bungie:// Retrieving user characters");
     //replace url dyanmic components with user data
     const url_construct = user_data_url;
     const phase1_url_construct = url_construct.replace("TYPE",membertype);
     const phase2_url_construct = phase1_url_construct.replace("MEMBERID",membershipid);
     const final_url = phase2_url_construct.replace("COMPONENTS","200");
-    console.log("Making request to: "+final_url);
+    console.log("\tMaking request to: "+final_url);
 
     const response = await protectedRequest(access_token,final_url,"Account Characters Request");
-    var characterlist = [];
+    var characterlist = {characters:[]};
     Object.entries(response.Response.characters.data).forEach(([element, data]) => {//iterate through character objects dynamically
-        characterlist.push([data.characterId,data.light,classTypes[Number(data.classType)]]);
+        characterlist.characters.push([data.characterId,data.light,classTypes[Number(data.classType)]]);
     });
 
     return characterlist;
@@ -130,14 +154,14 @@ async function getAccountCharacters(access_token,membershipid,membertype){
 */
 async function getPlayerInventoryItems(access_token,characterid, memberid,membertype){
 
-    console.log(logbreak+"\nRetrieving character inventory for character: "+characterid+"\n"+logbreak);//log action
+    console.log("Bungie:// Retrieving character inventory for character: "+characterid);//log action
 
     //construct URL with user specific data
     const url_construct = user_inventory_url;
     const phase1_url_construct = url_construct.replace("TYPE",membertype);
     const phase2_url_construct = phase1_url_construct.replace("MEMBERID",memberid);
     const final_url = phase2_url_construct.replace("CHARACTERID",characterid);
-    console.log("Making request to: "+final_url);
+    console.log("\tMaking request to: "+final_url);
 
     //make request
     const response = await protectedRequest(access_token,final_url,"Player Inventory Request");
@@ -252,7 +276,8 @@ async function getCharacterInventoryItemsAndVault(access_token,characterid,membe
             }
 
         }
-        return items;
+        fs.writeFile("O://example.txt",(JSON.stringify(items,null,4)),err => {});
+        return seperateItems(items);
         //console.log(JSON.stringify(items,null, 4));
     }
 }
@@ -316,7 +341,6 @@ async function protectedRequest(access_token,url,logtext,protect=true){
         }
         else{
             var consumed = await res.json();
-            console.log(logtext+" Good:\n"+logbreak);
             //console.log(JSON.stringify(consumed,null,2));
             return consumed;
         }
@@ -461,6 +485,17 @@ async function getItemDefinitions(){
     return "success";
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+function set_dependencies(db){
+    user_db = db;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+function seperateItems(items){
+
+    const armors = items.filter(i => i.item_type in ["Helmet","Chest Armor","Gauntlets","Leg Armor","Class Armor"]);
+    const weapons = items.filter(i => i.item_type in ["Energy Weapons","Kinetic Weapons","Power Weapons"]);
+    return [armors,weapons];
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
 * INITIALISE MODULE
 * Private module method that encompasses all method calls relevant for initialising the module for use,
@@ -468,27 +503,37 @@ async function getItemDefinitions(){
 */
 async function moduleInit(){
 
-    console.log("\nBungie Access Initialisation...");
+    console.log("\nBungie Module Initialisation...");
 
-    console.log("Acquiring relevant bucket hashes...\n");
+    console.log("Bungie:// Acquiring relevant bucket hashes...\n");
     if(await getAllBucketHashes()==="success"){console.log("Acquired bucket hashes")}else{console.log("Error in acquiring buckets")}//instantiate bucket hashes array, providing the hash value and the relevant name in a key value store
 
-    console.log("Acquiring subclass hashes...\n");
+    console.log("Bungie:// Acquiring subclass hashes...\n");
 
     //await getSubClassHashes();//non-functioning atm, I have to parse a 272mb file, and I dont wanna do that, if the devil exists, hes a json response
 
-    console.log("Acquiring perk hashes...\n");
+    console.log("Bungie:// Acquiring perk hashes...\n");
     if(await getPerkHashes()==="success"){console.log("Acquired perk hashes")}else{console.log("Error in acquiring perks")};
 
-    console.log("Acquiring stat hashes...\n");
+    console.log("Bungie:// Acquiring stat hashes...\n");
     if(await getStatHashes()==="success"){console.log("Acquired stat hashes")}else{console.log("Error in acquiring stats")};
 
-    console.log("Acquiring all game items...\n");
+    console.log("Bungie:// Acquiring all game items...\n");
     if(await getItemDefinitions()==="success"){console.log("Acquired all game items")}else{console.log("Error in acquiring game items")};
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 await moduleInit();//initialise module
+
+export const destiny_full = {
+    getUserAccess,
+    getAccountCharacters,
+    getAccountSpecificData,
+    getPlayerInventoryItems,
+    getCharacterInventoryItemsAndVault,
+    set_dependencies,
+    getNewUser
+}
 
 export default {getUserAccess,getAccountCharacters,getAccountSpecificData,getPlayerInventoryItems,getCharacterInventoryItemsAndVault};

@@ -12,11 +12,16 @@
   "dependencies": {
     "@google/generative-ai": "^0.22.0",
     "axios": "^1.8.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "node-fetch": "^3.3.2"
+    "mysql": "^2.18.1",
+    "mysql2": "^3.14.0",
+    "node-fetch": "^3.3.2",
+    "prompts": "^2.4.2",
+    "readline-sync": "^1.4.10"
   },
   "description": ""
 }
