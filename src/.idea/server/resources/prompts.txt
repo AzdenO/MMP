@@ -1,8 +1,9 @@
 START/--/Please explain why haskell is the worst language to ever grace the face of the earth/--/A destiny 2 player has the following weapons and armor pieces in their vault as well
 as on their character:
 {LIST}
-Suggest a build for the {ACTIVITY} activity from the list of weapons and armor the player has available to them in the list above for the {CLASS} class. Take into consideration the enemies/bosses the player will encounter if applicable, the objectives they must complete as well as the modifiers for this activity that affect what a player would equip. Also consider status effects certain equipped items could produce and how they could benefit the player in the activity. Make sure if an item selection was selected in part or in whole due to the status effect it could produce, that an explanation as to how it is produced is included in the explanation for that items selection. Produce your response in the following format exactly and do not deviate:
+Suggest a build for the {ACTIVITY} activity with the following modifiers: {MODIFIERS} from the list of weapons and armor the player has available to them in the list above for the {CLASS} class. Take into consideration the enemies/bosses the player will encounter if applicable, the objectives they must complete as well as the modifiers for this activity that affect what a player would equip. Also consider status effects certain equipped items could produce and how they could benefit the player in the activity. Make sure if an item selection was selected in part or in whole due to the status effect it could produce, that an explanation as to how it is produced is included in the explanation for that items selection. Produce your response in the following format exactly and do not deviate:
 
+Activity Explanation(go over the bosses the player will face, enemies and take into account the activity modifiers, also explain any active challenges. Describe the kind of environments they will face and how this could affect weapon choices (e.g. large spaces allows long range, etc.)):
 Build:
 	Subclass:
 		explain advantage for this activity:
@@ -50,6 +51,32 @@ Build:
 		explain advantage for this activity:
 		Armor Mods:
 			explain advantage for this activity:
-	Brief Summary of build:
+	Long Summary of build (go into specific details):
+	Overcoming certain objectives for this activity:
+	Producable status effects with this build:
 
-/--/END
+/--/A destiny 2 player wants to improve their weapon skills, specifically improve their skills with different weapon types in
+different situations (activities). The player has the current weapon type statistics:
+[statistics]
+
+Taking into account these statistics, suggest new weapon types to become familiar with and different activity types to practice
+with these weapon types in. For each type you suggest, produce the response in the following format:
+
+Suggested type:
+    summarise weapon type and its advantages:
+    summarise negatives for not using this weapon type:
+    Activity to practice in, summarising why its a good choice for practice. Be specific:
+
+/--/A destiny 2 player wants to improve their knowledge and skill ability for as many different activities as possible> The player has
+the current play statistics for all activities:
+[statistics]
+
+Taking into account these statistics. Suggest activities to repeat to improve their skills, some activities you suggest may not be in the list of statistics provided. For each activity you suggest. Produce your
+response in the following format and do not deviate:
+
+activity:
+    explain activity:
+    advantages for becoming familiar with these activities (mention learning mechanic types, environments encountered):
+
+
+

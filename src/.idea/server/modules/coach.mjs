@@ -11,33 +11,8 @@ export default class Coach{
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     async get_suggestions_by_activity(activity_id,character) {
-        this.reasoner.act_build(activity_id, this.#parseUserItems(), character);
+        this.reasoner.act_build(activity_id, this.userservice.getUserItems(this.getDisplayName()), character);
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*
-    * PARSE USER ITEMS FOR USE IN GEMINI
-    * Private class method for taking the necessary parts for every item (so excluding hashid, instanceid, etc.) to be used
-    * in a prestructured prompt
-    */
-    #parseUserItems(){
-        var parsed = "";
-
-        for(const item in this.items){
-            if(this.items[item].item_type==="Subclass"){//subclass compatibility not currently implemented
-                continue;
-            }
-            var parseditem = this.items[item];
-            delete parseditem.instance;
-            delete parseditem.itemId;
-            if(this.items[item].perks.length == 0){
-                delete parseditem.perks;
-            }
-            parsed+=JSON.stringify(parseditem,null, 4);
-        }
-        return parsed;
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getDisplayName(){
         return this.details.displayname;

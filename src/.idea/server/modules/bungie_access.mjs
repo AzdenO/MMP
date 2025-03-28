@@ -3,7 +3,8 @@ import env from "dotenv";//safely storing of secrets
 import dayjs from "dayjs";
 import fs from "node:fs";//for writing to files, not technically necessary apart from when saving responses from bungie to look at more easily
 var user_db = null;
-import {AuthError} from "./utils/errors.mjs";
+import {AuthError,InitError} from "./utils/errors.mjs";
+import modifiers from "mysql/lib/protocol/BufferList.js";
 env.config();
 /////////////////////////////////////////LOAD API ENVIRONMENT VARIABLES///////////////////////////////////
 const apikey = process.env.D2_API_KEY;
@@ -28,6 +29,10 @@ const damageTypes=["Not Applicable","Kinetic","Arc","Solar","Void","Raid Damage"
 var perkHashes = [];//bungie provides a hash for each perk on a weapon, which we query the manifest for to get its name
 var statHashes = [];//bungie provides a hash value for every stat on a weapon or armor piece, we query the manifest for this static data
 var plugHashes = [];
+var activityTypeHashes = [];
+var staticActivities = [];
+var activityModifiers = [];
+var activeActivities = [];
 var itemNameHashes = [];//stores all items in the game, including their hash, name and description
 ////////////////////////////////////////MISCELLANEOUS VARIABLES///////////////////////////////////////////
 const logbreak = "////////////////////";
@@ -461,8 +466,45 @@ async function getStatHashes(){
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function getModHashes(){
+async function getActivityModifierHashes(){
+    const modifierHashes = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityModifierDefinition,"Activity Modifiers",false);
 
+    for(const[keyValue, modifier] of Object.entries(modifierHashes)){
+        activityModifiers.push({
+           hash: keyValue,
+           name: modifier.displayProperties.name,
+           description: modifier.displayProperties.description,
+        });
+    }
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+async function getActivityTypeHashes(){
+    const typeHashes = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityTypeDefinition,"Activity Type",false);
+    for(const[type_hash, value] of Object.entries(typeHashes)){
+        activityTypeHashes.push({
+           hash: type_hash,
+           name: value.displayProperties.name
+        });
+    }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+async function getActivityDefinitions(){
+    const activityResponse = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityDefinition,"Activity Definitions",false);
+
+    for(const[activity_hash, hash] of Object.entries(activityResponse)){
+        if(hash.displayProperties.name=="Classified"){
+            continue;
+        }
+        staticActivities.push({
+            hash: activity_hash,
+            name: hash.displayProperties.name,
+            type: (activityTypeHashes.find(type => type.hash == hash.activityTypeHash)).name,
+            description: hash.displayProperties.description,
+            isPlaylist: hash.isPlaylist
+
+        });
+    }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -485,15 +527,61 @@ async function getItemDefinitions(){
     return "success";
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+async function getMilestoneActivities(){
+    const milestones = await protectedRequest(null,base_domain+"/Platform/Destiny2/Milestones/","Milestones Request",false);
+
+    for(const[keyval, milestone] of Object.entries(milestones.Response)){
+        for(const activity in milestone.activities){
+            const foundActivity = staticActivities.find(act => act.hash == milestone.activities[activity].activityHash);
+            var modifiers = [];
+            for(const modifier in milestone.activities[activity].modifierHashes){
+                const foundModifier = activityModifiers.find(mod => mod.hash == milestone.activities[activity].modifierHashes[modifier]);
+                modifiers.push({
+                   name:  foundModifier.name,
+                   description: foundModifier.description
+                });
+            }
+            activeActivities.push({
+                name: foundActivity.name,
+                description: foundActivity.description,
+                modifiers: modifiers
+            });
+        }
+    }
+    console.log(JSON.stringify(activeActivities,null,4));
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 function set_dependencies(db){
     user_db = db;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function seperateItems(items){
 
-    const armors = items.filter(i => i.item_type in ["Helmet","Chest Armor","Gauntlets","Leg Armor","Class Armor"]);
-    const weapons = items.filter(i => i.item_type in ["Energy Weapons","Kinetic Weapons","Power Weapons"]);
-    return [armors,weapons];
+    var armors = [];
+    var weapons = [];
+
+    const armorTypes = ["Helmet","Chest Armor","Gauntlets","Leg Armor","Class Armor"];
+    const weaponTypes = ["Energy Weapons","Kinetic Weapons","Power Weapons"];
+
+    for(var item in items){
+        if(checkType(items[item].item_type,armorTypes)){
+            armors.push(items[item]);
+        }else if(checkType(items[item].item_type, weaponTypes)){
+            weapons.push(items[item]);
+        }
+    }
+    return [armors, weapons];
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+function checkType(item_type, types){
+    for(var type in types){
+        if(item_type == types[type]){
+            return true;
+        }
+    }
+    return false;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -520,6 +608,18 @@ async function moduleInit(){
 
     console.log("Bungie:// Acquiring all game items...\n");
     if(await getItemDefinitions()==="success"){console.log("Acquired all game items")}else{console.log("Error in acquiring game items")};
+
+    console.log("Bungie:// Acquiring activity types...\n");
+    await getActivityTypeHashes();
+
+    console.log("Bungie:// Acquiring activity definitions...\n");
+    await getActivityDefinitions();
+
+    console.log("Bungie:// Acquiring activity modifier definitions...\n");
+    await getActivityModifierHashes();
+
+    console.log("Bungie:// Acquiring active activities...\n");
+    await getMilestoneActivities();
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

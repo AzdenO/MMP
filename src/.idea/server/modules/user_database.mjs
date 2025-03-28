@@ -74,7 +74,17 @@ async function checkForUser(userid){
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function storeUserItems(items, userid){
+async function storeItem(itemdata, type){
+    console.log(`Database:// Storing item:\n\t ${itemdata[3]} of type ${itemdata[5]} for user ${itemdata[2]}`)
+    const connection = await getConnection();
+    var result = null;
+    if(type == "Weapon"){
+        result = await connection.execute("CALL addWeapon(?,?,?,?,?,?,?,?,?)",itemdata);
+    }else if(type == "Armor"){
+        await connection.execute("CALL addArmor(?,?,?,?,?,?,?,?)",itemdata);
+    }
+
+    connection.release();
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +114,8 @@ async function load_queries(){
 * Private module method to create a new database, as well as creating all tables
 */
 async function init_db(){
-    for(let x=1; x<3; x++){
+    const connection = await getConnection();
+    for(let x=0; x<3; x++){
         await connection.execute(queries[x]);
     }
 }
@@ -166,7 +177,7 @@ async function getConnection(){
 * UPDATE A USERS REFRESH TOKEN AND EXPIRY DATE
 * This function is used by User Services when an authorisation request on the server receives an auth code, not any kind
 * of identifier (refresh token) where we can check the database first. As part of that flow, the user service gets the player
-* data from destiny which involves asking for new tokens from bungie, invalidating what is stored in the database. Therefore
+* data from destiny first which involves asking for new tokens from bungie, invalidating what is stored in the database. Therefore
 * the new refresh token needs adding to the database for requests where the refresh token is used.
 */
 async function updateRefresh(token, expiry, user){
@@ -175,13 +186,27 @@ async function updateRefresh(token, expiry, user){
     connection.release();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+* GET ITEMS BELONGING TO PLAYER WITH PROVIDED USERID
+* Method for retrieving all of a players items from the database, a list of arguments can be passed to retrieve only
+* specific item types, power levels, etc. (Currently only retrieves all player items, further implementation at later date)
+*/
+async function getUserItems(userid, args=null){
+    console.log(`Database:// Item retrieval request for user: ${userid}`);
+    const connection = await getConnection();
+
+    const result = await connection.execute("CALL getAllPlayerItems(?)",[userid]);
+    return [result[0][0],result[0][1]];
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const db = {
     initialise,
     getUser,
     newUser,
     refreshUser,
-    storeUserItems,
+    storeItem,
     checkForUser,
-    updateRefresh
+    updateRefresh,
+    getUserItems
 }
