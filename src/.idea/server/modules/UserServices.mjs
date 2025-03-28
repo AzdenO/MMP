@@ -2,12 +2,12 @@ var db = null;
 var destiny = null;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-async function authorizeUser(coach,code=null,cookie=null) {
+async function authorizeUser(coach,code=null,refresh=null) {
 
-    if(cookie){//if a token cookie is present then this is not a new user
+    if(refresh){//if a token cookie is present then this is not a new user
 
         console.log("User Services (Authorisation):// Authorisation by refresh token");
-        await db.getUser(cookie, coach);
+        await db.getUser(cookie, refresh);
 
     }else if(code){//if an OAuth code is present, this is likely a new user
         console.log("User Services (Authorisation):// Authorisation by OAuth2 code");
@@ -16,7 +16,7 @@ async function authorizeUser(coach,code=null,cookie=null) {
             await db.refreshUser(coach.getDisplayName());//refresh users data on the database
             await db.updateRefresh(coach.getRefreshToken(),coach.getRefreshExpiry(),coach.getDisplayName());//update user token in database seen as we had no choice but to authorise with bungie first
 
-            getUserItems(coach.getDisplayName());
+            //getUserItems(coach.getDisplayName());
 
         }else{
             await db.newUser(coach.details);

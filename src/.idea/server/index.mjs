@@ -11,6 +11,9 @@ import dayjs from "dayjs";//time module
 import cookieParser from "cookie-parser";
 
 ////////////////////////////////////////////////SERVER-WIDE DEPENDENCY CONFIGURATION////////////////////////////////////
+/*Main Server File Dependencies*/
+import {invalidParamsBody,invalidTokenBody} from "./modules/constants/responseConstants.mjs";
+
 /*Secondary dependencies*/
 
 import mysql from "mysql2/promise";
@@ -39,8 +42,6 @@ try{
     console.log(error);
     process.exit(400);
 }
-
-destiny.set_dependencies(db);//pass database dependency to destiny module
 
 UserService.initialise(destiny,db);
 
@@ -80,6 +81,33 @@ const httpsOptions = {
 };
 ///////////////////////////////////////////////ROUTE DEFINITIONS////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+api.get("/server/coach/WeaponSkills", async (req, res) => {
+
+    const token = req.headers["x-access-token"];
+    if(!token){
+        res.status(501);
+        res.json(invalidParamsBody);
+        res.send();
+        return;
+    }else{
+
+        try{
+
+            const generated = await active_pool.process(token, 2);
+
+        }catch(err){
+
+            if(typeof err === "InvalidTokenError"){
+                res.status(401);
+                res.json(invalidTokenBody);
+                res.send();
+            }
+
+        }
+    }
+
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 api.get('/server/coach/act_sug_build', async(req, res) => {
 
@@ -88,12 +116,8 @@ api.get('/server/coach/act_sug_build', async(req, res) => {
     const activityId = req.headers["activity-id"];
 
     if(!characterId || !token || !activityId){
-        res.status(501);
-        res.json({
-            success: false,
-            message: "Request missing necessary query parameters",
-
-        });
+        res.status(400);
+        res.json(invalidParamsBody);
         res.send();
         return;
 
@@ -105,12 +129,10 @@ api.get('/server/coach/act_sug_build', async(req, res) => {
 
         }catch(err){
 
-            if(typeof err === "InvalidTokenError"){
+            if(err.constructor.name == "InvalidTokenError"){
                 res.status(401);
-                res.json({
-                    success: false,
-                    message: "Provided token is invalid, reauthorisation required. If you do not have a refresh token, please go back to /server/authorize with a valid bungie OAuth2 authorisation code",
-                })
+                res.json(invalidTokenBody);
+                res.send();
             }
 
         }
