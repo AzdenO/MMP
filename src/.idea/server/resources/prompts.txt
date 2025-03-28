@@ -4,6 +4,7 @@ as on their character:
 Suggest a build for the {ACTIVITY} activity with the following modifiers: {MODIFIERS} from the list of weapons and armor the player has available to them in the list above for the {CLASS} class. Take into consideration the enemies/bosses the player will encounter if applicable, the objectives they must complete as well as the modifiers for this activity that affect what a player would equip. Also consider status effects certain equipped items could produce and how they could benefit the player in the activity. Make sure if an item selection was selected in part or in whole due to the status effect it could produce, that an explanation as to how it is produced is included in the explanation for that items selection. Produce your response in the following format exactly and do not deviate:
 
 Activity Explanation(go over the bosses the player will face, enemies and take into account the activity modifiers, also explain any active challenges. Describe the kind of environments they will face and how this could affect weapon choices (e.g. large spaces allows long range, etc.)):
+Activity survivability (if the players character power level is high enough, and if not, state such and create a build suggestion to maximise survivability):
 Build:
 	Subclass:
 		explain advantage for this activity:
@@ -55,7 +56,9 @@ Build:
 	Overcoming certain objectives for this activity:
 	Producable status effects with this build:
 
-/--/A destiny 2 player wants to improve their weapon skills, specifically improve their skills with different weapon types in
+/--/
+
+A destiny 2 player wants to improve their weapon skills, specifically improve their skills with different weapon types in
 different situations (activities). The player has the current weapon type statistics:
 [statistics]
 
@@ -75,8 +78,107 @@ Taking into account these statistics. Suggest activities to repeat to improve th
 response in the following format and do not deviate:
 
 activity:
-    explain activity:
-    advantages for becoming familiar with these activities (mention learning mechanic types, environments encountered):
+    explain activity (bosses, phases, environments, enemy types, brief story details):
+    advantages for becoming familiar with this activity (mention learning mechanic types, environments encountered and how these add to a players skillset, weapon rolls as rewards, and any other advantages you can think of):
+
+/--/
+
+A destiny 2 players character has the following equipped armors:
+[ARMOR]
+As well as the following equipped weapons:
+[WEAPONS]
+and their subclass is configured as the following:
+[SUBCLASS]
+They have the following items available to them to switch out:
+[ITEMS]
+
+Please analyze this build, producing your response in the following format without deviating:
+Analysis:
+    Overview and explanation of what activities/situations this build is optimized for, if any. If not geared towards any specific abilities, state this:
+    Producable status effects:
+        ability to produce longevity for effect with equipped items including any armor mods and weapon perks:
+    Weapon configuration:
+        for each weapon (put weapon name here):
+            weapon type advantages:
+            any status effect advantages the weapon provides:
+            further advantages with weapon perks(if any):
+            weapon disadvantages with weapon perks(if any):
+            weapon advantages with weapon stats:
+            weapon disadvantages with weapon stats:
+            possible switch of weapon from list of provided items:
+                advantage over currently equipped:
+                disadvantage over currently equipped:
+    Armor configuration:
+        for each piece of equipped armor (put armor name here):
+            for each equipped armor mod (put name here):
+                mod advantage to wider character configuration:
+                any disadvantages to wider character configuration:
+                possible different set of mods:
+                    for each suggestion, explain its advantage for wider character configuration:
+            Armor stat advantages (may not be true for some of this armors statistics):
+                resilience:
+                Mobility:
+                Recovery:
+                Discipline:
+                Intellect:
+                Strength:
+            Armor stat disadvantages (may not be true for some of this armors statistics):
+    Exotic choices (if any exotics are even equipped, if not, then explain the advantage exotics can provide):
+        exotic weapon (weapon name here):
+            perk advantages (briefly relating to different combat environments and wider character configuration if applicable):
+    Subclass configuration:
+        producable status effects (list here):
+            for each producable effect, explain its advantages:
+        melee ability choice:
+            explain advantage this choice provides for certain combat environments:
+        grenade ability choice:
+            explain advantage this choice provides for certain combat environments:
+        class ability choice:
+            explain advantage this choice provides for certain combat environments:
+        aspect choices:
+            for each aspect:
+                explain advantage this choice provides for wider subclass configuration:
+                explain advantage this choice provides to wider character configuration (including considerations for survivability, damage output, advantages for certain combat environments)
+        Fragment choices:
+            for each fragment:
+                explain advantage for wider character configuration (including benefits to overall build stats, damage output, defence ability, if applicable)
+                explain advantage to wider subclass configuration:
+        Chosen super ability:
+            explain advantages this particular super ability provides (including benefits in certain combat environments, activities, and how it could be used in line with wider character configuration)
+        Brief summary of build(including outlining whats good and bad about weapon choices, armor choices, subclass choices):
+
+/--/
+
+A destiny 2 player took part in the following activity, getting the following number of kills, deaths, and other statistics:
+[ACTIVITY]
+
+/--/A destiny 2 player wants to know the meaning of the keyword
+[KEYWORD]
+
+Explain this keyword, producing your response in the following format:
+
+    Keyword:
+        type(whether it is a status effect, item keyword, faction, etc.):
+        Explanation (if the keyword is a status effect, explain how it is produced and what benefits it provides a player)
+
+/--/
+A destiny 2 player wants a set of targets to improve their overall skill in the game. They have the following statistics:
+Weapon statistics:[WEAPON]
+Activity statistics:[ACTIVITY]
+crucible statistics:[CRUCIBLE]
+
+Produce a set of 20 targets for the player to meet, basing what you produce on the statistics provided and where you think the player needs to gain greater skill or playtime to improve the overall average. These targets must be numerically based, so in the form of current/target.
+The targets you produce can be:
+completing a certain number of activity types, e.g. raids,grandmaster nightfalls, seasonal acitivities, survival activites, etc.
+getting a certain number of crucible kills for a certain crucible gamemode
+getting a certain number of damage dealt for a specific activity (raid bosses, etc.)
+
+Each target you produce should be produced in the following format with no deviation:
+    <Target>
+        <type>insert type here (e.g. Activity completions, kill count, damage dealt)</type>
+        <targetValue>insert target value here<targetValue>
+    </Target>
+
 
 
 
