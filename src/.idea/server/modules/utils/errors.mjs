@@ -36,3 +36,12 @@ export class InvalidTokenError extends Error {
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////
+export class DatabaseError extends Error {
+    constructor(message, code) {
+        super(message);
+        this.code = code;
+        this.name = this.constructor.name;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+//////////////////////////////////////////////////////////////////////////////////////

@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import fs from "node:fs";//for writing to files, not technically necessary apart from when saving responses from bungie to look at more easily
 var user_db = null;
 import {AuthError,InitError} from "./utils/errors.mjs";
+import {parseWeaponStats} from "./utils/bungieParser.mjs"
 import {replaceMultiple} from "./utils/stringUtils.js";
 env.config();
 /////////////////////////////////////////LOAD API ENVIRONMENT VARIABLES///////////////////////////////////
@@ -19,7 +20,7 @@ const user_account_data = "https://www.bungie.net/Platform/User/GetMembershipsFo
 const user_data_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/?components=COMPONENTS";//for getting characters, vault data, etc.
 const item_data_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Item/ITEMID/?components=300,302,304,305";
 const manifest_url = "https://www.bungie.net/Platform/Destiny2/Manifest/";//url for static game data, such as bucket hashes
-var weapon_stats_url = "https://www.bungie.net/Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Stats/groups=Weapons";
+var weapon_stats_url = "https://www.bungie.net/Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Stats/?groups=Weapons";
 
 var manifestData = null;//as part of module init, multiple calls would need to be made to the manifest endpoint. Caching the first request made to it saves time for subsequent requests for other module iniitialisation attributes
 /////////////////////////////////////////////////////BUNGIE RETURN VALUES/////////////////////////////////
@@ -44,7 +45,7 @@ const logbreak = "////////////////////";
 * Function called by the coach that encompasses all necessary function calls, and returns all data in an object the coach
 * object will store as an attribute
 */
-async function getNewUser(auth_code, userObj){
+async function getNewUser(auth_code){
     var userDetails = {};
 
     const data = await getUserAccess(null, auth_code);
@@ -66,7 +67,7 @@ async function getNewUser(auth_code, userObj){
 
     userDetails.characters = await getAccountCharacters(userDetails.accessToken,userDetails.membershipid,userDetails.membertype);
 
-    userObj.details = userDetails;
+    return userDetails;
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -282,9 +283,7 @@ async function getCharacterInventoryItemsAndVault(access_token,characterid,membe
             }
 
         }
-        fs.writeFile("O://example.txt",(JSON.stringify(items,null,4)),err => {});
         return seperateItems(items);
-        //console.log(JSON.stringify(items,null, 4));
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -315,7 +314,7 @@ async function getVaultItems(membershipid,membertype,access_token){
 * GET ALL PLAYER ITEMS ACROSS ALL CHARACTERS INCLUDING THE PLAYERS VAULT
 * All-encompassing method to fetch and parse all player items from all applicable sources, including what is
 * equipped and unequipped on each individual character as well as the players vault, returning a single list
-* of all items
+* of all items,seperated by armor and weapons
 */
 async function getAllPlayerItems(characterid,membershipid,membertype,access_token){
 
@@ -327,16 +326,29 @@ async function getAllPlayerItems(characterid,membershipid,membertype,access_toke
  * @param membershipid Player membership id, maps to platform player plays on
  * @param membertype Maps to platform type player plays on (enum)
  * @param access_token Unique token for accessing a specific players data
- * @returns {Promise<void>} A list of objects with {typeName: weapontype, value: kills}
+ * @param pve boolean flag whether to return pve results or pvp results
+ * @returns {Promise<void>} A list of objects with {typeName: string, precision kills: int, normal kills: int}
  */
-async function getAccountWeaponStats(membershipid,membertype,access_token){
+async function getAccountWeaponStats(membershipid,membertype,access_token, pve){
 
-    const values = {
+    const flags = {
         "MEMBERTYPE": membertype,
         "MEMBERID": membershipid
     };
-    const final_url = replaceMultiple(/MEMBERTYPE|MEMBERID/g,values,weapon_stats_url);
-    const response = await protectedRequest(access_token,final_url,"Account weapon stats Request");
+
+    const final_url = replaceMultiple(/MEMBERTYPE|MEMBERID/g,flags,weapon_stats_url);
+    var requested = null;
+    var result = await protectedRequest(access_token,final_url,"Account weapon stats Request");
+    result = result.Response.mergedAllCharacters.results;
+    if(pve){
+        requested = result.allPvE.allTime;
+    }else{
+        requested = result.allPvP.allTime;
+    }
+    const results = parseWeaponStats(requested);
+    fs.writeFile("O://exampleWeaponStatsParsed.txt",JSON.stringify(results,null,4),"utf8",(err) => {})
+
+
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -392,7 +404,7 @@ async function protectedRequest(access_token,url,logtext,protect=true){
             headers: header
         });
         if(!res.ok){
-            console.log(logtext+" Bad:\n"+logbreak);
+            console.log(logtext+" Bad:\n"+logbreak+"\n"+res.toString());
             var consumed = await res.json();
             console.log(JSON.stringify(consumed,null,4));
             return "error";
@@ -674,7 +686,7 @@ async function moduleInit(){
     console.log("Bungie:// Acquiring active activities...");
     await getMilestoneActivities();
 
-    getAccountWeaponStats("id","type",null);
+
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -684,7 +696,8 @@ await moduleInit();//initialise module
 export const destiny_full = {
     getCharacterInventoryItemsAndVault,
     set_dependencies,
-    getNewUser
+    getNewUser,
+    getAccountWeaponStats
 }
 
 export default {getUserAccess,getAccountCharacters,getAccountSpecificData,getPlayerInventoryItems,getCharacterInventoryItemsAndVault};
