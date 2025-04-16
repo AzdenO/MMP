@@ -1,0 +1,9 @@
+//////////////////////////////////////////////////////////////////
+/**
+ * Function to cause a delay in execution
+ * @param millis milliseconds to delay for
+ */
+export function delay(millis){
+    return new Promise(resolve => setTimeout(resolve, millis));
+}
+//////////////////////////////////////////////////////////////////

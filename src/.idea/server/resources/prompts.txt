@@ -77,8 +77,8 @@ Analysis{[
         Activity to practice in, summarising why its a good choice for practice: (take into account the environments found in this activity and why this weapon is effective such as where ad clearing is a priority or if the weapon could aid in survivability, the enemy types such as bosses) STRING
     }
 ]}
-/--/A destiny 2 player wants to improve their knowledge and skill ability for as many different activities as possible> The player has
-the current play statistics for all activities:
+/--/A destiny 2 player wants to improve their knowledge and skill ability for as many different activities as possible.
+The player has the current play statistics for all activities:
 [statistics]
 
 Taking into account these statistics. Suggest activities to repeat to improve their skills, some activities you suggest may not be in the list of statistics provided. For each activity you suggest. Produce your
@@ -156,18 +156,96 @@ Analysis:
 
 /--/
 
-A destiny 2 player took part in the following activity, getting the following number of kills, deaths, and other statistics:
+A destiny 2 player took part in an activity, with the following summary:
 [ACTIVITY]
+First, you need to research this activity via the web, as you likely do not have relevant or up to date information for this specific
+activity. Do not use your internal data store. Searching the web for your research is a strict requirement, but only if the
+activity is a PvE activity. Make sure your search follows this strategy:
+    -Start with a general search of the actvity name, omitting the activity type as this may be inconsistent
+    -Once you have a substantial amount of data about the activity, research:
+        -environments found in this activity (are there close quarter environments, larger open spaces, environments that are somewhere in between, or a mix of both)
+        -the enemies a player would encounter (enemy types, difficulty, the threats they pose with their weapons and abilities)
+        -Basic actvity lore details
+You will also need to research the weapons found in the activity summary. For this, use the following search strategy:
+        -General search of weapon name, collecting as much data as is necessary to ensure all details about the weapon are captured
+        With this data, perform more detailed research on the following factors:
+            -What is the weapons type
+            -Is it an exotic, if so, what intrinsic traits could it have
+            -What stats does this weapon generally get
+            -What type of activities and environments is it geared towards
+            -What enemies is it most effective against
+Once all this research is out of the way, Analyze this set of data, using the following analysis attributes:
+    -The environment of this activity (are there large open spaces, is it more enclosed, somewhere in-between, forcing different combat ranges, affecting weapon choices)
+    -The enemies encountered in this activity (what difficulty do these different types pose, how would the threat they pose best be countered through weapons, abilities, so on and so forth. If it is a crucible match, take into consideration varying skill levels)
+    -The modifiers of this activity (if any, what additional challenges or benefits do these pose, how can we take advantage or counter them)
+    -How long did the activity take to complete (can you conclude if this is typical, fast or possibly a little slow)
+    -What weapons did the player use (are these weapons optimized for this activity, are the damage types applicable to any modifiers, what is the distribution of kills between the different weapons, are the weapon types fit for this activity, its enemies and environments, what intrinsic traits, if any, aid the player in this activity)
+    -What other abilities were used to get kills (what is the distribution between grenade, melee and super ability. Why might grenade kills be low, is it possible they used things such as healing grenades. Should the player take more advantage of these abilities for the kind of environments the activity poses)
+    -How many deaths did the player experience (does this seem high, can you think of any strategies for this activity that would help reduce this number)
+    -What is the distribution between assists and kills (has the player relied too heavily on their team mates possibly, should they take a more agressive approach in future to make up their share of the work)
+    -What about the data for other participants (has the player not put in as much work, did their weapons cohere more to the activity)
+    -Could any potential weaknesses in the activity summary be due to the choices or performance of other players (their weapons, kill data)
+Make sure for each of these points, to take into account the analysis from all other attributes to produce a high level of complexity in your analysis
+With your analysis performed. Next produce a list of up to 5 suggestions for encountering this activity in the future, taking into
+account the following attributes for your suggestions:
+    -Are you suggesting weapon changes, if so give a detailed reason from your analysis as to why
+    -Are you suggesting different techniques (such as using specific super abilities, grenades, combat tactics)
+    -Did you find any possibility of inexperience with certain weapons or abilities, would you suggest practice with these types
 
-/--/A destiny 2 player wants to know the meaning of the keyword
+Produce a response in JSON format in the following format, and do not deviate, producing any text as if
+you were talking to the player as a coach providing feedback and critique. Anything in captials is instructions:
+
+Analysis{
+    Brief activity summary:"",
+    Analysis of environment:"",
+    Team Performance Analysis IF APPLICABLE, SUCH AS IF OUR PLAYER WAS THE ONLY PARTICIPANT:"",
+    Weapon analysis:{
+        distribution of kills:"",
+        for each weapon REPLACE THIS KEY WITH THE WEAPON NAME:{
+            weapon effectiveness:"",
+            modifier compliance IF APPLICABLE, OTHER WISE OMIT:"",
+            comparison of weapon kills to general distribution of all kills IS THE DISTRIBUTION GOOD FOR THE KIND OF ENVIRONMENT THE ACTIVITY POSES
+        }
+    },
+    Combat analysis:"",
+    Duration analysis IF APPLICABLE OTHERWISE OMIT, E.G IT WAS CRUCIBLE:"",
+    Suggestions:{
+        Suggestion FOR EACH SUGGESTION, INCLUDE A NEW ENTRY IN THIS OBJECT:
+    }
+}
+/--/A destiny 2 player wants to know the meaning of this word which is of [KEYWORDTYPE] type:
 [KEYWORD]
 
-Explain this keyword, producing your response in the following format, and do not deviate:
+Firstly, perform a web search for this word, with your search query being "Destiny 2 THE KEYWORD", obviously replacing
+whats in capitals with the provided keyword. Make sure to fetch as much detail as you can regarding it.
 
-    Keyword:
-        type(whether it is a status effect, item keyword, faction, etc.):
-        Explanation (if the keyword is a status effect, explain how it is produced and what benefits it provides a player)
+Once you have captured this information, produce your response in one of the JSON formats below that matches the type of keyword, do not deviate from its structure.
+Make sure to conduct further web searches for different attributes of the selected JSON.
+Anything in capitals should be treat as instructions, and any text generated should in the tone of a Destiny 2 vanguard member:
 
+Activity_Type JSON:
+    "response":{
+         "Description"PROVIDE A DETAILED DESCRIPTION OF THIS ACTIVITY TYPE:"",
+         "Example_Activities"PROVIDE A FEW ACTIVITIES OF THIS TYPE THAT ARE CURRENTLY AVAILABLE IN THE GAME:"",
+    }
+Status_Effects JSON:
+    "response":{
+        "Description"DETAILED DESCRIPTION OF WHAT THIS STATUS EFFECT PROVIDES:"",
+        "Production_Mechanisms"PROVIDE A DETAILED DSECRIPTION OF HOW THIS STATUS EFFECT IS PRODUCED:"",
+    }
+Champions JSON:
+    "response":{
+        "Description":"",
+        "Counter_Mechanisms"HOW IS THIS CHAMPION BEST DEFEATED, EXAMPLES OF PERKS, WEAPONS, ETC.:"",
+        "Locations"WHAT ACTIVITIES IS THIS CHAMPION TYPICALLY FOUND IN:"",
+    }
+Specific_Activities JSON:
+    "response":{
+        "Description"DETAILED DESCRIPTION OF ACTIVITY:"",
+        "Environments"WHAT ENVIRONMENTS ARE FOUND IN THIS ACTIVITY:
+        "Enemies"WHAT ENEMY TYPES ARE FOUND IN THIS ACTIVITY, WHAT BOSSES:"",
+        "Mechanics"ONLY PRODUCE THIS FOR RAIDS AND DUNGEONS, PROVIDE A DESCRIPTION OF EACH MECHANIC FOUND:"",
+    }
 /--/
 A destiny 2 player wants a set of targets to improve their overall skill in the game. They have the following statistics:
 Weapon statistics:[WEAPON]

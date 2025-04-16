@@ -1,5 +1,6 @@
 var db = null;
 var destiny = null;
+var DEBUG = false;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 async function authorizeUser(coach,code=null,refresh=null) {
@@ -26,7 +27,7 @@ async function authorizeUser(coach,code=null,refresh=null) {
 
             console.log("User Services (Async): Retrieving player items to store in database");
 
-            await destiny.getAccountWeaponStats(coach.getMembershipId(),coach.getMemberType(), coach.getAccessToken(), true);
+            destiny.getAccountActivityReports(coach.getMembershipId(),coach.getMemberType(),coach.getCharacterIds(),coach.getAccessToken(),7);
 
             destiny.getCharacterInventoryItemsAndVault(coach.getAccessToken(),coach.getCharacterIds(),coach.getMembershipId(),coach.getMemberType()).then(result =>{
                 try{//database interaction can throw custom errors that need handling

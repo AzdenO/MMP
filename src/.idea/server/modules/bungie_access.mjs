@@ -2,15 +2,31 @@
 import env from "dotenv";//safely storing of secrets
 import dayjs from "dayjs";
 import fs from "node:fs";//for writing to files, not technically necessary apart from when saving responses from bungie to look at more easily
-var user_db = null;
 import {AuthError,InitError} from "./utils/errors.mjs";
-import {parseWeaponStats} from "./utils/bungieParser.mjs"
+import {parseWeaponStats,parseActivityHistory,setGameData} from "./utils/bungieParser.mjs";
+import * as Endpoints from "./constants/BungieEndpoints.mjs";
+import * as EndpointParameters from "./constants/BungieEndpointConstants.mjs";
 import {replaceMultiple} from "./utils/stringUtils.js";
+import {delay} from "./utils/timeUtils.mjs";
 env.config();
 /////////////////////////////////////////LOAD API ENVIRONMENT VARIABLES///////////////////////////////////
 const apikey = process.env.D2_API_KEY;
 const clientid = process.env.D2_CLIENT_ID;//doesnt need to be a secret but is of the theme so might as well store it here
 const clientsecret = process.env.D2_CLIENT_SECRET;
+/////////////////////////////////////////REQUEST VARIABLES////////////////////////////////////////////////
+/**
+ * The current request number used to avoid bungie api throttling. This is managed inside of protected request and resets
+ * every second
+ * @type {number}
+ */
+var curReqNum = 0;
+
+/**
+ * The number of milliseconds since bungie api throttle management was reset. Once this reaches a thousand, it starts again
+ * and curReqNum is reset to 0
+ * @type {number}
+ */
+var reqMillis = 0;
 /////////////////////////////////////////COMMON ENDPOINTS/////////////////////////////////////////////////
 const base_domain="https://www.bungie.net";
 const user_access_token = "https://www.bungie.net/Platform/App/oauth/token/";//pass an auth code from OAuth2 to receive access and refresh tokens
@@ -21,7 +37,8 @@ const user_data_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEM
 const item_data_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Item/ITEMID/?components=300,302,304,305";
 const manifest_url = "https://www.bungie.net/Platform/Destiny2/Manifest/";//url for static game data, such as bucket hashes
 var weapon_stats_url = "https://www.bungie.net/Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Stats/?groups=Weapons";
-
+var activity_reports_url = base_domain+"/Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Character/CHARID/Stats/Activities/";
+var pgcr_url = base_domain+"/Platform/Destiny2/Stats/PostGameCarnageReport/INSTANCE";
 var manifestData = null;//as part of module init, multiple calls would need to be made to the manifest endpoint. Caching the first request made to it saves time for subsequent requests for other module iniitialisation attributes
 /////////////////////////////////////////////////////BUNGIE RETURN VALUES/////////////////////////////////
 
@@ -88,7 +105,7 @@ async function getUserAccess(refreshToken=null,auth_code=null) {
         }).toString();
 
         try{
-            const res = await fetch(user_access_token, {
+            const res = await fetch(Endpoints.user_access_token, {
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -124,9 +141,8 @@ async function getUserAccess(refreshToken=null,auth_code=null) {
 async function getAccountSpecificData(access_token){
 
     console.log("Bungie:// Retrieving user account data");
-    console.log("\tMaking request to: "+user_account_data);
 
-    const response = await protectedRequest(access_token,user_account_data,"Account Data Request");
+    const response = await protectedRequest(access_token,Endpoints.user_account_data,"Account Data Request");
     return response;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,21 +151,26 @@ async function getAccountSpecificData(access_token){
 * Function that requests users characters, and parses the response to be held in the coach object at the end of function call
 */
 async function getAccountCharacters(access_token,membershipid,membertype){
+    var hoursPlayed = 0;
 
     console.log("Bungie:// Retrieving user characters");
+
+    const pathParams = {
+        "TYPE": membertype,
+        "MEMBERID": membershipid
+    }
     //replace url dyanmic components with user data
-    const url_construct = user_data_url;
-    const phase1_url_construct = url_construct.replace("TYPE",membertype);
-    const phase2_url_construct = phase1_url_construct.replace("MEMBERID",membershipid);
-    const final_url = phase2_url_construct.replace("COMPONENTS","200");
+    const final_url = replaceMultiple(/TYPE|MEMBERID/g,pathParams,Endpoints.user_data_url)+"?components=200";
+
     console.log("\tMaking request to: "+final_url);
 
     const response = await protectedRequest(access_token,final_url,"Account Characters Request");
     var characterlist = {characters:[]};
     Object.entries(response.Response.characters.data).forEach(([element, data]) => {//iterate through character objects dynamically
         characterlist.characters.push([data.characterId,data.light,classTypes[Number(data.classType)]]);
+        hoursPlayed+= data.minutesPlayedTotal/60;
     });
-
+    hoursPlayed.toPrecision(2);//round to 2 decimal places, to be memory efficient
     return characterlist;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -163,11 +184,13 @@ async function getPlayerInventoryItems(access_token,characterid, memberid,member
 
     console.log("Bungie:// Retrieving character inventory for character: "+characterid);//log action
 
+    const pathParams = {
+        "TYPE": membertype,
+        "MEMBERID": memberid,
+        "CHARACTERID": characterid,
+    }
     //construct URL with user specific data
-    const url_construct = user_inventory_url;
-    const phase1_url_construct = url_construct.replace("TYPE",membertype);
-    const phase2_url_construct = phase1_url_construct.replace("MEMBERID",memberid);
-    const final_url = phase2_url_construct.replace("CHARACTERID",characterid);
+    const final_url = replaceMultiple(/TYPE|MEMBERID|CHARACTERID/g,pathParams,Endpoints.user_inventory_url);
     console.log("\tMaking request to: "+final_url);
 
     //make request
@@ -291,12 +314,35 @@ function parseItemResponse(response){
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function getEquippedItems(characterid,membershipid,membertype,access_token){
+/**
+ * Function to fetch items for a players character
+ * @param characterid the id for the character we are fetching for
+ * @param membershipid player membership id, tied to platform they play on
+ * @param membertype platform type the player plays on
+ * @param access_token access token used by this registered application to access player data on their behalf
+ * @param equipped boolean to indicate whether to fetch what is equipped or unequipped
+ * @returns {Promise<void>} A bungie api response, this will need parsing by the bungie parser module
+ */
+async function getCharacterItems(characterid,membershipid,membertype,access_token, equipped){
 
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function getUnEquipped(characterid,membershipid,membertype,access_token){
+    const pathParams = {
+        "TYPE": membertype,
+        "MEMBERID": membershipid,
+        "CHARACTERID": characterid,
+    }
+    let locationComponent = 0;
 
+    if(equipped){
+        locationComponent = 205;
+    }
+    else{
+        locationComponent = 201;
+    }
+    console.log("Bungie:// Retrieving equipped character items for character: "+characterid);
+    const final_url = replaceMultiple(/TYPE|MEMBERID|CHARACTERID/g,pathParams,Endpoints.user_inventory_url)+"?components=300,304,302,305,"+locationComponent;
+
+    const res = await protectedRequest(access_token,final_url,"Character Equipped Items Request");
+    return res.Response;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -327,7 +373,7 @@ async function getAllPlayerItems(characterid,membershipid,membertype,access_toke
  * @param membertype Maps to platform type player plays on (enum)
  * @param access_token Unique token for accessing a specific players data
  * @param pve boolean flag whether to return pve results or pvp results
- * @returns {Promise<void>} A list of objects with {typeName: string, precision kills: int, normal kills: int}
+ * @returns {Promise<void>} A list of objects with {typeName: string, precision kills: int, total kills: int}
  */
 async function getAccountWeaponStats(membershipid,membertype,access_token, pve){
 
@@ -350,6 +396,75 @@ async function getAccountWeaponStats(membershipid,membertype,access_token, pve){
 
 
 
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to return all player activity reports for all time for the provided character id, using the Destiny2.getActivityHistory
+ * end point to find all played instance IDs, iterating through these to fetch a PGCR for each one, and passing those to the parser
+ * to return a minimal array of objects with key activity and player details
+ * @param membershipid Membership id associated with player account, mapping to platform player plays on
+ * @param membertype Enum indicator for platform type player plays on
+ * @param access_token Provided by bungie api to access protected player data
+ * @param mode The activity mode to return reports for {DestinyActivityModeType: Enum} such as pvp, pve, raids, etc
+ * @returns {Promise<void>}
+ */
+async function getAccountActivityReports(membershipid,membertype,characterid,access_token,mode){
+
+    var page = 0;
+    var pages = [];
+
+    while(true){
+
+        const fetched = await getActivityResultPage(page,membershipid,membertype,characterid,access_token,mode);
+        pages.push(fetched);
+        if(fetched.Response.activities.length<250){
+           break;
+        }
+        page++;
+    }
+    var pGCRs = [];
+    var requests = [];
+    for(const page of pages){
+
+        for(const activity in page.Response.activities){
+            await delay(50);
+            requests.push(getActivityPGCR(page.Response.activities[activity].activityDetails.instanceId)
+                .then(data =>{
+                    pGCRs.push(data);
+                })
+            );
+        }
+
+    }
+    Promise.all(requests).then(results => {//once all PGCR requests are resolved
+        pGCRs = pGCRs.sort((left, right) => left.Response.period.localeCompare(right.Response.period));//sort array in descending order, as some PGCR requests will finish before the previous possibly
+        fs.writeFile("O://examplePGCRs.txt",JSON.stringify(pGCRs,null,4),"utf8",(err) => {})
+        const res = parseActivityHistory(pGCRs,characterid);//parse the array of PGCRs, returning the meaningful data
+        fs.writeFile("O://exampleparsedactivities.txt",JSON.stringify(res,null,4),"utf8",(err) => {})
+    });
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to fetch a page of activity results from the Destiny2.getActivityHistory endpoint
+ *
+ * @param page The page number to request
+ * @param membershipid Membership id associated with player account, mapping to platform player plays on
+ * @param membertype Enum indicator for platform type player plays on
+ * @param access_token Provided by bungie api to access protected player data
+ * @param mode The activity mode to return reports for {DestinyActivityModeType: Enum} such as pvp, pve, raids, etc
+ *
+ * @returns {Promise<void>}
+ */
+async function getActivityResultPage(page,membershipid,membertype,characterid,access_token,mode){
+    const pathParams = {
+        "MEMBERTYPE": membertype,
+        "MEMBERID": membershipid,
+        "CHARID": characterid
+    }
+
+    const final_url = (replaceMultiple(/MEMBERTYPE|MEMBERID|CHARID/g,pathParams,activity_reports_url))+"?count=250&page="+page+"&mode="+mode;
+    console.log("Page url"+final_url);
+    return await protectedRequest(access_token,final_url,"Account activity reports request");
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -377,6 +492,20 @@ async function getItemData(access_token,memberid,membertype,instanceid){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
+ * Method to fetch a post game carange report of a particular played activity
+ * @param instanceid The instance ID of the activity to fetch the full report for
+ * @returns {Promise<void>} a json parsed response from bungie api
+ */
+async function getActivityPGCR(instanceid){
+    const pathParams = {
+        "INSTANCE": instanceid
+    }
+    const final_url = replaceMultiple(/INSTANCE/g,pathParams,pgcr_url);
+    const response = await protectedRequest(null,final_url,"PGCR request",false);
+    return response;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
 * MAKE REQUEST
 * Private module method to simplify requests that use similar headers, which nearly all endpoints this server concerns do.
 * Has a flow for access token requiring requests, as well as for requests of static destiny data, such as calls to the manifest.
@@ -397,9 +526,22 @@ async function protectedRequest(access_token,url,logtext,protect=true){
             "X-API-Key": apikey
         };
     }
+    ///////////////Throttle management, this should work for when different functions are making requests at similar times
+    const currentMillis  =dayjs().valueOf();
+
+    if(currentMillis-reqMillis<1500 && curReqNum==18){
+        await delay(currentMillis-reqMillis);
+        curReqNum=0;
+        reqMillis=dayjs().valueOf();
+    }else if(currentMillis-reqMillis>=1500){
+        curReqNum=0;
+        reqMillis=dayjs().valueOf();
+    }
+    curReqNum++;
 
     try{
         const res = await fetch(url, {
+            signal: AbortSignal.timeout(15000),
             method: 'GET',
             headers: header
         });
@@ -561,12 +703,27 @@ async function getActivityDefinitions(){
         if(hash.displayProperties.name=="Classified"){
             continue;
         }
+        var modifiers = [];
+        if(hash.modifiers.length>0){
+            for(const modifier of hash.modifiers){
+                const foundModifier = activityModifiers.find(mod => mod.hash == modifier.activityModifierHash);
+                if(typeof foundModifier==="undefined"){
+                    continue;
+                }
+                modifiers.push({
+                    name:  foundModifier.name,
+                    description: foundModifier.description
+                });
+            }
+        }
         staticActivities.push({
             hash: activity_hash,
+            light_level: hash.activityLightLevel,
             name: hash.displayProperties.name,
             type: (activityTypeHashes.find(type => type.hash == hash.activityTypeHash)).name,
             description: hash.displayProperties.description,
-            isPlaylist: hash.isPlaylist
+            isPlaylist: hash.isPlaylist,
+            modifiers: modifiers,
 
         });
     }
@@ -586,7 +743,8 @@ async function getItemDefinitions(){
         itemNameHashes.push({
             hashid: key,
             name: properties.displayProperties.name,
-            description: properties.displayProperties.description
+            description: properties.displayProperties.description,
+            damage: damageTypes[properties.defaultDamageType]
         });
     }
     return "success";
@@ -607,6 +765,7 @@ async function getMilestoneActivities(){
                 });
             }
             activeActivities.push({
+                hash: foundActivity.hash,
                 name: foundActivity.name,
                 description: foundActivity.description,
                 modifiers: modifiers
@@ -615,6 +774,11 @@ async function getMilestoneActivities(){
     }
     //console.log(JSON.stringify(activeActivities,null,4));
 
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+async function getActivityModeDefinitions(){
+    const res = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityModeDefinition,"Activity Modes Request",false);
+    fs.writeFile("O://activitymodeexample.txt",JSON.stringify(res,null,4),function(err){})
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function set_dependencies(db){
@@ -647,6 +811,16 @@ function checkType(item_type, types){
         }
     }
     return false;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function that manages throttling, to ensure requests do not go over the 25req/s limit of the bungie api.
+ *
+ * @returns either a number representing the number of milliseconds till a request can be made, or a boolean
+ * to say a request can be made
+ */
+function throttleManager(){
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -686,6 +860,12 @@ async function moduleInit(){
     console.log("Bungie:// Acquiring active activities...");
     await getMilestoneActivities();
 
+    await  getActivityModeDefinitions();
+
+    //pass bungie parser all static game data to be used in parsing all future responses from user requests
+    setGameData(staticActivities,activityModifiers,activeActivities,itemNameHashes);
+
+    reqMillis = dayjs().valueOf();//set req millis
 
 
 }
@@ -697,7 +877,8 @@ export const destiny_full = {
     getCharacterInventoryItemsAndVault,
     set_dependencies,
     getNewUser,
-    getAccountWeaponStats
+    getAccountWeaponStats,
+    getAccountActivityReports
 }
 
 export default {getUserAccess,getAccountCharacters,getAccountSpecificData,getPlayerInventoryItems,getCharacterInventoryItemsAndVault};
