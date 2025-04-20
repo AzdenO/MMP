@@ -10,7 +10,7 @@
 
 import {convertToMap} from "./listUtils.js";
 import {delay} from "./timeUtils.mjs";
-import {modeTypes} from "../constants/BungieConstants.mjs";
+import {modeTypes,damageTypes} from "../constants/BungieConstants.mjs";
 import * as fs from "node:fs";
 /**
  *
@@ -22,6 +22,12 @@ var activityIDs = null;
 var activeActivites = null;
 
 var activityModifiers = null;
+
+var bucketHashes = null;
+
+var statHashes = null;
+
+var perkHashes = null;
 
 var gameItems = null;
 
@@ -162,24 +168,24 @@ export function parseActivityHistory(pgcrArray, player){
         }
 
         results.push({
-            Date: activity.Response.period,
-            Activity: fetched.name,
-            TotalActivityKills: ourPlayer.values.kills.basic.value+participantData.kills,
-            Type:  actType,
-            Modifiers: fetched.modifiers,
-            Position: ourPlayer.standing,
-            Assists: ourPlayer.values.assists.basic.value,
-            Kills: ourPlayer.values.kills.basic.value,
-            Deaths: ourPlayer.values.deaths.basic.value,
-            Completed: ourPlayer.values.completed.basic.displayValue,
-            Duration: ourPlayer.values.activityDurationSeconds.basic.displayValue,
-            WeaponData: weapons,
-            KillData: {
+            Date: activity.Response.period,//date of the activity
+            Activity: fetched.name,//activity name
+            TotalActivityKills: ourPlayer.values.kills.basic.value+participantData.kills,//total kills for this activity across all players
+            Type:  actType,//the activity type
+            Modifiers: fetched.modifiers,//any modifiers present for this activity
+            Position: ourPlayer.standing,//our players standing in this activity
+            Assists: ourPlayer.values.assists.basic.value,//the assists our player got
+            Kills: ourPlayer.values.kills.basic.value,//the amount of kills our player got
+            Deaths: ourPlayer.values.deaths.basic.value,//how many deaths our player experienced
+            Completed: ourPlayer.values.completed.basic.displayValue,//was thisa ctivity completed
+            Duration: ourPlayer.values.activityDurationSeconds.basic.displayValue,//the time it took to complete this activity
+            WeaponData: weapons,//the weapons the player used for this activity and their share of enemy kills
+            KillData: {//other kill data for non-weapons
                 Grenade: ourPlayer.extended.values.weaponKillsGrenade.basic.value,
                 Melee: ourPlayer.extended.values.weaponKillsMelee.basic.value,
                 Super: ourPlayer.extended.values.weaponKillsSuper.basic.value
             },
-            OtherParticipants: participantData,
+            OtherParticipants: participantData,//the data for other participants including kills and weapons used
 
         });
     }
@@ -199,18 +205,146 @@ export function parseActivityStatistics(parsedPGCRs){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
+ * Function to parse a bungie Destiny2.getCharacter response for all items into a standardised format. This method assumes
+ * the response is made with the stat, plug and perk query components
+ * @param object the response object
+ * @param key the key string of the response object to access, such as inventory or equipment for parsing items from different
+ * locations
+ */
+export function parseItems(object, key){
+
+    const exclusions = ["General","Lost Items","Ships","Emotes","Quests","Ghost","Accessories","Vehicle","Clan Banners","Emblems","Finishers","Seasonal Artifact"]
+
+    if(DEBUG){
+        object = JSON.parse(fs.readFile("O://exampleEquippedItems.json",err => {}));
+        key = "equipment";
+    }
+    var items = [];
+
+    var components = convertToMap(Object.entries(object.Response.itemComponents.instances.data).map(([idstring, values])=>({
+        instanceid: idstring,
+        ...values,
+    })),"instanceid");
+    var statComponents = convertToMap(Object.entries(object.Response.itemComponents.stats.data).map(([idstring, values])=>({
+        instanceid: idstring,
+        ...values,
+    })),"instanceid");
+    var perkComponents = convertToMap(Object.entries(object.Response.itemComponents.perks.data).map(([idstring, values])=>({
+        instanceid: idstring,
+        ...values,
+    })),"instanceid");
+    var plugSets = convertToMap(Object.entries(object.Response.plugSets.data.plugs).map(([idstring, values])=>({
+        instanceid: idstring,
+        ...values,
+    })),"instanceid");
+    var socketComponents = convertToMap(Object.entries(object.Response.itemComponents.sockets.data).map(([idstring, values])=>({
+        instanceid: idstring,
+        ...values,
+    })),"instanceid");
+
+    for(const[keystring, item] of Object.entries(object.Response[key].data.items)){
+        const bucket = bucketHashes[item.bucketHash];
+
+        if(!bucket || exclusions.includes(bucket.name)){
+            continue;
+        }
+        if(bucket.name == "Subclass"){
+            const subclass = parseSubclass(item.itemInstanceId, item.itemHash, socketComponents);
+            items.push(subclass);
+        }
+        var parseditem = {
+            instanceid: item.itemInstanceId,
+            Slot: bucketHashes[item.bucketHash].name,
+            Name: gameItems[item.itemHash].name,
+            Power: components[item.itemInstanceId].primaryStat.value,
+            DamageType: damageTypes[components[item.itemInstanceId].damageType]
+
+        };
+        var stats = [];
+        for(const[statstring, stat] of Object.entries(statComponents[parseditem.instanceid].stats)){
+            stats.push({
+                Name: statHashes[stat.statHash].name,
+                Description: statHashes[stat.statHash].description,
+                Value: stat.value
+            });
+        }
+        parseditem.stats = stats;
+        var perks = [];
+        const instancePerks = perkComponents?.[parseditem.instanceid]?.perks;
+        if(instancePerks){
+            for(const[perkstring, perk] of Object.entries(perkComponents[parseditem.instanceid].perks)){
+                if(perk.visible){
+                    perks.push({
+                        Name: perkHashes[perk.perkHash].name,
+                        Description: perkHashes[perk.perkHash].description,
+                    })
+                }
+            }
+            parseditem.perks = perks;
+        }
+        items.push(parseditem);
+    }
+    fs.writeFile("O://exampleParsedItems.json",JSON.stringify(items),err => {});
+    return items;
+
+
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
  * Method to pass in arrays of all static game data such as activities, modifiers, perks, bucket hashes, weapon details and more
  * @param activities An array of activity objects in the form of {}
  * @param itemNames
  * @param PerkNames
  */
-export function setGameData(activities, activity_modfiers, activeActs, items){
+export function setGameData(activities, activity_modfiers, activeActs, items, perks, stats, buckets){
 
     //convert all static game data arrays into hash maps for better searching efficiency
     activityIDs = convertToMap(activities, "hash");
     activityModifiers = convertToMap(activity_modfiers,"hash");
     activeActivites = convertToMap(activeActs,"hash");
     gameItems = convertToMap(items,"hashid");
+    perkHashes = convertToMap(perks,"hashid");
+    statHashes = convertToMap(stats,"hashid");
+    bucketHashes = convertToMap(buckets,"hashid");
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Method to parse the response receivied from bungies OAuth2 endpoint, extarcting tokens and their expiries
+ * @param {Object} object The response json parsed into an object
+ * @return {Object} A minimal object containing only the necessary data
+ */
+export function parseTokenResponse(object){
+    return {
+        memberID: object.membership_id,
+        access: object.access_token,
+        access_expiry: object.expires_in,
+        refresh: object.refresh_token,
+        refresh_expiry: object.refresh_expires_in
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Parse a subclass configuration
+ * @param {string} subclassInstance The instance id of this subclass
+ * @param {string} subclassNameHash The hash of this subclasses name in the manifest
+ * @param {Map} sockets Map of all sockets from a parseItems instance
+ * @returns {Object} subclass configuration
+ */
+export function parseSubclass(subclassInstance, subclassNameHash, sockets){
+    let subclassComponents = sockets[subclassInstance];
+    var subclass= {
+        Name: gameItems[subclassNameHash].name,
+    }
+    var count = 1;
+    for(const socket of subclassComponents.sockets){
+        if(socket.isEnabled && socket.isVisible){
+            subclass["Component "+count+" Name"] = gameItems[socket.plugHash].name;
+            subclass["Component "+count+" Description"] = gameItems[socket.plugHash].description;
+        }
+        count++;
+    }
+    return subclass;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**

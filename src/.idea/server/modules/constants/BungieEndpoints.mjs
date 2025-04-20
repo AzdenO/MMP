@@ -7,21 +7,22 @@
  * @bungieAccessVersion 0.1.0
  */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const baseDomain = "https://www.bungie.net";
+export const baseDomain = "https://www.bungie.net/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const user_access_token = baseDomain+"/Platform/App/oauth/token/";
+export const user_access_token = baseDomain+"Platform/App/oauth/token/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const user_characters_url = baseDomain+"/Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/";
+export const user_characters_url = baseDomain+"Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const user_account_data = baseDomain+"/Platform/User/GetMembershipsForCurrentUser/";
+export const user_account_data = baseDomain+"Platform/User/GetMembershipsForCurrentUser/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const manifest_url = baseDomain+"https://www.bungie.net/Platform/Destiny2/Manifest/";
+export const manifest_url = baseDomain+"Platform/Destiny2/Manifest/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const pgcr_url = baseDomain+"/Platform/Destiny2/Stats/PostGameCarnageReport/INSTANCE";
+export const pgcr_url = baseDomain+"Platform/Destiny2/Stats/PostGameCarnageReport/INSTANCE";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const activity_reports_url = baseDomain+"/Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Character/CHARID/Stats/Activities/";
+export const activity_reports_url = baseDomain+"Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Character/CHARID/Stats/Activities/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const user_data_url = baseDomain+"/Platform/Destiny2/TYPE/Profile/MEMBERID/";
+export const user_data_url = baseDomain+"Platform/Destiny2/TYPE/Profile/MEMBERID/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const user_inventory_url = baseDomain+"/Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/";
+export const user_inventory_url = baseDomain+"Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const weapon_stats_url = baseDomain+"Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Stats/?groups=Weapons";

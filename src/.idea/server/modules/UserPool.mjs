@@ -1,55 +1,61 @@
 import {generateToken} from "./utils/cryptography.mjs";
-import {InvalidTokenError} from "./utils/errors.mjs";
 import dayjs from "dayjs";
 
 export default class UserPool{
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(){
-        this.pool = [];
+        this.pool = {};
 
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    refreshUserAccess(refreshToken){
-        console.log("User Pool:// Mapping refresh token to user");
-        const match = this.pool.find(user => user.coach.getRefreshToken() === refreshToken);
-        if(typeof match === "undefined"){
-            throw new InvalidTokenError();
-        }
-        const newToken = generateToken();
-        match.accessToken = newToken;
-        match.expires = dayjs().add(3600,"seconds").format("YYYY-MM-dd HH:mm:ss");
-        console.log("User Pool:// New token generated for user "+match.coach.getDisplayName());
-        return newToken;
-    }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
     appendUser(obj){
-        console.log("User Pool:// Generating access token and appending user to pool")
-        const token = generateToken();
-        this.pool.push(
-            {
-                accessToken: token,
+        console.log("User Pool:// Checking for pre-existing entry in pool");
+        if(this.checkForUser(obj)){
+            console.log("User Pool:// User already exists, resetting entry expiry");
+            this.pool[obj.getDisplayName()].expires = dayjs().add(3600,"seconds").format("YYYY-MM-dd HH:mm:ss");
+        }else{
+            console.log("User Pool:// Appending "+obj.getDisplayName()+" to pool");
+            this.pool[obj.getDisplayName()] = {
                 coach: obj,
                 expires: dayjs().add(3600,"seconds").format("YYYY-MM-dd HH:mm:ss")
             }
-        );
-        return token;
+        }
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    process(token, reqCode, args){
-        const match = this.pool.find(coach => coach.accessToken === token);
+    /**
+     * Method to find a matching coach object with the provided user id, and pass the arguments and coach object onto the
+     * execute method
+     * @param {string} userid The bungie display name tied to a coach object
+     * @param {int} reqCode The code which maps in the execute method to a specific coach function to call
+     * @param {string[]} args Any arguments necessary for this type of request
+     * @returns {Promise<*>}
+     */
+    process(userid, reqCode, args){
+        const match = this.pool[userid];
         if(typeof match === "undefined"){
+            console.log("User Pool:// No entry found for "+userid);
             throw new InvalidTokenError();
         }
+        console.log("User Pool:// Found active entry for "+userid);
         return this.#execute(match.coach,reqCode,args);
 
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    #execute(coach, reqCode, args){
-
+    async #execute(coach, reqCode, args){
+        console.log("User Pool:// Executing request");
         switch(reqCode){
             case 1:
                 return coach.get_suggestions_by_activity(args[0],args[1]);
+                break;
+            case 2:
+                return await coach.getWeaponSkillsContent(args[0]);
+                break;
+            case 3:
+                 return await coach.getCharacterAnalysis(args[0]);
+                 break;
+            case 4:
+                return await coach.getRecentActivities(args[0]);
                 break;
             default:
                 break;
@@ -59,17 +65,20 @@ export default class UserPool{
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*
-    * CHECK FOR PRE-EXISTING COACH OBJECT IN POOL
-    * This method serves a roll in authentication. If a user re-authorises such as through a webpage refresh
-    * there will most likely still be a coach object corresponding to the user. We find that object, replace it
-    * and issue a new refresh token. If one does not exist, it simply calls appendUser using the passed in coach
-    * object
-    */
+    /**
+     * Check if an entry already exists in the pool for this user
+     * @param {coach} obj
+     * @returns {boolean} indicating existance of user in pool
+     */
     checkForUser(obj){
-
+        if(this.pool.hasOwnProperty(obj.getDisplayName())){
+            return true;
+        }
+        return false;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
+    deleteEntryAfterExpiry(){
 
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 }

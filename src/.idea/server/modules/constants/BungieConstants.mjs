@@ -93,3 +93,9 @@ export const modeTypes = {
     92: "Relic"
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Array of damage types, where the bungie enum in an applicable API response maps to the index in this array
+ * @type {string[]} list of damage types where bungie damage type enum maps to the correct index
+ */
+export const damageTypes = ["Not Applicable","Kinetic","Arc","Solar","Void","Raid Damage","Stasis","Strand"];
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

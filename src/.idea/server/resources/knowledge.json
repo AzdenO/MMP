@@ -1,0 +1,103 @@
+{
+	"Activity_Types":[
+		"Vanguard Ops",
+		"Grandmaster Nightfall",
+		"Nightfall",
+		"Gambit",
+		"Crucible",
+		"Raid",
+		"Dungeon",
+		"Strike",
+		"Exotic Missions",
+		"Lost Sectors",
+		"Expert Lost Secorts",
+		"Public Events",
+		"Trials of Osiris",
+		"Iron Banner",
+		"Nightmare Hunt",
+		"Empire Hunt"
+	],
+	"Destination_Activities":[
+		"Blind Well",
+		"Altar of Sorrows",
+		"Termina Overload",
+		
+	],
+	"Specific_Activites":[
+		"Sundered Doctrine",
+		"Vespers Host",
+		"Prophecy",
+		"Ghosts of the Deep",
+		"Pit of Heresy",
+		"Grasp of Avarice",
+		"Duality",
+		"Spire of the Watcher",
+		"Warlords Ruin",
+		"Last Wish",
+		"Deepstone Crypt",
+		"Vow of the Disciple",
+		"Root of Nightmares",
+		"Salvations Edge"
+		"Vault of Glass",
+		"Kings Fall",
+		"Crotas End",
+		"Garden of Salvation",
+		"Dares of Eternity"
+	],
+	"Seasonal_Activities":[
+		"The Nether",
+		"Court of Blades",
+		"Sunless Cell",
+		"Contest of Elders",
+		"Tomb of Elders",
+		"Onslaught Salvation",
+		""
+	],
+	"Gameplay_Terms":[
+		"Power Level",
+		""
+	],
+	"Champions":[
+		"Overload Champion",
+		"Barrier Champion",
+		"Unstoppable Champion"
+	],
+	"Modifiers":[
+		"Randomised Banes",
+		"Surges",
+		"Equipment Locked",
+		""
+	],
+	"Status_Effects":[
+		"Amplified",
+		"Radiant",
+		"Restoration",
+		"Devour",
+		"Void Overshield",
+		"Invisibility",
+		"Frost Armor",
+		"Woven Mail",
+		"Armor Charge",
+		"Jolt",
+		"Blind",
+		"Scorch",
+		"Ignite",
+		"Weaken",
+		"Supress",
+		"Volatile",
+		"Slow",
+		"Freeze",
+		"Shatter",
+		"Suspend",
+		"Sever",
+		"Unravel",
+		"Ionic Trace",
+		"Stasis Crystal",
+		"Stasis Shard",
+		"Void Breach",
+		"Firesprite",
+		"Threadling",
+		"Tangle"
+	]
+	
+}

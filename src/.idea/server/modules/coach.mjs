@@ -2,7 +2,11 @@
 export default class Coach{
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     * Constructor for coach class that includes the class dependencies
+     * @param {Object} reasoner The singleton instance of the reasoner class to provide AI content
+     * @param {Object} service The singleton instance of user services to acccess player data
+     */
     constructor(reasoner,service) {
         this.reasoner = reasoner;//gemini api wrapper class/object
         this.userservice = service;
@@ -11,11 +15,29 @@ export default class Coach{
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     async get_suggestions_by_activity(activity_id,character) {
-        this.reasoner.act_build(activity_id, this.userservice.getUserItems(this.getDisplayName()), character);
+        return await this.reasoner.act_build(
+            activity_id,
+            this.userservice.getUserItems(this.getDisplayName()),
+            character
+        );
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    async getWeaponSkillsContent(){
-
+    async getWeaponSkillsContent(statType){
+        const stats = await this.userservice.getWeaponStats(this.getDisplayName(), true);
+        const content = await this.reasoner.weaponSkills(
+            stats
+        );
+        return content;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    async getCharacterAnalysis(characterid){
+        const configuration = await this.userservice.getCharacterConfiguration(this.getDisplayName(),characterid);
+        const content = await this.reasoner.characterAnalysis(configuration);
+        return content;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    async getRecentActivities(characterid){
+        return await this.userservice.getRecentActivities(this.getDisplayName(),characterid);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getDisplayName(){
@@ -32,6 +54,10 @@ export default class Coach{
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getAccessToken(){
         return this.details.accessToken;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getAccessExpiry(){
+        return this.details.accessExpiry;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getRefreshExpiry(){

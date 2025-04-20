@@ -5,7 +5,15 @@ var console_reader = null;
 var connectionPool = null;
 var queries = [];
 
-import {AuthError,InitError,UserNotFoundError} from "./utils/errors.mjs";
+import {AuthError,InitError,UserNotFoundError,InvalidTokenError} from "./utils/errors.mjs";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Import JSDoc type definitions
+ *
+ */
+/**
+ * @typedef {import("./types/databaseObjects.mjs").TokenData} TokenData
+ */
 
 import fs from "node:fs";
 //import secretiser from "./utils/cryptography.mjs";
@@ -13,14 +21,17 @@ import fs from "node:fs";
 async function newUser(user_details, items){
     console.log("Database:// Adding new user to database");
     const connection = await getConnection();
-    await connection.execute("CALL newUser(?,?,?,?,?,?,?)",[
+    await connection.execute("CALL newUser(?,?,?,?,?,?,?,?,?)",[
         user_details.displayname,
         user_details.accountID,
         user_details.membershipid,
         user_details.membertype.toString(),
         JSON.stringify(user_details.characters),
         user_details.refreshToken,
-        user_details.refresh_expiry])
+        user_details.refresh_expiry,
+        user_details.accessToken,
+        user_details.accessExpiry
+    ]);
     await connection.release();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,7 +197,7 @@ async function updateRefresh(token, expiry, user){
     connection.release();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
+/**
 * GET ITEMS BELONGING TO PLAYER WITH PROVIDED USERID
 * Method for retrieving all of a players items from the database, a list of arguments can be passed to retrieve only
 * specific item types, power levels, etc. (Currently only retrieves all player items, further implementation at later date)
@@ -197,10 +208,95 @@ async function getUserItems(userid, args=null){
 
     const result = await connection.execute("CALL getAllPlayerItems(?)",[userid]);
     return [result[0][0],result[0][1]];
+    connection.release();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to update the access token stored in the database for the provided user, calling a stored procedure on the database
+ * @param {string} userid bungie display name for a user which equates to a unique primary or foreign key
+ * @param {TokenData} args an object of type {userid:"", token:"", expiry:""}
+ * @param {boolean} type a boolean flag on whether to update the access token or refresh token for the user. True indicates updating
+ * the access token, and false obviously is for refresh token
+ * @returns {Promise<boolean>} a boolean indicating the success of the database operation
+ */
+async function updateTokens(args, type){
+    const connection = await getConnection();
+    console.log("Database:// Updating access token for: "+args.userid);
+    try{
+        var result;
+        if(type){
+            result = await connection.execute("CALL updateAccess(?,?,?)", [args.token,args.expiry,args.userid]);
+        }else{
+            result = await connection.execute("CALL updateRefresh(?,?,?)",[args.token,args.expiry,args.userid]);
+        }
 
-export const db = {
+    }catch(error){
+
+    }
+    connection.release();
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+async function getUserIDByRefresh(refresh){
+    const connection = await getConnection();
+    const result = connection.execute("CALL getUserIDByRefresh(?)", [refresh]);
+    if(!result[0][0][0]){
+        connection.release();
+        throw new InvalidTokenError();
+    }else{
+        connection.release();
+        return result[0][0][0];
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Method to query the database with a provided token to query its validity, returning a userid if successful
+ * @param {string} token The refresh or access token to query the database for
+ * @param {boolean} flag true indicates we are querying for an access token. This could be changed in future versions
+ * to a string equivalency check to be more verbose.
+ * @returns {Promise<string>} The userid associated with the provided token, will return "none" if no user was found
+ */
+async function queryToken(token, flag){
+    const connection = await getConnection();
+    console.log("Database:// Querying database for token");
+
+    try{
+        const result = await connection.execute("CALL queryToken(?,?)",[token, flag]);
+        if(!result[0][0][0]){
+            throw new InvalidTokenError();
+        }else{
+            connection.release();
+            return result[0][0][0].userid;
+        }
+    }catch(error){
+        console.log(error);
+    }
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to fetch from the database all details necessary to make requests to bungie protected endpoints, including
+ * the member id, platform type, and access token
+ * @param {string} userid The bungie display name to fetch the details for
+ * @returns {Promise<Object>} An object containing all data as key-values
+ */
+async function getBungieRequestData(userid){
+    const connection = await getConnection();
+
+    const result = await connection.execute("CALL getAccountData(?)",[userid]);
+    return {
+        platformid: result[0][0][0].platformid,
+        platformtype: result[0][0][0].platformtype,
+        token: result[0][1][0].access_token,
+    };
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Exported object containing all methods required for general server services, and excludes any methods typically used
+ * for authentication
+ * @type {{initialise: ((function(*, *, *, *): Promise<void>)|*), getUser: ((function(*, *): Promise<void>)|*), newUser: ((function(*, *): Promise<void>)|*), refreshUser: refreshUser, storeItem: ((function(*, *): Promise<void>)|*), checkForUser: ((function(*): Promise<boolean>)|*), updateRefresh: ((function(*, *, *): Promise<void>)|*), getUserItems: ((function(*, null=): Promise<[*,*]|undefined>)|*)}}
+ */
+export const dbBaseServices = {
     initialise,
     getUser,
     newUser,
@@ -208,5 +304,19 @@ export const db = {
     storeItem,
     checkForUser,
     updateRefresh,
-    getUserItems
+    getUserItems,
+    getBungieRequestData
+}
+/**
+ * Exported object containing methods only used for authentication purposes, to cleanly seperate base db logic from auth logic
+ * for modules that require different db services
+ * @type {{updateTokens: ((function(*, *): Promise<boolean>)|*), queryToken: ((function(string, boolean): Promise<string>)|*)}}
+ */
+export const dbAuthServices = {
+    updateTokens,
+    queryToken,
+    getUser,
+    checkForUser,
+    newUser,
+    getUserIDByRefresh,
 }

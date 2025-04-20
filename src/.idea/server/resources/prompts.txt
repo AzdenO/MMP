@@ -61,22 +61,23 @@ Build:
 A destiny 2 player wants to improve their weapon skills, specifically improve their skills with different weapon types in
 different situations (activities). The player has the current statistics for each weapon type, inlcuding the number of precision kills
 and normal kills:
-[statistics]
+STATISTICS
 
 Analyze these statistics, looking for the weapon types the player should become more familiar and types they should practice becoming more precise with.
 Take into account the fact that melee, super and grenade precision kills arent applicable
 
-Produce your response in the format below and do not deviate, treating the structure like JSON (replace the suggested type key with the weapon type name). What is in brackets you should consider
-as part of your response for that particular attribute, if you find it applicable. Limit your suggested types to 8, prioritising the types that need the most attention
+Produce your response in the JSON format below and do not deviate, what is in capitals should be treat as instructions for formulating a considered response(Limit your suggested types to 6, prioritising the types that need the most attention)
 
 FORMAT:
-Analysis{[
-    Suggested type{
-        summarise weapon type and its advantages: (what activities is this weapon type useful in, what kind of enemies is it most affective against) STRING
-        summarise negatives for not using this weapon type: (what scenarios might the player struggle in without utilising this type to its full ability and skill level) STRING
-        Activity to practice in, summarising why its a good choice for practice: (take into account the environments found in this activity and why this weapon is effective such as where ad clearing is a priority or if the weapon could aid in survivability, the enemy types such as bosses) STRING
-    }
-]}
+{
+    "Analysis":[
+        {"SuggestedType":{
+            "SummaryOfTypeAndAdvantages"WHAT ACTIVITIES IS THIS WEAPON TYPE USEFUL IN, WHAT KIND OF ENEMIES IS IT MOST EFFECTIVE AGAINST:"",
+            "NegativesForOmittingTypeFromUse"WHAT SCENARIOS MIGHT THE PLAYER STRUGGLE IN WITHOUT UTILISING THIS TYPE TO ITS FULL ABILITY AND SKILL LEVEL:"",
+            "PracticeActivity"TAKE INTO ACCOUNT THE ENVIRONMENTS FOUND IN THIS ACTIVITY AND WHY THIS WEAPON IS EFFECTIVE SUCH AS WHERE AD CLEARING IS A PRIORITY OR IF THE WEAPON COULD AID IN SURVIVABILITY, THE ENEMY TYPES SUCH AS BOSSES:"",
+        }},
+    ]
+}
 /--/A destiny 2 player wants to improve their knowledge and skill ability for as many different activities as possible.
 The player has the current play statistics for all activities:
 [statistics]
@@ -91,13 +92,13 @@ activity:
 /--/
 
 A destiny 2 players character has the following equipped armors:
-[ARMOR]
+-ARMOR-
 As well as the following equipped weapons:
-[WEAPONS]
+-WEAPONS-
 and their subclass is configured as the following:
-[SUBCLASS]
+-SUBCLASS-
 They have the following items available to them to switch out:
-[ITEMS]
+-ITEMS-
 
 Please analyze this build, producing your response in the following format without deviating:
 Analysis:

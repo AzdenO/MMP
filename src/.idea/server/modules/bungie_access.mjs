@@ -3,7 +3,7 @@ import env from "dotenv";//safely storing of secrets
 import dayjs from "dayjs";
 import fs from "node:fs";//for writing to files, not technically necessary apart from when saving responses from bungie to look at more easily
 import {AuthError,InitError} from "./utils/errors.mjs";
-import {parseWeaponStats,parseActivityHistory,setGameData} from "./utils/bungieParser.mjs";
+import {parseWeaponStats,parseActivityHistory,setGameData,parseItems,parseTokenResponse} from "./utils/bungieParser.mjs";
 import * as Endpoints from "./constants/BungieEndpoints.mjs";
 import * as EndpointParameters from "./constants/BungieEndpointConstants.mjs";
 import {replaceMultiple} from "./utils/stringUtils.js";
@@ -27,19 +27,6 @@ var curReqNum = 0;
  * @type {number}
  */
 var reqMillis = 0;
-/////////////////////////////////////////COMMON ENDPOINTS/////////////////////////////////////////////////
-const base_domain="https://www.bungie.net";
-const user_access_token = "https://www.bungie.net/Platform/App/oauth/token/";//pass an auth code from OAuth2 to receive access and refresh tokens
-const user_inventory_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/?components=102,201,205,300";
-const user_vault_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/?components=102,300";
-const user_account_data = "https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/";
-const user_data_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/?components=COMPONENTS";//for getting characters, vault data, etc.
-const item_data_url = "https://www.bungie.net/Platform/Destiny2/TYPE/Profile/MEMBERID/Item/ITEMID/?components=300,302,304,305";
-const manifest_url = "https://www.bungie.net/Platform/Destiny2/Manifest/";//url for static game data, such as bucket hashes
-var weapon_stats_url = "https://www.bungie.net/Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Stats/?groups=Weapons";
-var activity_reports_url = base_domain+"/Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Character/CHARID/Stats/Activities/";
-var pgcr_url = base_domain+"/Platform/Destiny2/Stats/PostGameCarnageReport/INSTANCE";
-var manifestData = null;//as part of module init, multiple calls would need to be made to the manifest endpoint. Caching the first request made to it saves time for subsequent requests for other module iniitialisation attributes
 /////////////////////////////////////////////////////BUNGIE RETURN VALUES/////////////////////////////////
 
 const classTypes = ["Titan","Hunter","Warlock"];//bungie only returns a number for the character class type. We use this number as the index of the array to return the actual class type
@@ -53,6 +40,8 @@ var staticActivities = [];
 var activityModifiers = [];
 var activeActivities = [];
 var itemNameHashes = [];//stores all items in the game, including their hash, name and description
+var manifestData = null;//as part of module init, multiple calls would need to be made to the manifest endpoint. Caching the first request made to it saves time for subsequent requests for other module iniitialisation attributes
+
 ////////////////////////////////////////MISCELLANEOUS VARIABLES///////////////////////////////////////////
 const logbreak = "////////////////////";
 
@@ -65,15 +54,15 @@ const logbreak = "////////////////////";
 async function getNewUser(auth_code){
     var userDetails = {};
 
-    const data = await getUserAccess(null, auth_code);
+    const data = await getUserAccess(auth_code, false);
     if(data=="error"){
         throw new AuthError("Error in acquiring bungie access with provided auth code","1001");
     }
-    userDetails.accountID = data.membership_id;
-    userDetails.accessToken = data.access_token;
-    userDetails.refreshToken = data.refresh_token;
-    userDetails.refresh_expiry = dayjs().add(data.refresh_expires_in, "seconds").format("DD-MM-YYYY HH:mm:ss");
-
+    userDetails.accountID = data.memberID;
+    userDetails.accessToken = data.access;
+    userDetails.refreshToken = data.refresh;
+    userDetails.refresh_expiry = dayjs().add(data.refresh_expiry, "seconds").format("DD-MM-YYYY HH:mm:ss");
+    userDetails.accessExpiry = dayjs().add(data.access_expiry, "seconds").format("DD-MM-YYYY HH:mm:ss");
     const accountdata = await getAccountSpecificData(userDetails.accessToken);
     if(accountdata=="error"){
         throw new AuthError("Error in acquiring user specific details","1002");
@@ -88,18 +77,21 @@ async function getNewUser(auth_code){
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* GET BUNGIE AUTHENTICATION
-* Method for getting authorisation from the bungie api, to make requests for the user associated with the authorisation code
-* or if the user is already in the server database, using their refresh token to exchange this for an active access token.
-* If the refresh token is at its default, this is interpreted as a new server user
-*/
-async function getUserAccess(refreshToken=null,auth_code=null) {
-    if(refreshToken==null){//if this is a new user, therefore a refresh token does not exist
-
+/**
+ * Method to make a post request to bungies OAuth2 token endpoint to excahnge either a refresh token or auth code for a new
+ * set of tokens
+ * @param {string} code The code to exchange
+ * @param {boolean} flag True if exchanging a refresh token, false otherwise
+ * @returns {Promise<any|string>}
+ */
+async function getUserAccess(code, flag) {
+    var grant = "authorization_code";
+    if(flag) {//if this is a new user, therefore a refresh token does not exist
+        grant = "refresh_token";
+    }
         const request_body = new URLSearchParams({//convert authorization attributes into URL encoded format
             grant_type: 'authorization_code',
-            code: auth_code,
+            code: code,
             client_id: clientid,
             client_secret: clientsecret
         }).toString();
@@ -120,7 +112,7 @@ async function getUserAccess(refreshToken=null,auth_code=null) {
             else{
                 const consumed = await res.json();
                 //console.log(consumed);
-                return consumed;
+                return parseTokenResponse(consumed);
             }
         }catch(error){
             console.log("Found an error in user authentication: "+error);
@@ -128,9 +120,6 @@ async function getUserAccess(refreshToken=null,auth_code=null) {
 
 
 
-    }else{
-
-    }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -198,122 +187,6 @@ async function getPlayerInventoryItems(access_token,characterid, memberid,member
     return response.Response;//only this element is necessary, including the other component values in the url, allows the bungie api to construct a 300 response for all items listed
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* GET ALL CHARACTER ITEMS (EQUIPPED AND UNEQUIPPED) AS WELL AS USER VAULT ITEMS
-* Method to retrieve inventory items and vault items in a format that can be easily read, especially by the reasoner
-*/
-async function getCharacterInventoryItemsAndVault(access_token,characterid,memberid,membertype){
-
-    const equippedAndUnequipped = await getPlayerInventoryItems(access_token,characterid,memberid,membertype);
-    var characteritems = []//variable to hold parsed data for items on the character
-    var vaultitems = []//variable to hold parsed data for items in a players vault
-
-    //check for errors
-    if(equippedAndUnequipped == "error"){
-
-        return "error";
-
-    //beginning parsing response
-    //then get item name from other endpoint
-    }else{
-
-        //Create lists to hold all parsed item types
-        var items = []
-
-        //first get isntance id, item hash id and bucket hash from inventory and equipment elements
-        for(const item in equippedAndUnequipped.inventory.data.items){
-            for(const buckethash in bucketHashes){
-                if(bucketHashes[buckethash].hashid==equippedAndUnequipped.inventory.data.items[item].bucketHash){
-                    items.push({item_type: bucketHashes[buckethash].name,instance: equippedAndUnequipped.inventory.data.items[item].itemInstanceId, itemId: equippedAndUnequipped.inventory.data.items[item].itemHash});
-                }
-            }
-        }
-        for(const item in equippedAndUnequipped.equipment.data.items){
-            for(const buckethash in bucketHashes){
-                if(bucketHashes[buckethash].hashid==equippedAndUnequipped.equipment.data.items[item].bucketHash){
-                    items.push({item_type: bucketHashes[buckethash].name,instance: equippedAndUnequipped.equipment.data.items[item].itemInstanceId, itemId: equippedAndUnequipped.equipment.data.items[item].itemHash});
-                }
-            }
-        }
-
-        //then get power level, damage type from components element
-        for(const[key, data] of Object.entries(equippedAndUnequipped.itemComponents.instances.data)){
-            for(const itemIndex in items){
-
-                if(items[itemIndex].instance==key && items[itemIndex].item_type != "Subclass"){
-
-                    items[itemIndex].damage=damageTypes[data.damageType];
-                    items[itemIndex].power=data.primaryStat.value;
-
-                }
-            }
-        }
-        //then get perks (perks.data.perks), mods (sockets.data.sockets LIST) and stats (stats.data.stats) from item details
-        var subclassdata = "";
-        for(const item in items){
-            const itemdata = await getItemData(access_token,memberid,membertype,items[item].instance);
-            if(items[item].item_type==="Subclass"){
-                subclassdata +="\n\n"+JSON.stringify(itemdata,null,4);
-            }
-            fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/resources/Example_Json/subclassdata_example.txt",subclassdata,err => {});
-            var perks = [];
-            if(items[item].item_type in ["Subclass","Modifications","General","Consumables"]){
-                continue;
-            }
-
-            //Attach item perks
-            if(!(typeof itemdata.Response.perks.data==="undefined")){//if the response includes perks for the item
-                //Attach item perks
-                for(const perkIndex in itemdata.Response.perks.data.perks){
-
-                    for(const hashindex in perkHashes){
-
-                        if(perkHashes[hashindex].hashid==itemdata.Response.perks.data.perks[perkIndex].perkHash){
-
-                            perks.push({name: perkHashes[hashindex].name, desc:perkHashes[hashindex].description});
-                        }
-                    }
-                }
-            }
-            items[item].perks = perks;
-
-            //Attach item stats
-            var stats = [];
-            for(const statIndex in itemdata.Response.stats.data.stats){
-
-                for(const hashIndex in statHashes){
-
-                    if(statHashes[hashIndex].hashid==itemdata.Response.stats.data.stats[statIndex].statHash){
-
-                        stats.push({name: statHashes[hashIndex].name, desc:statHashes[hashIndex].description, value: itemdata.Response.stats.data.stats[statIndex].value});
-                    }
-                }
-            }
-            items[item].stats = stats;
-
-            //attach item names
-            const cached_item = itemNameHashes.find(itm => itm.hashid==items[item].itemId);
-            items[item].name=cached_item.name;
-
-            //get subclass fragments
-            if(items[item].item_type==="Subclass"){
-                var fragments=[];
-                for(const socket in itemdata.Response.sockets.data.sockets){
-                    const cached_perk = perkHashes.find(prk => prk.hashid==itemdata.Response.sockets.data.sockets[socket].plugHash);
-                    fragments.push(cached_perk);
-                }
-                items[item].fragments = fragments;
-            }
-
-        }
-        return seperateItems(items);
-    }
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-function parseItemResponse(response){
-
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Function to fetch items for a players character
  * @param characterid the id for the character we are fetching for
@@ -330,6 +203,7 @@ async function getCharacterItems(characterid,membershipid,membertype,access_toke
         "MEMBERID": membershipid,
         "CHARACTERID": characterid,
     }
+    let key = "equipment"
     let locationComponent = 0;
 
     if(equipped){
@@ -337,12 +211,14 @@ async function getCharacterItems(characterid,membershipid,membertype,access_toke
     }
     else{
         locationComponent = 201;
+        key = "inventory";
     }
     console.log("Bungie:// Retrieving equipped character items for character: "+characterid);
     const final_url = replaceMultiple(/TYPE|MEMBERID|CHARACTERID/g,pathParams,Endpoints.user_inventory_url)+"?components=300,304,302,305,"+locationComponent;
 
     const res = await protectedRequest(access_token,final_url,"Character Equipped Items Request");
-    return res.Response;
+    await fs.writeFile("O://exampleEquippedItems.json",JSON.stringify(res,null,4),err => {});
+    return parseItems(res,key);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -382,7 +258,7 @@ async function getAccountWeaponStats(membershipid,membertype,access_token, pve){
         "MEMBERID": membershipid
     };
 
-    const final_url = replaceMultiple(/MEMBERTYPE|MEMBERID/g,flags,weapon_stats_url);
+    const final_url = replaceMultiple(/MEMBERTYPE|MEMBERID/g,flags,Endpoints.weapon_stats_url);
     var requested = null;
     var result = await protectedRequest(access_token,final_url,"Account weapon stats Request");
     result = result.Response.mergedAllCharacters.results;
@@ -393,7 +269,7 @@ async function getAccountWeaponStats(membershipid,membertype,access_token, pve){
     }
     const results = parseWeaponStats(requested);
     fs.writeFile("O://exampleWeaponStatsParsed.txt",JSON.stringify(results,null,4),"utf8",(err) => {})
-
+    return results;
 
 
 }
@@ -402,22 +278,27 @@ async function getAccountWeaponStats(membershipid,membertype,access_token, pve){
  * Function to return all player activity reports for all time for the provided character id, using the Destiny2.getActivityHistory
  * end point to find all played instance IDs, iterating through these to fetch a PGCR for each one, and passing those to the parser
  * to return a minimal array of objects with key activity and player details
- * @param membershipid Membership id associated with player account, mapping to platform player plays on
- * @param membertype Enum indicator for platform type player plays on
- * @param access_token Provided by bungie api to access protected player data
- * @param mode The activity mode to return reports for {DestinyActivityModeType: Enum} such as pvp, pve, raids, etc
- * @returns {Promise<void>}
+ * @param {string} membershipid Membership id associated with player account, mapping to platform player plays on
+ * @param {string} membertype Enum indicator for platform type player plays on
+ * @param {string} characterid The character whos reports we are returning
+ * @param {string} access_token Provided by bungie api to access protected player data
+ * @param {int} mode The activity mode to return reports for {DestinyActivityModeType: Enum} such as pvp, pve, raids, etc
+ * @param {int} count The number of activities to return, if null, all player activities are returned
+ * @returns {Promise<Array>} An array of parsed PGCRs
  */
-async function getAccountActivityReports(membershipid,membertype,characterid,access_token,mode){
-
+async function getAccountActivityReports(membershipid,membertype,characterid,access_token,mode,count=null){
+    console.log("Bungie:// Retrieving activity reports");
     var page = 0;
     var pages = [];
+    if(count==null){
+        count = 250;//max number per page
+    }
 
     while(true){
 
-        const fetched = await getActivityResultPage(page,membershipid,membertype,characterid,access_token,mode);
+        const fetched = await getActivityResultPage(page,membershipid,membertype,characterid,access_token,mode,count);
         pages.push(fetched);
-        if(fetched.Response.activities.length<250){
+        if(fetched.Response.activities.length<250){//applicable for the last page and if we are returning less than 250 activities
            break;
         }
         page++;
@@ -436,33 +317,34 @@ async function getAccountActivityReports(membershipid,membertype,characterid,acc
         }
 
     }
-    Promise.all(requests).then(results => {//once all PGCR requests are resolved
+    const result = await Promise.all(requests).then(results => {//once all PGCR requests are resolved
         pGCRs = pGCRs.sort((left, right) => left.Response.period.localeCompare(right.Response.period));//sort array in descending order, as some PGCR requests will finish before the previous possibly
-        fs.writeFile("O://examplePGCRs.txt",JSON.stringify(pGCRs,null,4),"utf8",(err) => {})
         const res = parseActivityHistory(pGCRs,characterid);//parse the array of PGCRs, returning the meaningful data
-        fs.writeFile("O://exampleparsedactivities.txt",JSON.stringify(res,null,4),"utf8",(err) => {})
+        return res;
     });
+    return result;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Function to fetch a page of activity results from the Destiny2.getActivityHistory endpoint
  *
- * @param page The page number to request
- * @param membershipid Membership id associated with player account, mapping to platform player plays on
- * @param membertype Enum indicator for platform type player plays on
- * @param access_token Provided by bungie api to access protected player data
- * @param mode The activity mode to return reports for {DestinyActivityModeType: Enum} such as pvp, pve, raids, etc
+ * @param {int} page The page number to request
+ * @param {string} membershipid Membership id associated with player account, mapping to platform player plays on
+ * @param {string} membertype Enum indicator for platform type player plays on
+ * @param {string} access_token Provided by bungie api to access protected player data
+ * @param {int} mode The activity mode to return reports for {DestinyActivityModeType: Enum} such as pvp, pve, raids, etc
+ * @param {int} count The number of activities to return for this page
  *
- * @returns {Promise<void>}
+ * @returns {Promise<Object>} A bungie response parsed to an object
  */
-async function getActivityResultPage(page,membershipid,membertype,characterid,access_token,mode){
+async function getActivityResultPage(page,membershipid,membertype,characterid,access_token,mode, count){
     const pathParams = {
         "MEMBERTYPE": membertype,
         "MEMBERID": membershipid,
         "CHARID": characterid
     }
 
-    const final_url = (replaceMultiple(/MEMBERTYPE|MEMBERID|CHARID/g,pathParams,activity_reports_url))+"?count=250&page="+page+"&mode="+mode;
+    const final_url = (replaceMultiple(/MEMBERTYPE|MEMBERID|CHARID/g,pathParams,activity_reports_url))+"?count="+count+"&page="+page+"&mode="+mode;
     console.log("Page url"+final_url);
     return await protectedRequest(access_token,final_url,"Account activity reports request");
 }
@@ -504,6 +386,7 @@ async function getActivityPGCR(instanceid){
     const response = await protectedRequest(null,final_url,"PGCR request",false);
     return response;
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
 * MAKE REQUEST
@@ -573,7 +456,7 @@ async function getAllBucketHashes(){
 
     var relevant_buckets = ["Helmet","Chest Armor","Gauntlets","Leg Armor","Subclass","Modifications","Energy Weapons","Class Armor","Kinetic Weapons","Consumables","Power Weapons","General"];
 
-    const response = await protectedRequest(null,manifest_url,"Requesting Manifest data",false);
+    const response = await protectedRequest(null,Endpoints.manifest_url,"Requesting Manifest data",false);
     manifestData = response;//bucket hashes is the first init method called, so cache the result so subsequent init methods can use it
     if(response=="error"){
 
@@ -582,7 +465,7 @@ async function getAllBucketHashes(){
 
     }else{
 
-        var def_url = base_domain+response.Response.jsonWorldComponentContentPaths.en.DestinyInventoryBucketDefinition;
+        var def_url = Endpoints.baseDomain+response.Response.jsonWorldComponentContentPaths.en.DestinyInventoryBucketDefinition;
         const definitions = await protectedRequest(null,def_url,"Request bucket definitions",false);
 
         if(definitions=="error"){
@@ -600,11 +483,11 @@ async function getAllBucketHashes(){
 
                         for(var bucket in relevant_buckets){
 
-                            if(relevant_buckets[bucket]==data.displayProperties.name){
 
-                                bucketHashes.push({hashid: hash, name: data.displayProperties.name});
 
-                            }
+                            bucketHashes.push({hashid: hash, name: data.displayProperties.name});
+
+
                         }
                     }
                 }
@@ -637,7 +520,7 @@ async function getSubClassHashes(){
 */
 async function getPerkHashes(){
 
-    const perkResponse = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinySandboxPerkDefinition,"Perk Hash Request",false);
+    const perkResponse = await protectedRequest(null,Endpoints.baseDomain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinySandboxPerkDefinition,"Perk Hash Request",false);
     if(perkResponse=="error"){
         return "error";
     }
@@ -656,7 +539,7 @@ async function getPerkHashes(){
 * Private module method to dynamically retrieve all item stat hashes from the bungie api, called upon module initialisation
 */
 async function getStatHashes(){
-    const statResponse = await protectedRequest(null, base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyStatDefinition, "Stats Hash Request",false);
+    const statResponse = await protectedRequest(null, Endpoints.baseDomain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyStatDefinition, "Stats Hash Request",false);
     if(statResponse=="error"){
         return "error";
     }
@@ -674,7 +557,7 @@ async function getStatHashes(){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function getActivityModifierHashes(){
-    const modifierHashes = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityModifierDefinition,"Activity Modifiers",false);
+    const modifierHashes = await protectedRequest(null,Endpoints.baseDomain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityModifierDefinition,"Activity Modifiers",false);
 
     for(const[keyValue, modifier] of Object.entries(modifierHashes)){
         activityModifiers.push({
@@ -687,7 +570,7 @@ async function getActivityModifierHashes(){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function getActivityTypeHashes(){
-    const typeHashes = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityTypeDefinition,"Activity Type",false);
+    const typeHashes = await protectedRequest(null,Endpoints.baseDomain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityTypeDefinition,"Activity Type",false);
     for(const[type_hash, value] of Object.entries(typeHashes)){
         activityTypeHashes.push({
            hash: type_hash,
@@ -697,7 +580,7 @@ async function getActivityTypeHashes(){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function getActivityDefinitions(){
-    const activityResponse = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityDefinition,"Activity Definitions",false);
+    const activityResponse = await protectedRequest(null,Endpoints.baseDomain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityDefinition,"Activity Definitions",false);
 
     for(const[activity_hash, hash] of Object.entries(activityResponse)){
         if(hash.displayProperties.name=="Classified"){
@@ -733,7 +616,7 @@ async function getActivityDefinitions(){
 * GET ALL ITEMS IN THE GAME, INCLUDING THEIR NAME, HASH ID AND DESCRIPTION
 */
 async function getItemDefinitions(){
-    const itemsResponse = await protectedRequest(null, base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyInventoryItemDefinition, "Item Hash Request",false);
+    const itemsResponse = await protectedRequest(null, Endpoints.baseDomain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyInventoryItemDefinition, "Item Hash Request",false);
     if(itemsResponse=="error"){
         return "error";
     }
@@ -751,7 +634,7 @@ async function getItemDefinitions(){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function getMilestoneActivities(){
-    const milestones = await protectedRequest(null,base_domain+"/Platform/Destiny2/Milestones/","Milestones Request",false);
+    const milestones = await protectedRequest(null,Endpoints.baseDomain+"Platform/Destiny2/Milestones/","Milestones Request",false);
 
     for(const[keyval, milestone] of Object.entries(milestones.Response)){
         for(const activity in milestone.activities){
@@ -777,7 +660,7 @@ async function getMilestoneActivities(){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function getActivityModeDefinitions(){
-    const res = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityModeDefinition,"Activity Modes Request",false);
+    const res = await protectedRequest(null,Endpoints.baseDomain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyActivityModeDefinition,"Activity Modes Request",false);
     fs.writeFile("O://activitymodeexample.txt",JSON.stringify(res,null,4),function(err){})
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -863,7 +746,7 @@ async function moduleInit(){
     await  getActivityModeDefinitions();
 
     //pass bungie parser all static game data to be used in parsing all future responses from user requests
-    setGameData(staticActivities,activityModifiers,activeActivities,itemNameHashes);
+    setGameData(staticActivities,activityModifiers,activeActivities,itemNameHashes,perkHashes,statHashes,bucketHashes);
 
     reqMillis = dayjs().valueOf();//set req millis
 
@@ -874,11 +757,15 @@ async function moduleInit(){
 await moduleInit();//initialise module
 
 export const destiny_full = {
-    getCharacterInventoryItemsAndVault,
     set_dependencies,
     getNewUser,
     getAccountWeaponStats,
-    getAccountActivityReports
+    getAccountActivityReports,
+    getCharacterItems
+}
+export const bungieAuth = {
+    getNewUser,
+    getUserAccess
 }
 
-export default {getUserAccess,getAccountCharacters,getAccountSpecificData,getPlayerInventoryItems,getCharacterInventoryItemsAndVault};
+export default {getUserAccess,getAccountCharacters,getAccountSpecificData,getPlayerInventoryItems};
