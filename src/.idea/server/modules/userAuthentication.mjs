@@ -80,6 +80,7 @@ export async function baseAuthentication(coach, code){
             userid: coach.getDisplayName()
         }, false);
     }else{
+
         await dbAuth.newUser(coach.details);
         console.log("User Authentication://");
     }

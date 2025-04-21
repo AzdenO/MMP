@@ -310,6 +310,21 @@ export function setGameData(activities, activity_modfiers, activeActs, items, pe
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
+ * Method to parse a response object at the Destiny2.getHistoricalStats endpoint, returning a couple statistics relevant
+ * to the coaching aspect of the server
+ * @param {Object} object The response object to parse
+ */
+export function parseHistoricalStats(object){
+    return {
+        LongestKillSpree: object.Response.mergedAllCharacters.results.allPvE.allTime.longestKillSpree.basic.value,
+        AverageLifeSpan: object.Response.mergedAllCharacters.results.allPvE.allTime.averageLifespan.basic.displayValue,
+        winLossRatio: (object.Response.mergedAllCharacters.results.allPvP.allTime.winLossRatio.basic.value).toPrecision(2),
+        bestSingleGameKills: object.Response.mergedAllCharacters.results.allPvP.allTime.bestSingleGameKills.basic.value,
+        KDRatio: (object.Response.mergedAllCharacters.results.allPvP.allTime.killsDeathsRatio.basic.value).toPrecision(2),
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
  * Method to parse the response receivied from bungies OAuth2 endpoint, extarcting tokens and their expiries
  * @param {Object} object The response json parsed into an object
  * @return {Object} A minimal object containing only the necessary data

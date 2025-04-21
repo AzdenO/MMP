@@ -3,7 +3,7 @@ import env from "dotenv";//safely storing of secrets
 import dayjs from "dayjs";
 import fs from "node:fs";//for writing to files, not technically necessary apart from when saving responses from bungie to look at more easily
 import {AuthError,InitError} from "./utils/errors.mjs";
-import {parseWeaponStats,parseActivityHistory,setGameData,parseItems,parseTokenResponse} from "./utils/bungieParser.mjs";
+import {parseWeaponStats,parseActivityHistory,setGameData,parseItems,parseTokenResponse,parseHistoricalStats} from "./utils/bungieParser.mjs";
 import * as Endpoints from "./constants/BungieEndpoints.mjs";
 import * as EndpointParameters from "./constants/BungieEndpointConstants.mjs";
 import {replaceMultiple} from "./utils/stringUtils.js";
@@ -72,6 +72,7 @@ async function getNewUser(auth_code){
     userDetails.displayname = accountdata.Response.destinyMemberships[0].bungieGlobalDisplayName+accountdata.Response.destinyMemberships[0].bungieGlobalDisplayNameCode.toString();
 
     userDetails.characters = await getAccountCharacters(userDetails.accessToken,userDetails.membershipid,userDetails.membertype);
+    userDetails.progression = await getHistoricalStats(userDetails.accessToken,userDetails.membershipid,userDetails.membertype)
 
     return userDetails;
 
@@ -258,7 +259,7 @@ async function getAccountWeaponStats(membershipid,membertype,access_token, pve){
         "MEMBERID": membershipid
     };
 
-    const final_url = replaceMultiple(/MEMBERTYPE|MEMBERID/g,flags,Endpoints.weapon_stats_url);
+    const final_url = replaceMultiple(/MEMBERTYPE|MEMBERID/g,flags,Endpoints.weapon_stats_url)+"?groups=Weapons";
     var requested = null;
     var result = await protectedRequest(access_token,final_url,"Account weapon stats Request");
     result = result.Response.mergedAllCharacters.results;
@@ -444,6 +445,18 @@ async function protectedRequest(access_token,url,logtext,protect=true){
         return "error";
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+async function getHistoricalStats(access_token,memberid,membertype){
+    const pathParams = {
+        "MEMBERTYPE": membertype,
+        "MEMBERID": memberid
+    }
+    var url = replaceMultiple(/MEMBERTYPE|MEMBERID/g,pathParams,Endpoints.weapon_stats_url);
+    const data = await protectedRequest(access_token,url,"Historical Stats Request");
+    return parseHistoricalStats(data);
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////INITIALISATION METHODS/////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -761,11 +774,13 @@ export const destiny_full = {
     getNewUser,
     getAccountWeaponStats,
     getAccountActivityReports,
+    getHistoricalStats,
     getCharacterItems
 }
 export const bungieAuth = {
     getNewUser,
-    getUserAccess
+    getUserAccess,
+    getHistoricalStats,
 }
 
 export default {getUserAccess,getAccountCharacters,getAccountSpecificData,getPlayerInventoryItems};

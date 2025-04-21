@@ -39,6 +39,9 @@ export default class Coach{
     async getRecentActivities(characterid){
         return await this.userservice.getRecentActivities(this.getDisplayName(),characterid);
     }
+    async getBasicCoachingData(){
+
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getDisplayName(){
         return this.details.displayname;

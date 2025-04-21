@@ -18,10 +18,10 @@ import {AuthError,InitError,UserNotFoundError,InvalidTokenError} from "./utils/e
 import fs from "node:fs";
 //import secretiser from "./utils/cryptography.mjs";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function newUser(user_details, items){
+async function newUser(user_details,progressionData, items){
     console.log("Database:// Adding new user to database");
     const connection = await getConnection();
-    await connection.execute("CALL newUser(?,?,?,?,?,?,?,?,?)",[
+    await connection.execute("CALL newUser(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[
         user_details.displayname,
         user_details.accountID,
         user_details.membershipid,
@@ -30,7 +30,12 @@ async function newUser(user_details, items){
         user_details.refreshToken,
         user_details.refresh_expiry,
         user_details.accessToken,
-        user_details.accessExpiry
+        user_details.accessExpiry,
+        user_details.progression.LongestKillSpree,
+        user_details.progression.AverageLifeSpan,
+        user_details.progression.winLossRatio,
+        user_details.progression.bestSingleGameKills,
+        user_details.progression.KDRatio
     ]);
     await connection.release();
 }

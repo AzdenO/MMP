@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 ////////////////////////////////////////////////SERVER-WIDE DEPENDENCY CONFIGURATION////////////////////////////////////
 /*Main Server File Dependencies*/
 import {invalidParamsBody,invalidTokenBody, ServerErrorBody} from "./modules/constants/responseConstants.mjs";
+import {handle} from "./modules/utils/serverUtils/ErrorHandler.mjs"
 
 /*Secondary dependencies*/
 
@@ -116,10 +117,7 @@ api.get("/server/coach/characterAnalysis",async (req,res)=>{
                 generated: generated
             })
         }catch(error){
-            if(err instanceof ServerErrors.InvalidTokenError){
-                res.status(401);
-                res.json(invalidTokenBody);
-            }
+            handle(error, res);
         }
     }
 });
@@ -158,10 +156,7 @@ api.get("/server/coach/weapon_skills", async (req, res) => {
 
         }catch(err){
 
-            if(err instanceof ServerErrors.InvalidTokenError){
-                res.status(401);
-                res.json(invalidTokenBody);
-            }
+            handle(err, res);
 
         }
     }
@@ -189,10 +184,7 @@ api.get('/server/bungie/getrecentactivities',async(req, res) => {
                 content: generated
             })
         }catch(err){
-            if(err instanceof ServerErrors.InvalidTokenError){
-                res.status(401);
-                res.json(invalidTokenBody);
-            }
+            handle(err, res);
         }
     }
 });
@@ -306,12 +298,7 @@ api.post('/server/authorize', async (req, res) => {
             /*
              * MANUAL TESTING AREA, INSERT CODE HERE
              */
-            destiny.destiny_full.getCharacterItems(
-                newuser.getCharacterIds(),
-                newuser.getMembershipId(),
-                newuser.getMemberType(),
-                newuser.getAccessToken(),
-                true)
+            UserService.getCoachData(newuser.getDisplayName());
             /*
              * END OF MANUAL TESTING AREA
              */

@@ -25,4 +25,4 @@ export const user_data_url = baseDomain+"Platform/Destiny2/TYPE/Profile/MEMBERID
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const user_inventory_url = baseDomain+"Platform/Destiny2/TYPE/Profile/MEMBERID/Character/CHARACTERID/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const weapon_stats_url = baseDomain+"Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Stats/?groups=Weapons";
+export const weapon_stats_url = baseDomain+"Platform/Destiny2/MEMBERTYPE/Account/MEMBERID/Stats/";

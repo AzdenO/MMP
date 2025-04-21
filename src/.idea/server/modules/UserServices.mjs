@@ -1,3 +1,9 @@
+/**
+ * @module UserServices
+ * @description Module to encapsulate fetching of data from the database and bungie, as well as setting some data in the database
+ * @version 0.1.0
+ * @author Declan Roy Alan Wadsworth
+ */
 import * as fs from "node:fs";
 
 var db = null;
@@ -82,10 +88,10 @@ async function getCharacterConfiguration(userid, characterid){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
- *
- * @param userid
- * @param pve
- * @returns {Promise<void>}
+ * Fetch the players 30 most recent activities
+ * @param {string} userid The player we are fetching activities for
+ * @param {string} characterid The players character to fetch activities for
+ * @returns {Promise<Array>}
  */
 async function getRecentActivities(userid,characterid){
     const requestParams = await db.getBungieRequestData(userid);
@@ -118,6 +124,16 @@ async function getUserItems(userid){
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Method to return basic coaching data about the player that is stored in the database
+ * @param {string} userid The user to return this data for
+ * @returns {Promise<void>}
+ */
+async function getCoachData(userid){
+    const requestParams = await db.getBungieRequestData(userid);
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function getPlayerFromBungie(code){
     return await destiny.getNewUser(code);
 }
@@ -145,6 +161,7 @@ export default {
     getCharacterConfiguration,
     getRecentActivities,
     getKnowledgeBase,
+    getCoachData,
     initialise
 }
 
