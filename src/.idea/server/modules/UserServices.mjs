@@ -5,6 +5,7 @@
  * @author Declan Roy Alan Wadsworth
  */
 import * as fs from "node:fs";
+import cron from "node-cron";
 
 var db = null;
 var destiny = null;
@@ -127,10 +128,11 @@ async function getUserItems(userid){
 /**
  * Method to return basic coaching data about the player that is stored in the database
  * @param {string} userid The user to return this data for
- * @returns {Promise<void>}
+ * @returns {Promise<Object>}
  */
 async function getCoachData(userid){
-    const requestParams = await db.getBungieRequestData(userid);
+    const data =  await db.getProgressionData(userid);
+    return data;
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,6 +142,29 @@ async function getPlayerFromBungie(code){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function getPlayerFromDB(){
 
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Method to update all user data that requires resetting every week, such as weekly progress tracking stats
+ */
+async function weeklyUpdate(){
+    console.log("User Services (Async): Starting weekly update");
+    const userids = await db.getAllUsers();
+    for(const userid of userids){
+        const requestParams = await db.getBungieRequestData(userid);
+        const newData = await destiny.getHistoricalStats(
+            requestParams.token,
+            requestParams.platformid,
+            requestParams.platformtype
+        )
+        db.updateProgressionData(userid, newData);
+    }
+    //schedule this job to occur again on tuesday every week at 18:05
+    cron.schedule(
+        "5 18 * * 2",
+        weeklyUpdate
+    );
+    console.log("User Services (Async): Weekly update complete");
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function injectDependencies(bungie,database){
@@ -152,6 +177,12 @@ function injectDependencies(bungie,database){
 async function initialise(destiny,database){
     console.log("User Services:// Initialising Service");
     injectDependencies(destiny,database);
+    console.log("User Services:// Scheduling weekly update");
+    cron.schedule(
+        "5 18 * * 2",
+        weeklyUpdate
+    )
+    console.log("User Services:// Initialisation complete");
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -162,10 +193,6 @@ export default {
     getRecentActivities,
     getKnowledgeBase,
     getCoachData,
+    weeklyUpdate,
     initialise
-}
-
-export const authServices = {
-    getPlayerFromBungie,
-    getPlayerFromDB
 }

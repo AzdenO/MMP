@@ -780,7 +780,6 @@ export const destiny_full = {
 export const bungieAuth = {
     getNewUser,
     getUserAccess,
-    getHistoricalStats,
 }
 
 export default {getUserAccess,getAccountCharacters,getAccountSpecificData,getPlayerInventoryItems};

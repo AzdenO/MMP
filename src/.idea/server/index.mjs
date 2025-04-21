@@ -13,7 +13,9 @@ import cookieParser from "cookie-parser";
 ////////////////////////////////////////////////SERVER-WIDE DEPENDENCY CONFIGURATION////////////////////////////////////
 /*Main Server File Dependencies*/
 import {invalidParamsBody,invalidTokenBody, ServerErrorBody} from "./modules/constants/responseConstants.mjs";
-import {handle} from "./modules/utils/serverUtils/ErrorHandler.mjs"
+import {handle} from "./modules/utils/serverUtils/ErrorHandler.mjs";
+import {parseAllParams} from "./modules/utils/serverUtils/ParamHandler.mjs";
+import {RequestCodes} from "./modules/Enums/PoolRequestCodes.mjs";
 
 /*Secondary dependencies*/
 
@@ -98,28 +100,31 @@ const httpsOptions = {
 };
 ///////////////////////////////////////////////ROUTE DEFINITIONS////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-api.get("/server/coach/characterAnalysis",async (req,res)=>{
-    const token = req.headers["x-access-token"];
-    const charid = req.headers["character-id"];
-
-    if(!token || !charid){
-        console.log("Server (GetCharacterAnalysis):// Invalid parameters")
-        res.status(400);
-        res.json(invalidParamsBody);
-    }else{
-        try{
-            const userid = await authServices.authorize(token);
-            console.log("Server (GetCharacterAnalysis):// Request authenticated, processing request");
-            const generated = active_pool.process(userid, 3, [charid]);
-            res.json({
-                status:"success",
-                message: "I`m initiating Operation Ahamkara",
-                generated: generated
-            })
-        }catch(error){
-            handle(error, res);
+api.get("/server/coach/character/:characterid/analysis",async (req,res)=>{
+    const params = parseAllParams(
+        req,
+        res,
+        {
+            path: ["characterid"],
+            header: ["x-access-token"],
         }
+    );
+    if(!params){
+        return;
     }
+    try{
+        const userid = await authServices.authorize(params.header["x-access-token"]);
+        console.log("Server (GetCharacterAnalysis):// Request authenticated, processing request");
+        const generated = await active_pool.process(userid, RequestCodes.CHARACTERANALYSIS, [params.path["characterid"]]);
+        res.json({
+            status:"success",
+            message: "I`m initiating Operation Ahamkara",
+            generated: generated
+        });
+    }catch(error){
+        handle(error, res);
+    }
+
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 api.get("/server/bungie/knowledge",async (req,res)=>{
@@ -130,139 +135,151 @@ api.get("/server/bungie/knowledge",async (req,res)=>{
     })
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-api.get("/server/coach/activity_skills",async (req,res)=>{
+api.get("/server/coach/activity-skills",async (req,res)=>{
 
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-api.get("/server/coach/weapon_skills", async (req, res) => {
+api.get("/server/coach/weapon-skills", async (req, res) => {
 
-    const token = req.headers["x-access-token"];
-    const type = req.headers["skills-type"];
-    if(!token | !type){
-        console.log("Server (GetWeaponSkills):// Invalid parameters")
-        res.status(400);
-        res.json(invalidParamsBody);
-    }else{
-
-        try{
-            const userid = await authServices.authorize(token);
-            console.log("Server (GetWeaponSkills):// Request authenticated, processing request");
-            const generated = await active_pool.process(userid, 2, [charid]);
-            res.json({
-                success: true,
-                message: "You`re a wall around these zones guardian, take that iron will beyond the crucible",
-                content: generated
-            });
-
-        }catch(err){
-
-            handle(err, res);
-
+    const params = parseAllParams(
+        req,
+        res,
+        {
+            query: ["skillstype"],
+            header: ["x-access-token"]
         }
+    )
+    if(!params){
+        return;
     }
+
+
+    try{
+        const userid = await authServices.authorize(params.header["x-access-token"]);
+        console.log("Server (GetWeaponSkills):// Request authenticated, processing request");
+        const generated = await active_pool.process(userid, RequestCodes.WEAPONSKILLS, [params.query["skillstype"]]);
+        res.json({
+            success: true,
+            message: "You`re a wall around these zones guardian, take that iron will beyond the crucible",
+            content: generated
+        });
+
+    }catch(err){
+
+        handle(err, res);
+
+    }
+
 
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-api.get('/server/bungie/getrecentactivities',async(req, res) => {
-    const token = req.headers["x-access-token"];
-    const charid = req.headers["character-id"];
+api.get('/server/bungie/character/:characterid/recent-activities',async(req, res) => {
 
-    if(!token){
-        console.log("Server (GetRecentActivities):// Invalid parameters")
-        res.status(400);
-        res.json(invalidParamsBody);
-    }else{
-
-        try{
-            const userid = await authServices.authorize(token);
-            console.log("Server (GetRecentActivities):// Request authenticated, fetching past 30 activities");
-            const generated = await active_pool.process(userid, 4,[charid]);
-            res.status(200);
-            res.json({
-                success: true,
-                message: "Devotion inspires bravery, bravery inspires sacrifice, sacrifice leads to...",
-                content: generated
-            })
-        }catch(err){
-            handle(err, res);
+    const params = parseAllParams(
+        req,
+        res,
+        {
+            path: ["characterid"],
+            header: ["x-access-token"]
         }
+    )
+    if(!params){
+        return;
     }
+
+    try{
+        const userid = await authServices.authorize(token);
+        console.log("Server (GetRecentActivities):// Request authenticated, fetching past 30 activities");
+        const generated = await active_pool.process(userid, RequestCodes.RECENTACTIVITIES,[charid]);
+        res.status(200);
+        res.json({
+            success: true,
+            message: "Devotion inspires bravery, bravery inspires sacrifice, sacrifice leads to...",
+            content: generated
+        })
+    }catch(err){
+        handle(err, res);
+    }
+
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 api.get("/server/coach/data",async (req,res)=>{
-    const token = req.headers["x-access-token"];
-
-    if(!token){
-        res.status(400);
-        res.json(invalidParamsBody);
-    }else{
-
+    const params = parseAllParams(
+        req,
+        res,
+        {
+            header: ["x-access-token"]
+        }
+    )
+    if(!params){
+        return;
     }
+    const userid = await authServices.authorize(params.header["x-access-token"]);
+    const generated = await active_pool.process(userid, RequestCodes.PROGRESSIONDATA,[]);
+
+
+
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-api.get('/server/coach/act_sug_build', async(req, res) => {
-    const characterId = req.headers["character-id"];
-    const token = req.headers["x-access-token"];
-    const activityId = req.headers["activity-id"];
+api.get('/server/coach/character/:characterid/activity/:activityid/build', async(req, res) => {
 
-    if(!characterId || !token || !activityId){
-        res.status(400);
-        res.json(invalidParamsBody);
-        res.send();
-
-    }else{
-
-        try{
-            const userid = await authServices.authorize(token);
-            const generated = await active_pool.process(userid, 1,[characterId,activityId]);
-            res.status(200);
-            res.json({
-                status: "success",
-                test: "successful",
-                generated: generated
-            });
-            console.log("Processed");
-
-
-        }catch(err){
-
-            if(err.constructor.name == "InvalidTokenError"){
-                res.status(401);
-                res.json(invalidTokenBody);
-            }else{
-                res.status(500);
-                res.json(ServerErrorBody);
-            }
-
+    const params = parseAllParams(
+        req,
+        res,
+        {
+            header: ["x-access-token"],
+            path: ["characterid","activityid"],
         }
+    )
+    if(!params){
+        return;
+    }
+
+
+    try{
+        const userid = await authServices.authorize(token);
+        const generated = await active_pool.process(userid, RequestCodes.ACTBUILD,[characterId,activityId]);
+        res.status(200);
+        res.json({
+            status: "success",
+            test: "successful",
+            generated: generated
+        });
+        console.log("Processed");
+
+
+    }catch(err){
+
+        handle(err,res);
     }
 })
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 api.post('server/authorize/reauth', async (req, res) => {
     console.log("Server:// New access token request");
-    const refresh = req.headers["x-refresh-token"];
 
-    if(!refresh){
-        res.status(400);
-        res.json(invalidParamsBody);
-        res.send();
-    }else{
-        try{
-            const tokens = authServices.reAuthorise(refresh);
-            res.status(200);
-            res.json({
-               status: "success",
-               message: "//Siva-ctrl-access: granted",
-               tokens: tokens
-            });
-        }catch(error){
-            if(err instanceof InvalidTokenError){
-                res.status(401);
-                res.json(invalidTokenBody);
-            }
+    const params = parseAllParams(
+        req,
+        res,
+        {
+            header: ["x-refresh-token"]
         }
+    )
+    if(!params){
+        return;
     }
+    try{
+        const tokens = authServices.reAuthorise(params.header["x-refresh-token"]);
+        res.status(200);
+        res.json({
+            status: "success",
+            message: "//Siva-ctrl-access: granted",
+            tokens: tokens
+        });
+    }catch(error){
+        handle(err,res);
+    }
+
 })
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -298,7 +315,6 @@ api.post('/server/authorize', async (req, res) => {
             /*
              * MANUAL TESTING AREA, INSERT CODE HERE
              */
-            UserService.getCoachData(newuser.getDisplayName());
             /*
              * END OF MANUAL TESTING AREA
              */
@@ -318,21 +334,7 @@ api.post('/server/authorize', async (req, res) => {
 
 
         }catch(err){
-            console.log(err);
-            newuser = null;//make applicable for garbage collection
-            console.log("Server:// Error in creating new user\n\t"+err.stack);
-            res.status(401);//return http status error code
-            res.json({
-                success: false,
-                message: "Error in authenticating user",
-                ErrorCode: 401,//sticking to standard http codes where applicable, this being authentication error
-                status: "error",
-                data:{
-                    errmsg:err.message
-                }
-            });
-
-
+            handle(err,res);
         }
     })();
 

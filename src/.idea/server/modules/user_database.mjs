@@ -21,7 +21,7 @@ import fs from "node:fs";
 async function newUser(user_details,progressionData, items){
     console.log("Database:// Adding new user to database");
     const connection = await getConnection();
-    await connection.execute("CALL newUser(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[
+    await connection.execute("CALL newUser(?,?,?,?,?,?,?,?,?,?)",[
         user_details.displayname,
         user_details.accountID,
         user_details.membershipid,
@@ -31,11 +31,7 @@ async function newUser(user_details,progressionData, items){
         user_details.refresh_expiry,
         user_details.accessToken,
         user_details.accessExpiry,
-        user_details.progression.LongestKillSpree,
-        user_details.progression.AverageLifeSpan,
-        user_details.progression.winLossRatio,
-        user_details.progression.bestSingleGameKills,
-        user_details.progression.KDRatio
+        JSON.stringify(user_details.progression,null,4),
     ]);
     await connection.release();
 }
@@ -296,6 +292,38 @@ async function getBungieRequestData(userid){
     };
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+async function getProgressionData(userid){
+    const connection = await getConnection();
+    const result = await connection.execute("CALL getProgressions(?)",[userid]);
+    return result[0][0][0];
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to fetch a list of userids for every user on the server
+ * @returns {Promise<Array<string>>} An array of userids
+ */
+async function getAllUsers(){
+    const connection = await getConnection();
+
+    const result = await connection.execute("SELECT userid FROM users");
+    const array = result[0].map(user => user.userid);//return only an array of userids, not objects
+    connection.release();
+    return array;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to update the weekly stats for a specific user
+ * @param {string} userid The user to update stats for
+ * @param {JSON} progression The progression data store in the thisWeekStats column
+ * @returns {Promise<void>}
+ */
+async function updateProgressionData(userid, progression){
+    const connection = await getConnection();
+
+    const result = await connection.execute("CALL updateProgressions(?,?)",[userid,JSON.stringify(progression,null,4)]);
+    connection.release();
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Exported object containing all methods required for general server services, and excludes any methods typically used
  * for authentication
@@ -310,6 +338,9 @@ export const dbBaseServices = {
     checkForUser,
     updateRefresh,
     getUserItems,
+    updateProgressionData,
+    getAllUsers,
+    getProgressionData,
     getBungieRequestData
 }
 /**

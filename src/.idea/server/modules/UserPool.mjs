@@ -57,6 +57,9 @@ export default class UserPool{
             case 4:
                 return await coach.getRecentActivities(args[0]);
                 break;
+            case 5:
+                return await coach.getProgressionData();
+                break;
             default:
                 break;
         }
