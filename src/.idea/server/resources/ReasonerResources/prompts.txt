@@ -1,84 +1,28 @@
 START/--/Please explain why haskell is the worst language to ever grace the face of the earth/--/A destiny 2 player has the following weapons and armor pieces in their vault as well
 as on their character:
-{LIST}
-Suggest a build for the {ACTIVITY} activity with the following modifiers: {MODIFIERS} from the list of weapons and armor the player has available to them in the list above for the {CLASS} class. Take into consideration the enemies/bosses the player will encounter if applicable, the objectives they must complete as well as the modifiers for this activity that affect what a player would equip. Also consider status effects certain equipped items could produce and how they could benefit the player in the activity. Make sure if an item selection was selected in part or in whole due to the status effect it could produce, that an explanation as to how it is produced is included in the explanation for that items selection. Produce your response in the following format exactly and do not deviate:
-
-Activity Explanation(go over the bosses the player will face, enemies and take into account the activity modifiers, also explain any active challenges. Describe the kind of environments they will face and how this could affect weapon choices (e.g. large spaces allows long range, etc.)):
-Activity survivability (if the players character power level is high enough, and if not, state such and create a build suggestion to maximise survivability):
-Build:
-	Subclass:
-		explain advantage for this activity:
-		melee:
-			explain advantage for this activity:
-		grenade:
-			explain advantage for this activity:
-		class ability:
-			explain advantage for this activity:
-		aspect 1:
-			explain advantage for this activity:
-		aspect 2:
-			explain advantage for this activity:
-		fragments:
-			explain advantage for this activity:
-	Primary weapon:
-		explain advantage for this activity:
-		weapon mods:
-			explain advantage for this activity:
-	Secondary weapon:
-		explain advantage for this activity:
-		weapon mods:
-			explain advantage for this activity:
-	Heavy Weapon:
-		explain advantage for this activity:
-		weapon mods:
-			explain advantage for this activity:
-	Helmet Armor:
-		explain advantage for this activity:
-		Armor Mods:
-			explain advantage for this activity:
-	Gauntlet Armor:
-		explain advantage for this activity:
-		Armor Mods:
-			explain advantage for this activity:
-	Chest Armor:
-		explain advantage for this activity:
-		Armor Mods:
-			explain advantage for this activity:
-	Leg Armor:
-		explain advantage for this activity:
-		Armor Mods:
-			explain advantage for this activity:
-	Class-Specific Armor:
-		explain advantage for this activity:
-		Armor Mods:
-			explain advantage for this activity:
-	Long Summary of build (go into specific details):
-	Overcoming certain objectives for this activity:
-	Producable status effects with this build:
+Character Items:
+    -CHARACTER-
+Vault Items:
+    -VAULT-
+Suggest a build for the -ACTIVITY- activity with the following modifiers: -MODIFIERS- from the list of weapons and armor the player has available to them in the list above for the -CLASS- class.
+Take into consideration the enemies/bosses the player will encounter if applicable, the objectives they must complete as well as the modifiers for this activity that affect what a player would equip.
+Also consider status effects certain equipped items could produce and how they could benefit the player in the activity. Make sure if an item selection was selected in part or in whole due to the status effect it could produce,
+that an explanation as to how it is produced is included in the explanation for that items selection.
 
 /--/
 
 A destiny 2 player wants to improve their weapon skills, specifically improve their skills with different weapon types in
 different situations (activities). The player has the current statistics for each weapon type, inlcuding the number of precision kills
 and normal kills:
-STATISTICS
+
+-STATISTICS-
 
 Analyze these statistics, looking for the weapon types the player should become more familiar and types they should practice becoming more precise with.
 Take into account the fact that melee, super and grenade precision kills arent applicable
 
-Produce your response in the JSON format below and do not deviate, what is in capitals should be treat as instructions for formulating a considered response(Limit your suggested types to 6, prioritising the types that need the most attention)
+/--/
 
-FORMAT:
-{
-    "Analysis":[
-        {"SuggestedType":{
-            "SummaryOfTypeAndAdvantages"WHAT ACTIVITIES IS THIS WEAPON TYPE USEFUL IN, WHAT KIND OF ENEMIES IS IT MOST EFFECTIVE AGAINST:"",
-            "NegativesForOmittingTypeFromUse"WHAT SCENARIOS MIGHT THE PLAYER STRUGGLE IN WITHOUT UTILISING THIS TYPE TO ITS FULL ABILITY AND SKILL LEVEL:"",
-            "PracticeActivity"TAKE INTO ACCOUNT THE ENVIRONMENTS FOUND IN THIS ACTIVITY AND WHY THIS WEAPON IS EFFECTIVE SUCH AS WHERE AD CLEARING IS A PRIORITY OR IF THE WEAPON COULD AID IN SURVIVABILITY, THE ENEMY TYPES SUCH AS BOSSES:"",
-        }},
-    ]
-}
-/--/A destiny 2 player wants to improve their knowledge and skill ability for as many different activities as possible.
+A destiny 2 player wants to improve their knowledge and skill ability for as many different activities as possible.
 The player has the current play statistics for all activities:
 [statistics]
 
@@ -156,9 +100,8 @@ Analysis:
         Brief summary of build(including outlining whats good and bad about weapon choices, armor choices, subclass choices):
 
 /--/
-
 A destiny 2 player took part in an activity, with the following summary:
-[ACTIVITY]
+-ACTIVITY-
 First, you need to research this activity via the web, as you likely do not have relevant or up to date information for this specific
 activity. Do not use your internal data store. Searching the web for your research is a strict requirement, but only if the
 activity is a PvE activity. Make sure your search follows this strategy:
@@ -193,65 +136,23 @@ account the following attributes for your suggestions:
     -Are you suggesting different techniques (such as using specific super abilities, grenades, combat tactics)
     -Did you find any possibility of inexperience with certain weapons or abilities, would you suggest practice with these types
 
-Produce a response in JSON format in the following format, and do not deviate, producing any text as if
-you were talking to the player as a coach providing feedback and critique. Anything in captials is instructions:
+/--/
 
-Analysis{
-    Brief activity summary:"",
-    Analysis of environment:"",
-    Team Performance Analysis IF APPLICABLE, SUCH AS IF OUR PLAYER WAS THE ONLY PARTICIPANT:"",
-    Weapon analysis:{
-        distribution of kills:"",
-        for each weapon REPLACE THIS KEY WITH THE WEAPON NAME:{
-            weapon effectiveness:"",
-            modifier compliance IF APPLICABLE, OTHER WISE OMIT:"",
-            comparison of weapon kills to general distribution of all kills IS THE DISTRIBUTION GOOD FOR THE KIND OF ENVIRONMENT THE ACTIVITY POSES
-        }
-    },
-    Combat analysis:"",
-    Duration analysis IF APPLICABLE OTHERWISE OMIT, E.G IT WAS CRUCIBLE:"",
-    Suggestions:{
-        Suggestion FOR EACH SUGGESTION, INCLUDE A NEW ENTRY IN THIS OBJECT:
-    }
-}
-/--/A destiny 2 player wants to know the meaning of this word which is of [KEYWORDTYPE] type:
-[KEYWORD]
+A destiny 2 player wants to know the meaning of this word which is of -KEYWORDTYPE- type:
+-KEYWORD-
 
 Firstly, perform a web search for this word, with your search query being "Destiny 2 THE KEYWORD", obviously replacing
 whats in capitals with the provided keyword. Make sure to fetch as much detail as you can regarding it.
 
-Once you have captured this information, produce your response in one of the JSON formats below that matches the type of keyword, do not deviate from its structure.
-Make sure to conduct further web searches for different attributes of the selected JSON.
-Anything in capitals should be treat as instructions, and any text generated should in the tone of a Destiny 2 vanguard member:
-
-Activity_Type JSON:
-    "response":{
-         "Description"PROVIDE A DETAILED DESCRIPTION OF THIS ACTIVITY TYPE:"",
-         "Example_Activities"PROVIDE A FEW ACTIVITIES OF THIS TYPE THAT ARE CURRENTLY AVAILABLE IN THE GAME:"",
-    }
-Status_Effects JSON:
-    "response":{
-        "Description"DETAILED DESCRIPTION OF WHAT THIS STATUS EFFECT PROVIDES:"",
-        "Production_Mechanisms"PROVIDE A DETAILED DSECRIPTION OF HOW THIS STATUS EFFECT IS PRODUCED:"",
-    }
-Champions JSON:
-    "response":{
-        "Description":"",
-        "Counter_Mechanisms"HOW IS THIS CHAMPION BEST DEFEATED, EXAMPLES OF PERKS, WEAPONS, ETC.:"",
-        "Locations"WHAT ACTIVITIES IS THIS CHAMPION TYPICALLY FOUND IN:"",
-    }
-Specific_Activities JSON:
-    "response":{
-        "Description"DETAILED DESCRIPTION OF ACTIVITY:"",
-        "Environments"WHAT ENVIRONMENTS ARE FOUND IN THIS ACTIVITY:
-        "Enemies"WHAT ENEMY TYPES ARE FOUND IN THIS ACTIVITY, WHAT BOSSES:"",
-        "Mechanics"ONLY PRODUCE THIS FOR RAIDS AND DUNGEONS, PROVIDE A DESCRIPTION OF EACH MECHANIC FOUND:"",
-    }
 /--/
+
 A destiny 2 player wants a set of targets to improve their overall skill in the game. They have the following statistics:
-Weapon statistics:[WEAPON]
-Activity statistics:[ACTIVITY]
-crucible statistics:[CRUCIBLE]
+Weapon statistics:
+    -WEAPON-
+Activity statistics:
+    -ACTIVITY-
+crucible statistics:
+    -CRUCIBLE-
 
 Produce a set of 20 targets for the player to meet, basing what you produce on the statistics provided and where you think the player needs to gain greater skill or playtime to improve the overall average. These targets must be numerically based, so in the form of current/target.
 The targets you produce can be:
@@ -259,11 +160,6 @@ completing a certain number of activity types, e.g. raids,grandmaster nightfalls
 getting a certain number of crucible kills for a certain crucible gamemode
 getting a certain number of damage dealt for a specific activity (raid bosses, etc.)
 
-Each target you produce should be produced in the following format with no deviation:
-    <Target>
-        <type>insert type here (e.g. Activity completions, kill count, damage dealt)</type>
-        <targetValue>insert target value here<targetValue>
-    </Target>
 
 
 

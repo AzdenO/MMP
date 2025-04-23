@@ -327,6 +327,17 @@ async function getAccountActivityReports(membershipid,membertype,characterid,acc
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
+ * Method to fetch and parse a report for a single activity instance passed to this function
+ * @param {string} instanceid The hash that maps to a specific activity instance on the bungie api
+ * @param {string} characterid The character the player played as for this activity
+ * @returns {Promise<Object>} Parsed report with high verbosity
+ */
+async function getActivitySummary(instanceid, characterid){
+    const pgcr = await getActivityPGCR(instanceid);
+    return parseActivityHistory([pgcr],characterid);
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
  * Function to fetch a page of activity results from the Destiny2.getActivityHistory endpoint
  *
  * @param {int} page The page number to request
@@ -775,6 +786,7 @@ export const destiny_full = {
     getAccountWeaponStats,
     getAccountActivityReports,
     getHistoricalStats,
+    getActivitySummary,
     getCharacterItems
 }
 export const bungieAuth = {

@@ -1,0 +1,39 @@
+{
+  "ActivityKeywordSchema": {
+    "type": "SchemaType.OBJECT",
+    "items": {
+      "type": "SchemaType.OBJECT",
+      "properties": {
+        'description': {
+          "type": "SchemaType.STRING",
+          "description": 'Provide a detailed description of this activity type, including any possible enemies and the threats they pose and typical combat environments',
+          "nullable": false
+        },
+        'exampleactivities': {
+          "type": "SchemaType.ARRAY",
+          "description": 'Provide a few examples of activities of this type',
+          "nullable": false
+        }
+      },
+      "required": ['description','exampleactivities'],
+    }
+  },
+  "CharacterAnalysisSchema": {
+
+  },
+  "ActivityAnalysisSchema": {
+
+  },
+  "WeaponSkillsAnalysisSchema": {
+
+  },
+  "ActivitySkillsSchema": {
+
+  },
+  "ActivityBuildSchema": {
+
+  },
+  "TargetsSchema": {
+
+  }
+}

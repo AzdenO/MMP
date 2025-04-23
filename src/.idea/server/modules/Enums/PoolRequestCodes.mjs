@@ -3,6 +3,7 @@
  * @description An enumeration for the user pool request codes that map to a specific function to call on a coach object
  * @version 0.1.0
  * @author Declan Roy Alan Wadsworth (drw8)
+ * @see ../../UserPool.mjs
  */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const RequestCodes = Object.freeze({
@@ -12,6 +13,7 @@ export const RequestCodes = Object.freeze({
     RECENTACTIVITIES: 4,
     PROGRESSIONDATA: 5,
     ACTIVITYSKILLS: 6,
+    ACTIVITYANALYSIS: 7,
 
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -9,7 +9,10 @@
 /*
  * Import all response bodies defined as JS constants
  */
-import * as BodyConstants from "../../constants/responseConstants.mjs"
+import * as BodyConstants from "../../constants/responseConstants.mjs";
+/*
+ * Import all errors that can be thrown across the server, as these are mostly handled at the top level of the endpoints
+ */
 import * as ServerErrors from "../errors.mjs";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,6 +30,28 @@ export function handle(err, res){
         console.log("\tProvided token is invalid");
         res.status(401);
         res.json(BodyConstants.invalidTokenBody);
+    }
+    if(err instanceof ServerErrors.ReasonerError){
+        handleReasonerError(err, res);
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to handle the ReasonerError instance, checking the code as this can throw errors where the server is at fault,
+ * or some argument passed by the client is at fault
+ * @param err
+ * @param res
+ */
+function handleReasonerError(err, res){
+    switch(err.code){
+        case "INVALID_KEYWORD_TYPE":
+            res.status(400);
+            res.json(BodyConstants.invalidParamsBody);
+            break;
+        default:
+            res.status(500);
+            res.json(BodyConstants.ServerErrorBody);
+            break;
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

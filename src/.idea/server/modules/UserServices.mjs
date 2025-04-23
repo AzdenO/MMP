@@ -1,17 +1,19 @@
 /**
  * @module UserServices
- * @description Module to encapsulate fetching of data from the database and bungie, as well as setting some data in the database
+ * @description Module to encapsulate fetching of data from the database and bungie, as well as setting some data in the database.
+ * This module is only ever called from the coach, and a single call on index.mjs to fetch the games knowledge base to abstract
+ * away other modules
  * @version 0.1.0
- * @author Declan Roy Alan Wadsworth
+ * @author Declan Roy Alan Wadsworth (drw8)
  */
-import * as fs from "node:fs";
-import cron from "node-cron";
+import * as fs from "node:fs";//accessing machine file system
+import cron from "node-cron"; //for scheduling methods to execute at specific times, such as the weekly data update
 
-var db = null;
-var destiny = null;
-var DEBUG = false;
+var db = null;//database dependency
+var destiny = null;//bungie access dependency
+var DEBUG = false;//modules DEBUG status, used for testing
 
-import {seperateItems} from "./utils/listUtils.js";
+import {seperateItems} from "./utils/listUtils.js";//method to seperate items fetch from bungie into arrays of their subtypes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  *
@@ -55,9 +57,23 @@ async function sendItemsToDatabase(userItems, userid){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
+ * Method to fetch from bungie access an activity summary that maps to the passed instance id
+ * @param {string} instanceid The hash value that maps to an activity instance on the bungie API
+ * @param {string} characterid The character the player played as for this activity, this character must have been present
+ * for this activity, otherwise this function will fail and throw an error
+ * @returns {Promise<Object>} The parsed activity summary
+ */
+async function getActivitySummary(instanceid,characterid){
+    const summary = await destiny.getActivitySummary(
+        instanceid,
+        characterid
+    )
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
  * Fetch the players weapon statistics for all weapon types
  * @param {string} userid The player to request data for
- * @returns {Promise<Object>}
+ * @returns {Promise<Object>} The statistics object
  */
 async function getWeaponStats(userid,pve){
     const requestParams = await db.getBungieRequestData(userid)

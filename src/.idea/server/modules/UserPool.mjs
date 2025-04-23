@@ -1,6 +1,13 @@
 import {generateToken} from "./utils/cryptography.mjs";
 import dayjs from "dayjs";
 
+/**
+ * @class UserPool
+ * @description A class to encapsulate tracking of active users utilizing the services provided by the API, and use to execute
+ * the correct methods on each coach object
+ * @version 0.3.0
+ * @author Declan Roy Alan Wadsworth (drw8)
+ */
 export default class UserPool{
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,14 +38,14 @@ export default class UserPool{
      * @param {string[]} args Any arguments necessary for this type of request
      * @returns {Promise<*>}
      */
-    process(userid, reqCode, args){
+    async process(userid, reqCode, args){
         const match = this.pool[userid];
         if(typeof match === "undefined"){
             console.log("User Pool:// No entry found for "+userid);
             throw new InvalidTokenError();
         }
         console.log("User Pool:// Found active entry for "+userid);
-        return this.#execute(match.coach,reqCode,args);
+        return await this.#execute(match.coach,reqCode,args);
 
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,6 +66,11 @@ export default class UserPool{
                 break;
             case 5:
                 return await coach.getProgressionData();
+                break;
+            case 6:
+                break;
+            case 7:
+                return await coach.getActivityAnalysis(args[0],args[1]);
                 break;
             default:
                 break;

@@ -19,9 +19,9 @@ import {RequestCodes} from "./modules/Enums/PoolRequestCodes.mjs";
 
 /*Secondary dependencies*/
 
-import mysql from "mysql2/promise";
+import mysql from "mysql2/promise";//mysql package
 
-import prompts from "prompts";
+import prompts from "prompts";//console input package
 
 /*Primary dependencies*/
 
@@ -70,7 +70,7 @@ var api = express();//instantiate rest server
 api.use(cors({
     origin: "*",//only allow requests from the github page
     methods: ["GET", "POST", "OPTIONS"],//allow only get, post and options requests on the server
-    allowedHeaders: ["Content-Type","activity-id","character-id","x-access-token","skills-type"],//define list of header attributes that are allowed in all requests
+    allowedHeaders: ["Content-Type","x-access-token"],//define list of header attributes that are allowed in all requests
     credentials: true//not applicable yet, but will be used in later version for authenticating a user with our server before authenticating with bungie
 }));
 
@@ -82,7 +82,6 @@ api.use((req, res,next) => {
 
 api.use(express.json());//allows for easier parsking of request jsons
 
-api.use(cookieParser());//allows for parsing of incoming cookies for retrieivng refresh tokens stored in HTTP only browser cookies
 //////////////////////////////////////////////////////GLOBAL VARIABLES//////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*Create all necessary global variables*/
@@ -135,8 +134,43 @@ api.get("/server/bungie/knowledge",async (req,res)=>{
     })
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-api.get("/server/coach/activity-skills",async (req,res)=>{
+/**
+ * @Endpoint VanguardMentor.getActivityAnalysis
+ * @description This endpoint provides to a client an AI generated analysis of a players performance in an activity in the style
+ * of an in-game coach
+ * @param characterid The bungie API character ID that the player utilised for this activity
+ * @param instanceid The bungie API instance ID for the past activity
+ * @param x-access-token A bungie API access token, in future versions, the server will implement a mirror system where it
+ * provides tokens specific to this server that reflect the bungie tokens stored safely on the server only, to protect
+ * against token leakage
+ * @returns A JSON body with a success flag, status code, fun message as well as an object for the AI generated content
+ */
+api.get("/server/coach/character/:characterid/played/:instanceid/analysis",async (req,res)=>{
+    const params = parseAllParams(
+        req,
+        res,
+        {
+            path: ["characterid","instanceid"],
+            header: ["x-access-token"],
+        }
+    )
+    if(!params){
+        return;
+    }
 
+    try{
+        const userid = await authServices.authorize(params.header["x-access-token"]);
+        console.log("Server (GetActivtyAnalysis):// Request authenticated, processing request");
+        const generated = await active_pool.process(userid, RequestCodes.ACTIVITYANALYSIS,[params.path["instanceid"],params.path["characterid"]]);
+        re.status(200);
+        res.json({
+            success: true,
+            message: "",
+            generated: generated
+        });
+    }catch(error){
+        handle(error, res);
+    }
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 api.get("/server/coach/weapon-skills", async (req, res) => {
@@ -348,5 +382,7 @@ api_https.createServer(httpsOptions, api).listen(PORT, "0.0.0.0",() =>{//create 
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
+ * MANUAL TESTING AREA FOR TESTING NOT REQUIRING BUNGIE ACCESS
+ */
 
