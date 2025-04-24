@@ -99,3 +99,40 @@ export const modeTypes = {
  */
 export const damageTypes = ["Not Applicable","Kinetic","Arc","Solar","Void","Raid Damage","Stasis","Strand"];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * An enumeration containing properties for each item subtype such as class armor, auto rifle, glaive, etc. This data cannot be
+ * fetched from any Bungie API endpoint, so it is hardcoded here. The key is the enum on the bungie api, and its value the name
+ * of the subtype
+ * @type {{}}
+ */
+export const itemSubTypes = {
+    0: "None",
+    1: "Crucible",
+    2: "Vanguard",
+    5: "Exotic",
+    6: "Auto Rifle",
+    7: "Shotgun",
+    8: "Machine Gun",
+    9: "Hand Cannon",
+    10: "Rocket Launcher",
+    11: "Fusion Rifle",
+    12: "Sniper Rifle",
+    13: "Pulse Rifle",
+    14: "Scout Rifle",
+    17: "Sidearm",
+    18: "Sword",
+    19: "Mask",
+    20: "Shader",
+    21: "Ornament",
+    22: "Fusion Rifle Line",
+    23: "Grenade Launcher",
+    24: "Submachine Gun",
+    25: "Trace Rifle",
+    26: "Helmet",
+    27: "Gauntlets",
+    28: "Chest Armor",
+    29: "Leg Armor",
+    30: "Class Armor",
+    31: "Bow",
+    32: "Glaive"
+}

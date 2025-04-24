@@ -31,14 +31,34 @@ export default class Reasoner{
         const result = await this.bot.generateContent(this.prompts[1])
         console.log(result.response.text());
     }
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Method to generate AI content that evaluates a players general activity skills, focusing on analysing a players
+     * entire activity history, looking at what the player takes part in the most
+     * @param {Object} history An object containing a verbose entry for every activity summary the player has taken part in
+     *
+     * @returns {Promise<Object>} The response object from the reasoner
+     */
+    async activitySkills(history){
+        const promptParams = {
+            "-HISTORY-": JSON.stringify(history,null,4)
+        }
+        const prompt = replaceMultiple(/-HISTORY-/g, promptParams, this.prompts[PromptIndexes.ACTIVITY_SKILLS]);
+        const schema = this.schemas.ActivitySKills;
+        const result = await this.#generate(
+            prompt,
+            schema,
+            0
+        );
+        return result;
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Method to generate AI content for suggesting a character build for a specific activity
      * @param {Object} activity An object containing activity.modifiers and activity.name
      * @param {Object} items An object with two properties items.character and items.vault
-     * @param character_class The character class to suggest a build for
-     * @returns {Promise<JSON>} JSON content to return to a client
+     * @param {string} character_class The character class to suggest a build for
+     * @returns {Promise<Object>} content to return to a client
      */
     async act_build(activity, items, character_class){
         const promptParams = {
@@ -105,7 +125,7 @@ export default class Reasoner{
             "-SUBCLASS-": JSON.stringify(character.Subclasses,null,4),
             "-ITEMS-": JSON.stringify(character.items,null,4)
         }
-        const prompt = replaceMultiple(/-ARMOR-|-WEAPONS-|-SUBCLASS-|-ITEMS-/g,promptParams,this.prompts[5]);
+        const prompt = replaceMultiple(/-ARMOR-|-WEAPONS-|-SUBCLASS-|-ITEMS-/g,promptParams,this.prompts[PromptIndexes.CHARACTER_ANALYSIS]);
         const result = await this.#generate(
             prompt,
             this.schemas.characterAnalysis,
@@ -136,7 +156,7 @@ export default class Reasoner{
     /**
      * Method to generate targets specific to a users overall statistics including weapon statistics, pve and pvp statistics
      * @param {{{Object} weapon,{Object} pve,{Object} pvp}} stats The object containing a property for each statistic piece
-     * @returns {Promise<JSON>} The response JSON
+     * @returns {Promise<Object>} The response object from the reasoner
      */
     async generateTargets(stats){
         const promptParams = {
@@ -616,7 +636,11 @@ export default class Reasoner{
                         description: "The realistically achievable value you have selected for this target that would improve a players profficiency",
                         nullable: false,
                     },
-                    required: ['name', 'targetvalue'],
+                    'description':{
+                        type: Type.STRING,
+                        description: "A brief description of what this target is for, such as complete x amount of night falls, get x amount of kills, etc."
+                    },
+                    required: ['name', 'targetvalue','description'],
                 }
             }
         }

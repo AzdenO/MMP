@@ -22,7 +22,7 @@ import * as ServerErrors from "../errors.mjs";
  * @param {Error} err The error caught at the endpoint
  * @param {Response} res The response object provided by the express module to send back to the client with sanitized error
  * content
- * @returns {Promise<void>}
+ * @returns Void
  */
 export function handle(err, res){
     console.log("Server Error Handler:// Error in request processing:");
@@ -54,4 +54,16 @@ function handleReasonerError(err, res){
             break;
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to handle the BungieError instance that can be thrown when requesting or parsing data from bungie, the code is checked
+ * so sanitization can be performed and send as verbose a response as possible
+ * @param {Error} err The error object caught at the endpoint
+ * @param {Response} res The response object provided by the express module
+ */
+function handleBungieError(err,res){
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

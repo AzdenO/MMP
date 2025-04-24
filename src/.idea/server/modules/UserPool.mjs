@@ -49,6 +49,13 @@ export default class UserPool{
 
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Execute the correct method on the coach object, determined by the passed request code
+     * @param {Object} coach The coach object mapping to a user
+     * @param {number} reqCode Number that maps in the switch statement to the correct coach method to call
+     * @param {Array<string>} args Any arguments necesary from a client for the coach method being called
+     * @returns {Promise<Object>} An object returned by the coach method
+     */
     async #execute(coach, reqCode, args){
         console.log("User Pool:// Executing request");
         switch(reqCode){
@@ -68,9 +75,13 @@ export default class UserPool{
                 return await coach.getProgressionData();
                 break;
             case 6:
+                return await coach.getActivitySkills();
                 break;
             case 7:
                 return await coach.getActivityAnalysis(args[0],args[1]);
+                break;
+            case 8:
+                return await coach.getGeneratedTargets();
                 break;
             default:
                 break;

@@ -349,6 +349,7 @@ api.post('/server/authorize', async (req, res) => {
             /*
              * MANUAL TESTING AREA, INSERT CODE HERE
              */
+            UserService.getVaultItems(newuser.getDisplayName());
             /*
              * END OF MANUAL TESTING AREA
              */

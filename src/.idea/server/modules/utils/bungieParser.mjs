@@ -10,7 +10,7 @@
 
 import {convertToMap} from "./listUtils.js";
 import {delay} from "./timeUtils.mjs";
-import {modeTypes,damageTypes} from "../constants/BungieConstants.mjs";
+import {modeTypes,damageTypes, itemSubTypes} from "../constants/BungieConstants.mjs";
 import * as fs from "node:fs";
 /**
  *
@@ -213,7 +213,7 @@ export function parseActivityStatistics(parsedPGCRs){
  */
 export function parseItems(object, key){
 
-    const exclusions = ["General","Lost Items","Ships","Emotes","Quests","Ghost","Accessories","Vehicle","Clan Banners","Emblems","Finishers","Seasonal Artifact"]
+    const exclusions = ["Lost Items","Ships","Emotes","Quests","Ghost","Accessories","Vehicle","Clan Banners","Emblems","Finishers","Seasonal Artifact","Consumables","Modifications"]
 
     if(DEBUG){
         object = JSON.parse(fs.readFile("O://exampleEquippedItems.json",err => {}));
@@ -233,17 +233,13 @@ export function parseItems(object, key){
         instanceid: idstring,
         ...values,
     })),"instanceid");
-    var plugSets = convertToMap(Object.entries(object.Response.plugSets.data.plugs).map(([idstring, values])=>({
-        instanceid: idstring,
-        ...values,
-    })),"instanceid");
     var socketComponents = convertToMap(Object.entries(object.Response.itemComponents.sockets.data).map(([idstring, values])=>({
         instanceid: idstring,
         ...values,
     })),"instanceid");
 
     for(const[keystring, item] of Object.entries(object.Response[key].data.items)){
-        const bucket = bucketHashes[item.bucketHash];
+        const bucket = bucketHashes[gameItems[item.itemHash].slot];
 
         if(!bucket || exclusions.includes(bucket.name)){
             continue;
@@ -252,9 +248,14 @@ export function parseItems(object, key){
             const subclass = parseSubclass(item.itemInstanceId, item.itemHash, socketComponents);
             items.push(subclass);
         }
+        if(!components[item.itemInstanceId]?.primaryStat){
+            console.log("Skipping item");
+            continue;
+        }
         var parseditem = {
             instanceid: item.itemInstanceId,
-            Slot: bucketHashes[item.bucketHash].name,
+            Type: gameItems[item.itemHash].type,
+            Slot: bucket.name,
             Name: gameItems[item.itemHash].name,
             Power: components[item.itemInstanceId].primaryStat.value,
             DamageType: damageTypes[components[item.itemInstanceId].damageType]

@@ -6,7 +6,7 @@
  * @see ../../UserPool.mjs
  */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RequestCodes = Object.freeze({
+export const RequestCodes = {
     ACTBUILD: 1,
     WEAPONSKILLS: 2,
     CHARACTERANALYSIS: 3,
@@ -14,6 +14,7 @@ export const RequestCodes = Object.freeze({
     PROGRESSIONDATA: 5,
     ACTIVITYSKILLS: 6,
     ACTIVITYANALYSIS: 7,
+    TARGETS: 8,
 
-});
+};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

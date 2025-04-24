@@ -8,6 +8,7 @@ import * as Endpoints from "./constants/BungieEndpoints.mjs";
 import * as EndpointParameters from "./constants/BungieEndpointConstants.mjs";
 import {replaceMultiple} from "./utils/stringUtils.js";
 import {delay} from "./utils/timeUtils.mjs";
+import {itemSubTypes} from "./constants/BungieConstants.mjs"
 env.config();
 /////////////////////////////////////////LOAD API ENVIRONMENT VARIABLES///////////////////////////////////
 const apikey = process.env.D2_API_KEY;
@@ -164,38 +165,14 @@ async function getAccountCharacters(access_token,membershipid,membertype){
     return characterlist;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* GET CHARACTER INVENTORY AND ITEM DETAILS
-* PRIVATE module method to retrieve equipped and unequipped items on a character.
-* This method does not format what is returned, and simply returns the response it gets from the bungie api for use in a method
-* that will parse the response.
-*/
-async function getPlayerInventoryItems(access_token,characterid, memberid,membertype){
-
-    console.log("Bungie:// Retrieving character inventory for character: "+characterid);//log action
-
-    const pathParams = {
-        "TYPE": membertype,
-        "MEMBERID": memberid,
-        "CHARACTERID": characterid,
-    }
-    //construct URL with user specific data
-    const final_url = replaceMultiple(/TYPE|MEMBERID|CHARACTERID/g,pathParams,Endpoints.user_inventory_url);
-    console.log("\tMaking request to: "+final_url);
-
-    //make request
-    const response = await protectedRequest(access_token,final_url,"Player Inventory Request");
-    return response.Response;//only this element is necessary, including the other component values in the url, allows the bungie api to construct a 300 response for all items listed
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Function to fetch items for a players character
- * @param characterid the id for the character we are fetching for
- * @param membershipid player membership id, tied to platform they play on
- * @param membertype platform type the player plays on
- * @param access_token access token used by this registered application to access player data on their behalf
- * @param equipped boolean to indicate whether to fetch what is equipped or unequipped
- * @returns {Promise<void>} A bungie api response, this will need parsing by the bungie parser module
+ * @param {string} characterid the id for the character we are fetching for
+ * @param {string} membershipid player membership id, tied to platform they play on
+ * @param {number} membertype platform type the player plays on
+ * @param {string} access_token access token used by this registered application to access player data on their behalf
+ * @param {boolean} equipped boolean to indicate whether to fetch what is equipped or unequipped
+ * @returns {Promise<Object>} A parsed bungie api response
  */
 async function getCharacterItems(characterid,membershipid,membertype,access_token, equipped){
 
@@ -230,17 +207,13 @@ async function getCharacterItems(characterid,membershipid,membertype,access_toke
  * @returns {Promise<void>}
  */
 async function getVaultItems(membershipid,membertype,access_token){
-
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
-* GET ALL PLAYER ITEMS ACROSS ALL CHARACTERS INCLUDING THE PLAYERS VAULT
-* All-encompassing method to fetch and parse all player items from all applicable sources, including what is
-* equipped and unequipped on each individual character as well as the players vault, returning a single list
-* of all items,seperated by armor and weapons
-*/
-async function getAllPlayerItems(characterid,membershipid,membertype,access_token){
-
+    const pathParams = {
+        "TYPE": membertype,
+        "MEMBERID": membershipid
+    }
+    const finalUrl = replaceMultiple(/TYPE|MEMBERID/g, pathParams,Endpoints.userVaultUrl)+"?components=102,300,304,302,305";
+    const res = await protectedRequest(access_token,finalUrl,"Vault Items Request");
+    return parseItems(res,"profileInventory");
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -299,7 +272,7 @@ async function getAccountActivityReports(membershipid,membertype,characterid,acc
 
         const fetched = await getActivityResultPage(page,membershipid,membertype,characterid,access_token,mode,count);
         pages.push(fetched);
-        if(fetched.Response.activities.length<250){//applicable for the last page and if we are returning less than 250 activities
+        if(fetched.Response.activities.length<250){//applicable for the last page and if we are returning less than 250 activities in total
            break;
         }
         page++;
@@ -356,7 +329,7 @@ async function getActivityResultPage(page,membershipid,membertype,characterid,ac
         "CHARID": characterid
     }
 
-    const final_url = (replaceMultiple(/MEMBERTYPE|MEMBERID|CHARID/g,pathParams,activity_reports_url))+"?count="+count+"&page="+page+"&mode="+mode;
+    const final_url = (replaceMultiple(/MEMBERTYPE|MEMBERID|CHARID/g,pathParams,Endpoints.activity_reports_url))+"?count="+count+"&page="+page+"&mode="+mode;
     console.log("Page url"+final_url);
     return await protectedRequest(access_token,final_url,"Account activity reports request");
 }
@@ -523,22 +496,6 @@ async function getAllBucketHashes(){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
-* GET ALL SUB CLASS HASHES
-* Private module method to dyanmically retrieve all sub-class hashes from the bungie api, for use in parsing specific user
-* data. NON-FUNCTIONING
-*/
-async function getSubClassHashes(){
-
-    console.log("Found inventory item definition url: "+JSON.stringify(manifestData.Response.jsonWorldComponentContentPaths.en.DestinyInventoryItemDefinition,null,4));
-
-    var relevant_hashes = [];
-
-    const definitions = await protectedRequest(null,base_domain+manifestData.Response.jsonWorldComponentContentPaths.en.DestinyInventoryItemDefinition,"Inventory Item Definition Request",false);
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/resources/example_Json/inventory_item_definitions_example.txt",JSON.stringify(definitions,null,4), err => {});
-
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
 * GET ALL PERK HASHES
 * Private module method to dynamically retrieve all perk hashes from the bungie api, for use in parsing specific user data
 */
@@ -650,6 +607,8 @@ async function getItemDefinitions(){
         itemNameHashes.push({
             hashid: key,
             name: properties.displayProperties.name,
+            slot: properties?.inventory?.bucketTypeHash,
+            type: properties?.itemTypeAndTierDisplayName,
             description: properties.displayProperties.description,
             damage: damageTypes[properties.defaultDamageType]
         });
@@ -742,8 +701,6 @@ async function moduleInit(){
     console.log("Bungie:// Acquiring relevant bucket hashes...\n");
     if(await getAllBucketHashes()==="success"){console.log("Acquired bucket hashes")}else{console.log("Error in acquiring buckets")}//instantiate bucket hashes array, providing the hash value and the relevant name in a key value store
 
-    console.log("Bungie:// Acquiring subclass hashes...\n");
-
     //await getSubClassHashes();//non-functioning atm, I have to parse a 272mb file, and I dont wanna do that, if the devil exists, hes a json response
 
     console.log("Bungie:// Acquiring perk hashes...");
@@ -787,11 +744,10 @@ export const destiny_full = {
     getAccountActivityReports,
     getHistoricalStats,
     getActivitySummary,
-    getCharacterItems
+    getCharacterItems,
+    getVaultItems,
 }
 export const bungieAuth = {
     getNewUser,
     getUserAccess,
 }
-
-export default {getUserAccess,getAccountCharacters,getAccountSpecificData,getPlayerInventoryItems};

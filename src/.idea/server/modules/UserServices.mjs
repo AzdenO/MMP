@@ -71,6 +71,24 @@ async function getActivitySummary(instanceid,characterid){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
+ * Function to fetch the totality of a players activity history from bungie
+ * @param {string} userid The user we are fetching this data for
+ * @param {string} character The character id (mapping to a character on the bungie api) to fetch activities for
+ * @returns {Promise<Object>} The players history
+  */
+async function getAllPlayerActivityReports(userid,character){
+    const params = await db.getBungieRequestData(userid);
+    const history = await destiny.getAccountActivityReports(
+        params.platformid,
+        params,platformtype,
+        character,
+        params.token,
+        0
+    )
+    return history;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
  * Fetch the players weapon statistics for all weapon types
  * @param {string} userid The player to request data for
  * @returns {Promise<Object>} The statistics object
@@ -102,6 +120,44 @@ async function getCharacterConfiguration(userid, characterid){
         Subclasses: seperated[2],
     }
 
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to fetch the items a player has on their character, this excludes what the player has equipped
+ * @param {string} userid The user to fetch data for
+ * @param {string} characterid The character to fetch the items from
+ * @returns {Promise<Object>} Object with a property for each item
+ */
+async function getCharacterItems(userid,characterid){
+    const params = await db.getBungieRequestData(userid);
+
+    const items = destiny.getCharacterItems(
+        characterid,
+        params.platformid,
+        params.platformtype,
+        params.token,
+        false
+    )
+    const seperated = seperateItems(items);
+    return {
+        Weapons: seperated[1],
+        Armors: seperated[0],
+        Subclasses: seperated[2],
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to fetch all items a player has stored in their vault
+ * @param {string} userid The user to fetch items for
+ * @returns {Promise<Array>} An array of all the items found
+ */
+async function getVaultItems(userid){
+    const params = await db.getBungieRequestData(userid)
+    const res = await destiny.getVaultItems(
+        params.platformid,
+        params.platformtype,
+        params.token
+    );
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -190,7 +246,13 @@ function injectDependencies(bungie,database){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function initialise(destiny,database){
+/**
+ * Initialise this module, injecting the necessary dependencies as well as scheduling the weekly update
+ * @param {Object} destiny The bungie_access.mjs dependency, that it exports as an object
+ * @param {OBject} database The user_database.mjs dependency, that it exports as an object
+ *
+ */
+function initialise(destiny,database){
     console.log("User Services:// Initialising Service");
     injectDependencies(destiny,database);
     console.log("User Services:// Scheduling weekly update");
@@ -201,7 +263,10 @@ async function initialise(destiny,database){
     console.log("User Services:// Initialisation complete");
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/**
+ * Export all necessary functions so the necessary external modules can utilize it as a dependency
+ * @type {Object}
+ */
 export default {
     getUserItems,
     getWeaponStats,
@@ -210,5 +275,6 @@ export default {
     getKnowledgeBase,
     getCoachData,
     weeklyUpdate,
+    getVaultItems,
     initialise
 }

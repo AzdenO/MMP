@@ -11,5 +11,7 @@ export const PromptIndexes = {
     WEAPON_SKILLS: 3,
     ACTIVITY_TYPE_KEYWORD: 7,
     ACTIVITY_ANALYSIS: 6,
-    TARGETS: 8
+    TARGETS: 8,
+    ACTIVITY_SKILLS: 4,
+    CHARACTER_ANALYSIS: 5
 }
