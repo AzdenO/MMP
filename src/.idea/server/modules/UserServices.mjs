@@ -3,7 +3,7 @@
  * @description Module to encapsulate fetching of data from the database and bungie, as well as setting some data in the database.
  * This module is only ever called from the coach, and a single call on index.mjs to fetch the games knowledge base to abstract
  * away other modules
- * @version 0.1.0
+ * @version 0.3.1
  * @author Declan Roy Alan Wadsworth (drw8)
  */
 import * as fs from "node:fs";//accessing machine file system
@@ -68,6 +68,7 @@ async function getActivitySummary(instanceid,characterid){
         instanceid,
         characterid
     )
+    return summary;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -80,7 +81,7 @@ async function getAllPlayerActivityReports(userid,character){
     const params = await db.getBungieRequestData(userid);
     const history = await destiny.getAccountActivityReports(
         params.platformid,
-        params,platformtype,
+        params.platformtype,
         character,
         params.token,
         0
@@ -208,6 +209,11 @@ async function getCoachData(userid){
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to retrieve basic player data such as standard path parameters for bungie API requests and characters
+ * @param {string} code An OAuth2 code provided by Bungie, sent to the server by a client
+ * @returns {Promise<Object>} An object containing basic user details
+ */
 async function getPlayerFromBungie(code){
     return await destiny.getNewUser(code);
 }
@@ -239,6 +245,19 @@ async function weeklyUpdate(){
     console.log("User Services (Async): Weekly update complete");
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Method to fetch a high verbosity object of an activity from an activity hash
+ * @param {string} activityHash The activity hash that maps to an activity on the bungie API
+ */
+function getActivity(activityHash){
+    return destiny.getActivity(activityHash);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to inject object dependencies
+ * @param {Object} bungie The bungie_access dependency
+ * @param {Object} database The user_database dependency
+ */
 function injectDependencies(bungie,database){
     destiny = bungie;
     db = database;
@@ -249,7 +268,7 @@ function injectDependencies(bungie,database){
 /**
  * Initialise this module, injecting the necessary dependencies as well as scheduling the weekly update
  * @param {Object} destiny The bungie_access.mjs dependency, that it exports as an object
- * @param {OBject} database The user_database.mjs dependency, that it exports as an object
+ * @param {Object} database The user_database.mjs dependency, that it exports as an object
  *
  */
 function initialise(destiny,database){
@@ -257,8 +276,8 @@ function initialise(destiny,database){
     injectDependencies(destiny,database);
     console.log("User Services:// Scheduling weekly update");
     cron.schedule(
-        "5 18 * * 2",
-        weeklyUpdate
+        "5 18 * * 2",//time expression, maps to 18:05 BST on a Tuesday
+        weeklyUpdate//function to execute
     )
     console.log("User Services:// Initialisation complete");
 }
@@ -274,7 +293,9 @@ export default {
     getRecentActivities,
     getKnowledgeBase,
     getCoachData,
-    weeklyUpdate,
     getVaultItems,
+    getActivity,
+    getActivitySummary,
+    getAllPlayerActivityReports,
     initialise
 }

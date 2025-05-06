@@ -13,8 +13,8 @@ export default class Reasoner{
         env.config();
         this.generator = new GoogleGenAI({apiKey: process.env.AI_API_KEY});
         this.#loadPrompts();
-        this.#loadSchemas();
-        this.model = "gemini-2.0-flash";
+        this.loadSchemas();
+        this.model = "gemini-2.5-flash-preview-04-17";
 
     }
 
@@ -50,6 +50,7 @@ export default class Reasoner{
             schema,
             0
         );
+        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/ActivitySkills.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,10 +63,10 @@ export default class Reasoner{
      */
     async act_build(activity, items, character_class){
         const promptParams = {
-            "-CHARACTER-": items.character,
+            "-CHARACTER-": JSON.stringify(items.character,null,4),
             "-CLASS-": character_class,
-            "-ACTIVITY-": activity.name,
-            "-MODIFIERS": activity.modifiers,
+            "-ACTIVITY-": "Activity Name: "+activity.details.name+" \nActivity Description: "+activity.details.description,
+            "-MODIFIERS": JSON.stringify(activity.modifiers,null,4),
             "-VAULT-": JSON.stringify(items.vault,null,4)
         }
         const prompt = replaceMultiple(/-CHARACTER-|-CLASS-|-ACTIVITY-|-MODIFIERS-|-VAULT-/g, promptParams, this.prompts[PromptIndexes.ACTIVITY_BUILD]);
@@ -74,6 +75,7 @@ export default class Reasoner{
             this.schemas.activityBuildSchema,
             1
         );
+        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/ActivityBuild_1.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,6 +89,7 @@ export default class Reasoner{
             this.schemas.weaponSkills,
             0
         )
+        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/WeaponSkills.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,6 +102,21 @@ export default class Reasoner{
         switch(type){
             case "ActivityType":
                 schema = this.schemas.ActivityTypeKeywordSchema;
+                break;
+            case "Destination_Activities":
+                schema = this.schemas.destinationActivities;
+                break;
+            case "Specific_Activity":
+                scehma = this.schemas.specificActivitySchema;
+                break;
+            case "Seasonal_Activities":
+                schema = this.schemas.seasonalActivities;
+                break;
+            case "Status_Effects":
+                schema = this.schemas.StatusEffectKeywordSchema;
+                break;
+            case "Champions":
+                schema = this.schemas.ChampionsKeywordSchema;
                 break;
             default:
                 throw new ReasonerError("Keyword type not supported", "INVALID_KEYWORD_TYPE");
@@ -122,15 +140,15 @@ export default class Reasoner{
         const promptParams = {
             "-ARMOR-": JSON.stringify(character.Armors,null,4),
             "-WEAPONS-": JSON.stringify(character.Weapons,null,4),
-            "-SUBCLASS-": JSON.stringify(character.Subclasses,null,4),
-            "-ITEMS-": JSON.stringify(character.items,null,4)
+            "-SUBCLASS-": JSON.stringify(character.Subclasses,null,4)
         }
-        const prompt = replaceMultiple(/-ARMOR-|-WEAPONS-|-SUBCLASS-|-ITEMS-/g,promptParams,this.prompts[PromptIndexes.CHARACTER_ANALYSIS]);
+        const prompt = replaceMultiple(/-ARMOR-|-WEAPONS-|-SUBCLASS-/g,promptParams,this.prompts[PromptIndexes.CHARACTER_ANALYSIS]);
         const result = await this.#generate(
             prompt,
             this.schemas.characterAnalysis,
             0
         );
+        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/CharacterAnalysis.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,6 +168,7 @@ export default class Reasoner{
             this.schemas.ActivityAnalysis,
             0
         );
+        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/ActivityAnalysis_1.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +189,7 @@ export default class Reasoner{
             this.schemas.generatedTargets,
             0
         );
+        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/Targets.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,7 +203,7 @@ export default class Reasoner{
      */
     async #generate(prompt, schema, temperature){
         const response = await this.generator.models.generateContent({
-            model: "gemini-2.0-flash",
+            model: this.model,
             contents: prompt,
             config:{
                 responseMimeType: "application/json",
@@ -191,6 +211,7 @@ export default class Reasoner{
                 temperature: temperature,
             }
         });
+        console.log("Reasoner:// Generation sucessfull")
         return JSON.parse(response.text);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -198,11 +219,88 @@ export default class Reasoner{
      * Load gemini response schemas from .json file at /resources/ReasonerResources/ResponseSchemas.json
      * @returns {Object} An object containing all response schemas
      */
-    #loadSchemas(){
+    loadSchemas(){
         var schemas = {};
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        schemas.SpecificActivitySchema = {
+            type: Type.OBJECT,
+            properties:{
+                'description': {
+                    type: Type.STRING,
+                    description: "Provide a detailed description of this activity",
+                    nullable: false,
+                },
+                'mechanics': {
+                    type: Type.STRING,
+                    description: "Give a detailed description of every mechanic that a player would face in this activity, and how they are completed",
+                    nullable: false,
+                },
+                'rewards': {
+                    type: Type.STRING,
+                    description: "Provide a detailed description of every reward that a player would receive in this activity, including any exotics, and activity specific rewards such as weapons and armors",
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        schemas.seasonalActivities = {
+            type: Type.OBJECT,
+            properties:{
+                'description': {
+                    type: Type.STRING,
+                    description: "Provide a detailed description of this seasonal activity, including what mechanics (if any) a player would face and potential rewards. Is there any seasonal items that can be used or configured to boost rewards or player combat ability in this activity?",
+                    nullable: false,
+                }
+            },
+            required: ['description'],
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        schemas.destinationActivities = {
+            type: Type.OBJECT,
+            properties:{
+                'description': {
+                    type: Type.STRING,
+                    description: 'Provide a detailed description of this activity, including what mechanics (if any) a player would face and potential rewards',
+                    nullable: false,
+                }
+            },
+            required: ['description'],
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         schemas.StatusEffectKeywordSchema = {
-
+            type: Type.OBJECT,
+            properties:{
+                'description': {
+                    type: Type.STRING,
+                    description: 'Provide a detailed description of this status effect and how it aids the player in activities',
+                    nullable: false,
+                },
+                'productionMechanisms': {
+                    type: Type.STRING,
+                    description: 'Provide examples and descriptions for the way this status effect can be produced',
+                    nullable: false,
+                },
+                'boosts':{
+                    type: Type.STRING,
+                    description: 'Provide examples and descriptions for how this effect can be boosted by certain perks or combination of subclass abilities',
+                }
+            },
+            required: ['description', 'productionMechanisms', 'boosts'],
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        schemas.ChampionsKeywordSchema = {
+            type: Type.OBJECT,
+            properties:{
+                'description': {
+                    type: Type.STRING,
+                    description: "Provide a detailed description of this champion and where it is usually encountered",
+                    nullable: false,
+                },
+                'combatMechanisms': {
+                    type: Type.STRING,
+                    description: "Provide examples and descriptions for how this champion can be combatted and eliminated in activities",
+                }
+            },
+            required: ['description', 'combatMechanisms'],
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         schemas.ActivityTypeKeywordSchema = {
@@ -598,7 +696,6 @@ export default class Reasoner{
                                         nullable: false,
                                     },
                                 },
-                                required: ["distributionShare","weaponEffectiveness","name"],
                             }
                         },
 
@@ -615,7 +712,7 @@ export default class Reasoner{
                     description: "An analysis of the duration of this activity, how long it took to complete, how long it took to complete, whether this could be improved or is acceptable. This can be omitted if the activity was PvP e.g. it was a crucible match",
                     nullable: true,
                 },
-                required: ["environment", "teamperformance", "WeaponAnalysis", "activitysummary", "combatAnalysis", "duration"],
+                //required: ["environment", "teamperformance", "WeaponAnalysis", "activitysummary", "combatAnalysis", "duration"],
             }
         }
         /////////////////////////////////////////////////////
@@ -645,9 +742,214 @@ export default class Reasoner{
             }
         }
         /////////////////////////////////////////////////////
+        schemas.activitySkillsSchema = {
+            type: Type.OBJECT,
+            properties:{
 
+            }
+        }
         /////////////////////////////////////////////////////
+        schemas.characterAnalysis = {
+            type: Type.OBJECT,
+            properties:{
+                'characterSummary':{
+                    type: Type.STRING,
+                    description: "Analysis of what activities/environments this build is most effective in, or if its more of a general purpose build",
+                    nullable: false,
+                },
+                'producableEffects':{
+                    type: Type.STRING,
+                    description: "Overview of what status effects this build can produce, and how they are produced. Include here effect sources such as those produced by the subclass as well as any perks on armors or weapons",
+                    nullable: false,
+                },
+                'weaponConfiguration':{
+                    type: Type.ARRAY,
+                    description: "An array containing an object of analysis for each weapon the character has equipped",
+                    nullable: false,
+                    items:{
+                        type: Type.OBJECT,
+                        description: "An object containing the analysis of an equipped weapon",
+                        properties:{
+                            'name':{
+                                type: Type.STRING,
+                                description: "The name of this weapon",
+                                nullable: false,
+                            },
+                            'weaponType':{
+                                type: Type.STRING,
+                                description: "This weapons type such as auto rifle, machine gun, etc.",
+                                nullable: false,
+                            },
+                            'slot':{
+                                type: Type.STRING,
+                                description: "The slot this weapon takes on the character",
+                                nullable: false,
+                            },
+                            'typeAdvantages':{
+                                type: Type.STRING,
+                                description: "Analyze the advantages of this weapons type, such as its typical damage output, environments in the game it is geared towards, as well enemy types its most effective against",
+                                nullable: false,
+                            },
+                            'producableEffects':{
+                                type: Type.STRING,
+                                description: "What effects can this weapon produce or provide boosts for, if any, and how does it benefit the player. If it does not boost or produce, state that",
+                                nullable: false,
+                            },
+                            'perkAdvantages':{
+                                type: Type.STRING,
+                                description: "Give a detailed explanation of the advantages provided by this weapons perks and how they might aid a player in different combat situations",
+                                nullable: false,
+                            },
+                            'perkDisadvantages':{
+                                type: Type.STRING,
+                                description: "Are these weapon perks the best they could be? Should the player consider finding different rolls of this weapon with better perks",
+                                nullable: false,
+                            },
+                            'statAdvantages':{
+                                type: Type.STRING,
+                                description: "Give a detailed analysis of the advantages provided by this weapons stats and how they might aid a player in different combat situations",
+                            }
+                        },
+                        required: ["typeAdvantages","slot","weaponType","name","producableEffects","perkAdvantages","perkDisadvantages","statAdvantages"],
+                    }
+                },
+                'armorConfiguration':{
+                    type: Type.ARRAY,
+                    description: "An array containing an object of analysis for each armor piece the character has equipped",
+                    nullable: false,
+                    items:{
+                        type: Type.OBJECT,
+                        description: "An object containing the analysis of an equipped armor piece",
+                        properties:{
+                            'name':{
+                                type: Type.STRING,
+                                description: "The name of this armor piece",
+                            },
+                            'slot':{
+                                type: Type.STRING,
+                                description: "The slot this armor piece takes on the character",
+                            },
+                            'perkAdvantages':{
+                                type: Type.STRING,
+                                description: "Give a concise description of each perk this armor piece has equipped, their advantages, and how they could aid a player in different combat situations",
+                                nullable: false,
+                            },
+                            'perkDisadvantages':{
+                                type: Type.STRING,
+                                description: "Are these armor perks the best they could be? Should the player consider switching some out, do they cohere to the rest of the characters build (do they provide direct boosts to the equipped weapons, damage types, abilities, effects, etc.), do they hinder some other aspects?",
+                                nullable: false,
+                            },
+                            'statAdvantages':{
+                                type: Type.STRING,
+                                description: "Give a concise analysis of the advantages provided by this armor stats and how they might aid a player in different combat situations",
+                            },
+                            'statDisadvantages':{
+                                type: Type.STRING,
+                                description: "Do these stats focus too much on singular character stats, or do they provide a more general boost to all stats. Considering the rest of the character build, could it be beneficial to equip armor that focus on specific statistics such as resilience, strength or any other type",
+                                nullable: false,
+                            }
+                        },
+                        required: ["slot","name","perkAdvantages","perkDisadvantages","statAdvantages","statDisadvantages"],
+                    }
+                },
+                'exoticChoices':{
+                    type: Type.ARRAY,
+                    description: "An array containing an object entry for each exotic equipped. If no exotics are equipped, a singular object explain why that leaves the player at a disadvantage",
+                    nullable: false,
+                    items:{
+                        type: Type.OBJECT,
+                        description: "An object containing the analysis of an equipped exotic",
+                        properties:{
+                            'name':{
+                                type: Type.STRING,
+                                description: "The name of this exotic",
+                            },
+                            'advantages':{
+                                type: Type.STRING,
+                                description: "Give a detailed analysis of the advantages provided by this exotic and how they might aid a player in different combat situations. Focus on the intrinsic traits it provides.",
+                                nullable: false,
+                            }
+                        },
+                        required: ["name","advantages"],
+                    }
+                },
+                'subclassConfiguration':{
+                    type: Type.OBJECT,
+                    description: "An object containing the analysis of the subclass configuration",
+                    properties:{
+                        'producableEffects': {
+                            type: Type.ARRAY,
+                            description: "An array of objects with an entry for each status effect this subclass configuration can produce",
+                            nullable: false,
+                            items:{
+                                type: Type.OBJECT,
+                                description: "An object containing a description of the status effect and how it can be produced and boosted",
+                                properties:{
+                                    'name':{
+                                        type: Type.STRING,
+                                        description: "The name of this effect",
+                                        nullable: false,
+                                    },
+                                    'advantages':{
+                                        type: Type.STRING,
+                                        description: "Give a detailed analysis of the advantages this effect provides the player and how it might aid them in different combat situations",
+                                        nullable: false,
+                                    },
+                                    'productionMechanism':{
+                                        type: Type.STRING,
+                                        description: "Give a detailed description of how this effect is produced and how it might be boosted (e.g. longer duration, boost to damage output or overall surivability, etc.)",
+                                        nullable: false,
+                                    },
+
+                                }
+                            }
+                        },
+                        'melee':{
+                            type: Type.STRING,
+                            description: "Give a detailed analysis of the melee ability provided by this subclass configuration and how it can aid a player in different combat situations",
+                            nullable: false,
+                        },
+                        'grenade':{
+                            type: Type.STRING,
+                            description: "Give a detailed analysis of the grenade ability provided by this subclass configuration and how it can aid a player in different combat situations",
+                            nullable: false,
+                        },
+                        'classAbility':{
+                            type: Type.STRING,
+                            description: "Give a detailed analysis of the class ability provided by this subclass configuration and how it can aid a player in different combat situations",
+                            nullable: false,
+                        },
+                        'superAbility':{
+                            type: Type.STRING,
+                            description: "Give a detailed analysis of the super ability provided by this subclass configuration and how it can aid a player in different combat situations",
+                            nullable: false,
+                        },
+                        'aspects':{
+                            type: Type.STRING,
+                            description: "A detailed analysis of the aspect choices for this build, if they cohere well to the rest of this build, how they provide the player an advantage, and what sitations and combat environments they are geared towards",
+                            nullable: false,
+                        },
+                        'fragments':{
+                            type: Type.STRING,
+                            description: "A detailed analysis of the fragments chosen for this build, if they cohere well to the rest of this build, how they provide the player an advantage, and what sitations and combat environments they are geared towards",
+                            nullable: false,
+                        }
+                    },
+                    required: ["producableEffects"],
+
+                },
+                'summary':{
+                    type: Type.STRING,
+                    description: "Give a detailed summary of the character build and the possible reason behind its configuration (what activities or activity do you think it is optimised for, or if it doesnt seem optimized, state thus), as well as its overall advantages and what it prioritises (such as survivability, damage output, etc.)",
+                    nullable: false,
+                }
+
+            },
+            required:["characterSummary","producableEffects","weaponConfiguration","armorConfiguration","exoticChoices","subclassConfiguration","summary"],
+        }
         this.schemas = schemas;
+        fs.writeFile('O://Dev/Level_4/VanguardMentorServer/src/.idea/server/resources/ReasonerResources/ResponseSchemas.json', JSON.stringify(schemas, null, 4), (err) => {});
+        /////////////////////////////////////////////////////
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

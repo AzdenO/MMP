@@ -3,12 +3,11 @@ import env from "dotenv";//safely storing of secrets
 import dayjs from "dayjs";
 import fs from "node:fs";//for writing to files, not technically necessary apart from when saving responses from bungie to look at more easily
 import {AuthError,InitError} from "./utils/errors.mjs";
-import {parseWeaponStats,parseActivityHistory,setGameData,parseItems,parseTokenResponse,parseHistoricalStats} from "./utils/bungieParser.mjs";
+import {parseWeaponStats,parseActivityHistory,setGameData,parseItems,parseTokenResponse,parseHistoricalStats, fetchActivity} from "./utils/bungieParser.mjs";
 import * as Endpoints from "./constants/BungieEndpoints.mjs";
 import * as EndpointParameters from "./constants/BungieEndpointConstants.mjs";
 import {replaceMultiple} from "./utils/stringUtils.js";
 import {delay} from "./utils/timeUtils.mjs";
-import {itemSubTypes} from "./constants/BungieConstants.mjs"
 env.config();
 /////////////////////////////////////////LOAD API ENVIRONMENT VARIABLES///////////////////////////////////
 const apikey = process.env.D2_API_KEY;
@@ -338,6 +337,7 @@ async function getActivityResultPage(page,membershipid,membertype,characterid,ac
 * GET ITEM INSTANCE SPECIFIC DATA
 * Private module method to retrieve specific details of a weapon and return a key-value store of the weapons
 * attributes such as name, power level, mods and stats
+ * @deprecated
 */
 async function getItemData(access_token,memberid,membertype,instanceid){
 
@@ -367,9 +367,18 @@ async function getActivityPGCR(instanceid){
     const pathParams = {
         "INSTANCE": instanceid
     }
-    const final_url = replaceMultiple(/INSTANCE/g,pathParams,pgcr_url);
+    const final_url = replaceMultiple(/INSTANCE/g,pathParams,Endpoints.pgcr_url);
     const response = await protectedRequest(null,final_url,"PGCR request",false);
     return response;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to return an object containing activity details fetched the bungie parser, which holds a hash map of activities in the game
+ * @param {string} hash An activity hash that maps to a specific activity on the bungie API, and therefore maps to an
+ * activity in the bungie parsers module memory objects
+ */
+function getActivity(hash){
+    return fetchActivity(hash);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -725,6 +734,13 @@ async function moduleInit(){
     await getMilestoneActivities();
 
     await  getActivityModeDefinitions();
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/StaticActivities.json",JSON.stringify(staticActivities,null,4),function(err){});
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/ActivityModifiers.json",JSON.stringify(activityModifiers,null,4),function(err){});
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/ActiveActivities.json",JSON.stringify(activeActivities,null,4),function(err){});
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/ItemHashes.json",JSON.stringify(itemNameHashes,null,4),function(err){});
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/PerkHashes.json",JSON.stringify(perkHashes,null,4),function(err){});
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/StatHashes.json",JSON.stringify(statHashes,null,4),function(err){});
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/BucketHashes.json",JSON.stringify(bucketHashes,null,4),function(err){});
 
     //pass bungie parser all static game data to be used in parsing all future responses from user requests
     setGameData(staticActivities,activityModifiers,activeActivities,itemNameHashes,perkHashes,statHashes,bucketHashes);
@@ -745,6 +761,7 @@ export const destiny_full = {
     getHistoricalStats,
     getActivitySummary,
     getCharacterItems,
+    getActivity,
     getVaultItems,
 }
 export const bungieAuth = {

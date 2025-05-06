@@ -1,0 +1,1667 @@
+[
+    {
+        "hash": "22073894",
+        "name": "A Challenge Awaits…",
+        "description": "Your current character has not yet completed this mission on Legendary difficulty.\nCompleting all Legendary missions provides additional rewards per class."
+    },
+    {
+        "hash": "36103086",
+        "name": "Legendary",
+        "description": "Heavily shielded and highly aggressive combatants appear in great numbers."
+    },
+    {
+        "hash": "38299602",
+        "name": "Oscillation",
+        "description": "Dealing damage with Scout Rifles, Pulse Rifles, and Grenade Launchers gradually reduces their damage while increasing the damage of Submachine Guns and Shotguns, and vice versa. \n\nOther weapon types deal significantly less damage."
+    },
+    {
+        "hash": "40182179",
+        "name": "Champion Foes",
+        "description": "You will face [Disruption] Overload and [Stagger] Unstoppable Champions."
+    },
+    {
+        "hash": "48917747",
+        "name": "Heavy Ammo Rules (Alpha)",
+        "description": "Spawn Cadence: Heavy ammo will spawn every round after a long duration."
+    },
+    {
+        "hash": "65390994",
+        "name": "Weekly Boss",
+        "description": "This week, a Subjugator Omen awaits you on wave 50."
+    },
+    {
+        "hash": "68890788",
+        "name": "Air Superiority",
+        "description": "Flying units do increased damage."
+    },
+    {
+        "hash": "77928345",
+        "name": "Rank-and-File Damage Increase",
+        "description": "Rank-and-file combatants deal increased damage."
+    },
+    {
+        "hash": "85104725",
+        "name": "Master Modifiers",
+        "description": "Extinguish\nExtra Champions\nLocked Loadout\nExtra Shields"
+    },
+    {
+        "hash": "93790318",
+        "name": "Shielded Foes",
+        "description": "You may face combatants with [Arc] Arc, [Solar] Solar, or [Void] Void shields."
+    },
+    {
+        "hash": "95459596",
+        "name": "Overcharged Rocket Launcher",
+        "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+    },
+    {
+        "hash": "100355054",
+        "name": "Matchmaking",
+        "description": "Matchmaking selects players based on character class. Each team is formed entirely of one class type."
+    },
+    {
+        "hash": "112345143",
+        "name": "Hot Knife",
+        "description": "Shanks now have Solar shields"
+    },
+    {
+        "hash": "138641527",
+        "name": "Crossfire Challenge",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "158678773",
+        "name": "Ashes to Ashes",
+        "description": "Dealing damage with a Solar weapon now applies scorch to your targets, but your foes also now apply scorch to you when they deal Solar or explosive damage."
+    },
+    {
+        "hash": "166293531",
+        "name": "Empath",
+        "description": "Enhanced radar. Take increased damage from melee."
+    },
+    {
+        "hash": "186409259",
+        "name": "Arc Threat",
+        "description": "{var:4005007457}% increase to incoming Arc damage."
+    },
+    {
+        "hash": "191124900",
+        "name": "The Core Four",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "196389522",
+        "name": "Escalating Difficulty",
+        "description": "Combatant difficulty increases after each preparation phase."
+    },
+    {
+        "hash": "197794292",
+        "name": "Champion Foes",
+        "description": "You will face [Shield-Piercing] Barrier and [Disruption] Overload Champions."
+    },
+    {
+        "hash": "201968501",
+        "name": "Of All Trades",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "203094476",
+        "name": "Limited Revives",
+        "description": "Limited fireteam revives. Gain additional revives by defeating Champions."
+    },
+    {
+        "hash": "214700178",
+        "name": "Overcharged Scout Rifle",
+        "description": "{var:1027206613}% bonus to Scout Rifle damage."
+    },
+    {
+        "hash": "217815700",
+        "name": "Which Witch",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "240545758",
+        "name": "Rune Rules",
+        "description": "Receiving Rune Progress while not holding a Rune will provide one.  Further progress will charge the Rune, eventually upgrading it to higher tiers.\n\nConsume your Rune to acquire Court Armaments.  Using a Tier 3 Rune for a Tier 1 purchase will still consume the Rune.  Plan your acquisitions with care!\n\nAvailable Court Armaments rotate each day.  Look for combos that will help you complete encounters faster!"
+    },
+    {
+        "hash": "255613027",
+        "name": "Escalating Difficulty",
+        "description": "With each encounter completed, combatants will grow more powerful and aggressive."
+    },
+    {
+        "hash": "261995644",
+        "name": "Grounded",
+        "description": "Damage taken while you are airborne is greatly increased."
+    },
+    {
+        "hash": "274420331",
+        "name": "The Only Oracle For You",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "302322071",
+        "name": "Matchmaking",
+        "description": "Matchmaking selects players based on character class. Each team has one of each class."
+    },
+    {
+        "hash": "317879233",
+        "name": "Glass",
+        "description": "Health and shields are reduced by half, but recovery is twice as fast."
+    },
+    {
+        "hash": "321244196",
+        "name": "Shocker",
+        "description": "When defeated, Goblins spawn Arc pools that causes damage over time."
+    },
+    {
+        "hash": "324020031",
+        "name": "Data Buffs",
+        "description": "Potential Data buffs:\n• Chance to create Threadlings on Strand damage\n• Chance to apply Suppressed on Void damage\n• Chance to gain grenade energy on combatant final blows"
+    },
+    {
+        "hash": "344764180",
+        "name": "Focused Activity",
+        "description": "This activity is currently Focused. Your score will contribute to your class's standing in the fight for glory in the Focus Activity Event."
+    },
+    {
+        "hash": "372037179",
+        "name": "Iron Banner: Eruption",
+        "description": "To win, rack up points by defeating your opponents. You gain more points and a boost of energy at each final blow while on a streak of 2 or more.\n\nStreak: The number of opponents you defeat in a single life. Streaks are broken into 2 tiers called Surging and Primed that award you increasingly more points and energy at each final blow. But beware: once you become Primed, you need to keep quickly defeating your opponents or you'll erupt!\n\nThe Hunt: This activates for your team when you or your teammate is Primed by reaching a streak of 5 or more. At the start of The Hunt, the whole team gets a boost of energy.  It ends when your team has no more players Primed."
+    },
+    {
+        "hash": "377122366",
+        "name": "Contestants: The Way of the Hoof",
+        "description": "Round 1: Hive\nRound 2: Fallen\nFinal Round: Valus Ta'aurc"
+    },
+    {
+        "hash": "384012338",
+        "name": "A Challenge Awaits…",
+        "description": "Your current character has not yet completed this mission on Legendary difficulty.\n\nCompleting all Legendary missions provides additional rewards per class."
+    },
+    {
+        "hash": "426976067",
+        "name": "Solar Surge",
+        "description": "{var:2189146210}% bonus to outgoing Solar damage."
+    },
+    {
+        "hash": "433047189",
+        "name": "Hardware Focus",
+        "description": "All abilities are disabled! Weapons are your only defense.\n\nCollect Special ammo and Heavy ammo from crates around the map."
+    },
+    {
+        "hash": "438106166",
+        "name": "Champion Foes",
+        "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+    },
+    {
+        "hash": "445825536",
+        "name": "Grandmaster Modifiers",
+        "description": "Contest\nJoin In Progress Disabled\nExtra Champions\nExtra Shields"
+    },
+    {
+        "hash": "474395167",
+        "name": "Havoc Rules",
+        "description": "Ammo crates spawn much more frequently, and players drop more ammo when defeated."
+    },
+    {
+        "hash": "501815068",
+        "name": "Master Modifiers",
+        "description": "Extra Champions\nLocked Loadout\nExtra Shields"
+    },
+    {
+        "hash": "512042454",
+        "name": "Stasis Threat",
+        "description": "{var:4005007457}% increase to incoming Stasis damage."
+    },
+    {
+        "hash": "517221851",
+        "name": "Join In Progress Disabled",
+        "description": "Your fireteam cannot be joined while in an activity. Return to orbit to add fireteam members."
+    },
+    {
+        "hash": "521652513",
+        "name": "Data Buffs",
+        "description": "Depositing data will award one of the following buffs:\n• Spawn an ammo crate\n• Chance to spawn Threadlings on combatant final blows\n• Chance to gain grenade energy on combatant final blows"
+    },
+    {
+        "hash": "582228082",
+        "name": "Exotic Drop Rate Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:1510191578}"
+    },
+    {
+        "hash": "584466411",
+        "name": "Leftovers",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "612342440",
+        "name": "Onslaught Rules",
+        "description": "Defend and repair the ADU against waves of combatants. If the ADU is destroyed, the activity will end.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after defeating the boss wave.\n\nBonus Objectives: These reward resources and armaments."
+    },
+    {
+        "hash": "636485977",
+        "name": "Survival Rules",
+        "description": "To win, your team must become the last Guardian(s) standing by defeating the opposing team to exhaust their revives.\n\nRevives: Both teams are allocated a limited pool of revives. If a team runs out of their revives, they can no longer respawn."
+    },
+    {
+        "hash": "678087389",
+        "name": "Contest Mode",
+        "description": "The activity is at a fixed difficulty. Test your might."
+    },
+    {
+        "hash": "703904464",
+        "name": "Scorched Earth",
+        "description": "Enemies throw grenades significantly more often."
+    },
+    {
+        "hash": "707305737",
+        "name": "Heavy Ammo Rules (Bravo)",
+        "description": "Spawn Cadence: Heavy ammo will spawn on the third round only."
+    },
+    {
+        "hash": "720259466",
+        "name": "Shielded Foes",
+        "description": "[Void] Void Shields"
+    },
+    {
+        "hash": "738174153",
+        "name": "Competitive Division Rules",
+        "description": "This playlist contains Collision and Survival. When you launch, it will randomly select one of the modes for you to play.\n\nCollision: To win, score more points than your opponents by capturing and controlling the zone. There will be one zone active at a time. Defeating your opponents does not directly grant points.\n\nSurvival: To win, your team must become the last Guardian(s) standing by defeating the opposing team to exhaust their revives."
+    },
+    {
+        "hash": "745014575",
+        "name": "Increased Vanguard Rank",
+        "description": "All Vanguard Rank point gains are increased!"
+    },
+    {
+        "hash": "766975360",
+        "name": "Illuminated Torment Challenge",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "787678752",
+        "name": "A Link to the Chain",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "791047754",
+        "name": "Grandmaster Modifiers",
+        "description": "Extinguish\nLimited Revives\nContest\nJoin In Progress Disabled\nExtra Champions\nLocked Loadout\nExtra Shields"
+    },
+    {
+        "hash": "792361634",
+        "name": "Exotic Drop Rate Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:219516062}"
+    },
+    {
+        "hash": "795009574",
+        "name": "Overcharged Machine Gun",
+        "description": "{var:1027206613}% bonus to Machine Gun damage."
+    },
+    {
+        "hash": "824516719",
+        "name": "Raid Challenges",
+        "description": "All challenges are active."
+    },
+    {
+        "hash": "838742970",
+        "name": "Stasis Burn",
+        "description": "+50% Stasis effectiveness."
+    },
+    {
+        "hash": "848207019",
+        "name": "Dynamic Difficulty",
+        "description": "Additional modifiers are randomly selected at the start of each encounter.\n\nCombatant power increases after each lap."
+    },
+    {
+        "hash": "858319113",
+        "name": "Haste",
+        "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+    },
+    {
+        "hash": "868171498",
+        "name": "Activity Rules",
+        "description": "Defeat as many bosses as possible before the countdown timer runs out.\n\nThe countdown timer pauses during preparation phases."
+    },
+    {
+        "hash": "874265159",
+        "name": "Flare",
+        "description": "When close to a fireteam member, gain increased Recovery and Super regeneration."
+    },
+    {
+        "hash": "915150015",
+        "name": "New Territory",
+        "description": "This playlist features three new Crucible maps: Dissonance, Eventide Labs, and Cirrus Plaza.\n\nIt features four randomized modes: Collision, Clash, Survival, and Elimination."
+    },
+    {
+        "hash": "929044687",
+        "name": "Overcharged Bow",
+        "description": "{var:1027206613}% bonus to Bow damage."
+    },
+    {
+        "hash": "933981331",
+        "name": "Escalating Difficulty",
+        "description": "Combatant difficulty increases after every other preparation phase."
+    },
+    {
+        "hash": "941999846",
+        "name": "Galvanized",
+        "description": "Combatants have more health and are more difficult to stun."
+    },
+    {
+        "hash": "965929096",
+        "name": "Famine",
+        "description": "All ammunition drops are significantly reduced."
+    },
+    {
+        "hash": "998275325",
+        "name": "Epitaph",
+        "description": "Taken combatants generate blight geysers when defeated."
+    },
+    {
+        "hash": "998963135",
+        "name": "Firebound",
+        "description": "When close to a fireteam member, gain increased Recovery and Super regeneration."
+    },
+    {
+        "hash": "1009404927",
+        "name": "Contest Mode",
+        "description": "The activity is set at a fixed difficulty. Test your might."
+    },
+    {
+        "hash": "1060852100",
+        "name": "Enigma Protocol Rules",
+        "description": "Venture into the VexNet, disrupt the Vex from accessing and locking away a treasure trove of Golden Age data, and investigate strange clues left in the network.\n\nEnigma Protocol uses a low starting timer, requiring Guardians to move quickly and find ways to increase their time in the VexNet.\n\nTo increase your timer:\n-Destroy Network Security Nodes\n-Defeat Archival Timekeepers\n-Unlock \"Codebase Splice\" Vendor Upgrades"
+    },
+    {
+        "hash": "1073070726",
+        "name": "Hot Step",
+        "description": "When defeated, challenging combatants drop fire at their location."
+    },
+    {
+        "hash": "1096446210",
+        "name": "Onslaught Rules",
+        "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set.\n\nADU: If the ADU is destroyed, the activity ends with the set.\n\nScraps: In-activity currency earned by scoring. Used to purchase and upgrade defenses at the start of every set and after the third and sixth waves.\n\nRewards: Granted on defeating a set's boss wave. Subsequent sets grant better rewards. Expert difficulty increases rewards.\n\nBonus Objectives: Reward resources, vendor reputation, and armaments."
+    },
+    {
+        "hash": "1108831612",
+        "name": "Brutal",
+        "description": "Your Power is significantly below the recommended level for this activity."
+    },
+    {
+        "hash": "1111960127",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Arc] Arc, [Solar] Solar, [Void] Void, and Strand shields."
+    },
+    {
+        "hash": "1139702033",
+        "name": "Expert Modifiers",
+        "description": "Locked Loadout\nExtra Shields"
+    },
+    {
+        "hash": "1149526926",
+        "name": "Synergy",
+        "description": "Fireteam communication and coordination is vital for success."
+    },
+    {
+        "hash": "1171597537",
+        "name": "Double Nightfall Drops",
+        "description": "All Nightfall loot drops are doubled."
+    },
+    {
+        "hash": "1172122584",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:2935433793}"
+    },
+    {
+        "hash": "1174869237",
+        "name": "Expert Modifiers",
+        "description": "Locked Loadout\nExtra Shields"
+    },
+    {
+        "hash": "1201462052",
+        "name": "Champions: Overload",
+        "description": "This mode contains Overload Champions, which cannot be stopped without an Overload mod."
+    },
+    {
+        "hash": "1204802854",
+        "name": "At Capacity Challenge",
+        "description": "\"Salvation's Edge\" raid challenge modes."
+    },
+    {
+        "hash": "1262171714",
+        "name": "Champion Foes",
+        "description": "You will face [Disruption] Overload Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+    },
+    {
+        "hash": "1264329482",
+        "name": "Balanced Scales",
+        "description": "This activity does not scale combatant difficulty according to fireteam size."
+    },
+    {
+        "hash": "1271621951",
+        "name": "Challenge Mode",
+        "description": "All Encounter Challenges Enabled and Required"
+    },
+    {
+        "hash": "1279873648",
+        "name": "Counterfeit",
+        "description": "When defeated, combatants can drop explosives disguised as familiar items."
+    },
+    {
+        "hash": "1282934989",
+        "name": "Overcharged Sniper Rifle",
+        "description": "{var:1027206613}% bonus to Sniper Rifle damage."
+    },
+    {
+        "hash": "1305687814",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:2774921993}"
+    },
+    {
+        "hash": "1315424373",
+        "name": "Coordinated Efforts Challenge",
+        "description": "\"Salvation's Edge\" raid challenge modes."
+    },
+    {
+        "hash": "1326581064",
+        "name": "Overcharged Sword",
+        "description": "{var:1027206613}% bonus to Sword damage."
+    },
+    {
+        "hash": "1332265391",
+        "name": "Data Buffs",
+        "description": "Potential Data buffs:\n• Chance to create Stasis Crystals on Stasis damage\n• Chance to apply Scorched on Solar damage\n• Defeated combatants have a chance to refund a portion of class ability energy"
+    },
+    {
+        "hash": "1334220775",
+        "name": "High Pressure",
+        "description": "The Fireteam has limited revives. \n\nPressure events will occur periodically. Complete them or die."
+    },
+    {
+        "hash": "1345228604",
+        "name": "Matchmaking",
+        "description": "Matchmaking prefers to avoid players with widely disparate skills."
+    },
+    {
+        "hash": "1345530799",
+        "name": "Paracausal Focus",
+        "description": "All weapons are disabled! Abilities are your only defense.\n\nYour abilities recharge much faster, and your camera is set to third person."
+    },
+    {
+        "hash": "1359116199",
+        "name": "Rumble Rules",
+        "description": "To win, defeat your opponents to get the most points! This is a free-for-all mode where no one is an ally."
+    },
+    {
+        "hash": "1361609633",
+        "name": "Increased Trials Rank",
+        "description": "All Trials Rank point gains are increased!"
+    },
+    {
+        "hash": "1376889134",
+        "name": "Brawler",
+        "description": "Melee abilities deal more damage and recharge much faster."
+    },
+    {
+        "hash": "1377045711",
+        "name": "Clash Rules",
+        "description": "To win, defeat your opponents to score more points than them!"
+    },
+    {
+        "hash": "1377274412",
+        "name": "Shielded Foes",
+        "description": "[Solar] Solar and [Void] Void Shields"
+    },
+    {
+        "hash": "1396678533",
+        "name": "Mettle",
+        "description": "The activity is at a fixed difficulty.\n\nYour effective Power is capped at {var:1311088063}."
+    },
+    {
+        "hash": "1410027362",
+        "name": "Blasts",
+        "description": "Combatant splash damage is increased.\n\nActivates Immediately."
+    },
+    {
+        "hash": "1410302403",
+        "name": "Power Level Disabled",
+        "description": "Combatant difficulty is set at a fixed level."
+    },
+    {
+        "hash": "1427917745",
+        "name": "Blackout",
+        "description": "Enemy melee attacks are significantly more powerful, and radar is disabled."
+    },
+    {
+        "hash": "1444852954",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Void] Void and Strand shields."
+    },
+    {
+        "hash": "1456687498",
+        "name": "Contestants: Disciples of the Neigh",
+        "description": "Round 1: Vex\nRound 2: Cabal\nFinal Round: Crota"
+    },
+    {
+        "hash": "1463769380",
+        "name": "Iron",
+        "description": "Enemies have more health and are not staggered by damage."
+    },
+    {
+        "hash": "1471048891",
+        "name": "Data Buffs",
+        "description": "Depositing data will award one of the following buffs:\n• Chance to spawn an Orb of Power on combatant final blows\n• Chance to spawn a Stasis Crystal on combatant final blows\n• Chance to gain class ability energy on combatant final blows"
+    },
+    {
+        "hash": "1486810101",
+        "name": "Equipment Locked",
+        "description": "You will not be able to change your equipment after this activity starts."
+    },
+    {
+        "hash": "1498263100",
+        "name": "Strength of Memory",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "1499411920",
+        "name": "Shot Caller",
+        "description": "Landing multiple precision hits with a Primary ammo weapon empowers Special and Heavy ammo weapons. Reduces incoming damage while active."
+    },
+    {
+        "hash": "1505377421",
+        "name": "Placement Series",
+        "description": "Complete placement matches to determine your starting position on the current Season's Ranked ladder.\n\nMatches played: {var:4027254163} of {var:2701182729}"
+    },
+    {
+        "hash": "1514862847",
+        "name": "Collision Rules",
+        "description": "Capture and control active zones to score points. There are multiple zone locations, but only one active at a time. \n\nThe team with the most points at the end of the match wins! Defeating your opponents does not grant points. \n\nZones: Score +1 point when your team captures an active zone. Score +1 point for each time interval your team controls that zone. Captured zones will deactivate after a set amount of time and a new zone will activate elsewhere on the map."
+    },
+    {
+        "hash": "1535174577",
+        "name": "Denial",
+        "description": "Taken Vandals summon their shields significantly more often."
+    },
+    {
+        "hash": "1545596619",
+        "name": "Escalating Difficulty",
+        "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+    },
+    {
+        "hash": "1553052482",
+        "name": "Balanced Diet Challenge",
+        "description": "\"Salvation's Edge\" raid challenge modes."
+    },
+    {
+        "hash": "1553093202",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Solar] Solar shields.\n\nActivity modifiers may add more shield types."
+    },
+    {
+        "hash": "1553444357",
+        "name": "Martyr",
+        "description": "Exploder units have more health."
+    },
+    {
+        "hash": "1555213579",
+        "name": "Contest of Elders Rules",
+        "description": "Successfully complete four laps in the Contest of Elders.\n\nWarden's Judgment:  A dynamic range of values tied to the activity's difficulty. Stacks of positive Judgment are called Warden's Favor and increase encounter difficulty. Stacks of negative Judgment are called Warden's Punishment and slightly decrease difficulty. \n\nWarden's Sentencing: Following every reward phase, the Warden will assess the fireteam's Judgment rating. Warden's Favor allows the fireteam to skip an encounter, while Warden's Punishment activates the Punishment Protocol.\n\nSecondary Objectives: Challenges and critical objectives appear in every encounter. Mastery of these objectives contributes toward Warden's Judgment.\n\nRewards: Granted upon the defeat of a boss. Subsequent laps pay out better rewards. Stacks of Warden's Favor increase your rewards even further."
+    },
+    {
+        "hash": "1572570117",
+        "name": "Ensemble's Refrain",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "1572913484",
+        "name": "Chill Touch",
+        "description": "Being hit by a melee attack slows you."
+    },
+    {
+        "hash": "1575279060",
+        "name": "Solar Thermal Swap",
+        "description": "Solar final blows grant melee and grenade energy. Stasis subclasses receive a lot; other subclasses receive a little."
+    },
+    {
+        "hash": "1593143649",
+        "name": "Mettle",
+        "description": "The activity is at a fixed difficulty.\n\nYour effective Power is capped at {var:1311088063}."
+    },
+    {
+        "hash": "1598472557",
+        "name": "Strand Threat",
+        "description": "{var:4005007457}% increase to incoming Strand damage."
+    },
+    {
+        "hash": "1598783516",
+        "name": "Champion Foes",
+        "description": "You will face [Stagger] Unstoppable Champions."
+    },
+    {
+        "hash": "1602614337",
+        "name": "Legacy: The Whisper",
+        "description": "This activity's difficulty has been tuned to approximate the experience of its original release.\n\nCombatants deal significantly more damage and have moderately increased health."
+    },
+    {
+        "hash": "1615778293",
+        "name": "Champion Foes",
+        "description": "You will face [Shield-Piercing] Barrier Champions."
+    },
+    {
+        "hash": "1616571513",
+        "name": "All Hands Challenge",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "1651706850",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Arc] Arc, [Solar] Solar, and [Void] Void shields."
+    },
+    {
+        "hash": "1681061669",
+        "name": "Heavyweight",
+        "description": "Power weapons deal more damage, and more ammo is available."
+    },
+    {
+        "hash": "1741733430",
+        "name": "Keep Out",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "1743397814",
+        "name": "Boss Rotation",
+        "description": "A Fieldrazer Tormentor awaits you on wave 50."
+    },
+    {
+        "hash": "1783825372",
+        "name": "",
+        "description": ""
+    },
+    {
+        "hash": "1789323317",
+        "name": "Raid Challenges",
+        "description": "All challenges are active."
+    },
+    {
+        "hash": "1792878913",
+        "name": "Mayhem Rules",
+        "description": "To win, defeat your opponents to score more points than them! Your abilities recharge much faster in this mode, and final blows made with Power weapons or Supers grant additional points."
+    },
+    {
+        "hash": "1806568190",
+        "name": "Champion Foes",
+        "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+    },
+    {
+        "hash": "1806775150",
+        "name": "Fireteam Power Boosting Disabled",
+        "description": "Fireteam power boosting is disabled for this activity."
+    },
+    {
+        "hash": "1834872958",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:1968703538}"
+    },
+    {
+        "hash": "1852184322",
+        "name": "Full Extinguish",
+        "description": "If all your fireteam members fall with 0 Revive Tokens, everyone is returned to orbit."
+    },
+    {
+        "hash": "1870323889",
+        "name": "Matchmaking",
+        "description": "When on an active Lighthouse Passage, matchmaking does not utilize skill.\n\nWhen on a Trials Passage or a completed Lighthouse Passage, matchmaking prefers players with similar weekly performance in Trials of Osiris."
+    },
+    {
+        "hash": "1874523520",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:1641349362}"
+    },
+    {
+        "hash": "1879607770",
+        "name": "Solar Singe",
+        "description": "Solar damage increases slightly from all sources."
+    },
+    {
+        "hash": "1894842396",
+        "name": "Boss Rotation",
+        "description": "A Siegehook Ogre awaits you on wave 50."
+    },
+    {
+        "hash": "1895965859",
+        "name": "Countdown Rules",
+        "description": "To win, your team must detonate or defuse charges. Defeating the entire opposing team and being the last Guardian(s) standing will also grant victory.\n\nAttackers: Arm the charge at one of two sites, and guard it until it detonates. Eliminating the defending team will result in winning a round.\n\nDefenders (Arming Phase): Prevent the attacking team from arming any charges until the round ends. Eliminating the attacking team will result in winning a round. \n\nDefenders (Defusing Phase): Defuse the armed charge. Eliminating the attacking team will not end the round."
+    },
+    {
+        "hash": "1897835427",
+        "name": "Limited Revives",
+        "description": "Limited fireteam revives. The Warden will grant additional revive tokens for each Model Prisoner defeated."
+    },
+    {
+        "hash": "1902839616",
+        "name": "Contestants: Disciples of the Neigh",
+        "description": "Round 1: Taken\nRound 2: Cabal\nFinal Round: Zydron"
+    },
+    {
+        "hash": "1909158654",
+        "name": "Restricted",
+        "description": "Fireteam revives are limited in Restricted Zones."
+    },
+    {
+        "hash": "1922761042",
+        "name": "Mettle",
+        "description": "The activity is at a fixed difficulty.\n\nYour effective Power is capped at {var:1311088063}."
+    },
+    {
+        "hash": "1926594730",
+        "name": "MA-75 Multipurpose",
+        "description": "Guardians deal increased damage with Auto Rifles and Grenade Launchers."
+    },
+    {
+        "hash": "1931480264",
+        "name": "Keep It Loaded",
+        "description": "Guardians deal increased damage with Sidearms."
+    },
+    {
+        "hash": "1969121547",
+        "name": "Flare",
+        "description": "Rapidly defeat combatants to unleash waves of paracausal fire around you dealing damage to nearby combatants."
+    },
+    {
+        "hash": "1974619026",
+        "name": "Champions: Barrier",
+        "description": "This mode contains Barrier Champions, which cannot be stopped without an Anti-Barrier mod."
+    },
+    {
+        "hash": "1990363418",
+        "name": "Champion Foes",
+        "description": "You will face [Shield-Piercing] Barrier and [Disruption] Overload Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+    },
+    {
+        "hash": "2001067135",
+        "name": "Checkmate Modifiers",
+        "description": "Ability recharge time: Slowed\n\nSpecial ammo is earned by engaging in combat.\n\nSpecial ammo is not lost on death."
+    },
+    {
+        "hash": "2006149364",
+        "name": "Champion Foes",
+        "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+    },
+    {
+        "hash": "2042632950",
+        "name": "Brawn",
+        "description": "Your health is massively increased but does not regenerate. Defeating challenging combatants will recover health for you and nearby allies."
+    },
+    {
+        "hash": "2050297303",
+        "name": "Grenadier",
+        "description": "Grenade abilities deal more damage and recharge much faster."
+    },
+    {
+        "hash": "2070303007",
+        "name": "Cosmic Equilibrium Challenge",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2072906693",
+        "name": "Stasis Thermal Swap",
+        "description": "Stasis final blows grant melee and grenade energy. Solar subclasses receive a lot; other subclasses receive a little."
+    },
+    {
+        "hash": "2081148033",
+        "name": "Delayed Extinguish",
+        "description": "Activates on wave 31.\n\nIf your fireteam falls, you will be returned to orbit."
+    },
+    {
+        "hash": "2098788044",
+        "name": "Looping Catalyst",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2117382464",
+        "name": "Class Warfare",
+        "description": "Using class abilities increases your fireteam's damage output. Reduces incoming damage while active."
+    },
+    {
+        "hash": "2139004924",
+        "name": "Fire Pit",
+        "description": "When defeated, Acolytes spawn fire pools that cause damage over time."
+    },
+    {
+        "hash": "2159250954",
+        "name": "Devious Thievery",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2160690722",
+        "name": "Boss Rotation",
+        "description": "A Fallen Warpriest awaits you on wave 50."
+    },
+    {
+        "hash": "2178457119",
+        "name": "Overcharged Trace Rifle",
+        "description": "{var:1027206613}% bonus to Trace Rifle damage."
+    },
+    {
+        "hash": "2201679031",
+        "name": "Control Rules",
+        "description": "Capture the zones and defeat your opponents for points. The team with the most points wins.\n\nZone Advantage: The state when your team owns 2 zones. Your team gains +2 points for every Guardian you defeat while in this state.\n\nPower Play: The state when your team owns all 3 zones. Your team gains +3 points for every Guardian you defeat while in this state.\n\nCapture Participant: You gain an additional +1 point for each player that participated in the zone capture."
+    },
+    {
+        "hash": "2203953934",
+        "name": "Mettle",
+        "description": "The activity is at a fixed difficulty.\n\nYour effective Power is capped at {var:1311088063}."
+    },
+    {
+        "hash": "2208550513",
+        "name": "Empath",
+        "description": "Enhanced radar. Take increased damage from melee."
+    },
+    {
+        "hash": "2229025674",
+        "name": "Contestants: The Way of the Hoof",
+        "description": "Round 1: Fallen\nRound 2: Hive\nFinal Round: Zydron"
+    },
+    {
+        "hash": "2255984700",
+        "name": "Defenses Down",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2263762817",
+        "name": "Data Buffs",
+        "description": "Depositing data will award one of the following buffs:\n• Chance to create Stasis Crystals on Stasis damage\n• Chance to apply Scorched on Solar damage\n• Chance to gain class ability energy on combatant final blows"
+    },
+    {
+        "hash": "2266489848",
+        "name": "Matchmaking",
+        "description": "Matchmaking prefers players with similar Competitive Rank."
+    },
+    {
+        "hash": "2288210988",
+        "name": "Shielded Foes",
+        "description": "[Arc] Arc, [Solar] Solar, and [Void] Void Shields"
+    },
+    {
+        "hash": "2290945089",
+        "name": "On the Clock",
+        "description": "This activity is timed. If your fireteam fails to complete the activity in the allotted time, everyone is returned to orbit."
+    },
+    {
+        "hash": "2323293470",
+        "name": "Raid Challenges",
+        "description": "All challenges are active."
+    },
+    {
+        "hash": "2327064309",
+        "name": "Momentum Control Rules",
+        "description": "Capture the zones and defeat your opponents for points. The team with the most points wins. This is a faster version of Control.\n\nMomentum: You can capture zones faster. Weapon damage is significantly increased. Abilities and Supers regenerate when you defeat an opponent. Passive regeneration is significantly decreased. \n\nZone Advantage: The state when your team owns 2 zones. Your team gains +2 points for every Guardian you defeat while in this state.\n\nPower Play: The state when your team owns all 3 zones. Your team gains +3 points for every Guardian you defeat while in this state."
+    },
+    {
+        "hash": "2349614593",
+        "name": "Contest Mode",
+        "description": "The activity is at a fixed difficulty. Test your might."
+    },
+    {
+        "hash": "2378419670",
+        "name": "Frontliner",
+        "description": "Ability recharge rate is increased."
+    },
+    {
+        "hash": "2431130026",
+        "name": "Arena: Breach Executable: Mode Rules",
+        "description": "Complete objectives and defeat high-value targets to generate data Motes.\n\nUpon death, some collected data will drop to the ground to be reacquired.\n\nPick up data and deposit it to earn power-ups during encounters.\n\nSuccessfully completing encounters in Expert difficulty will provide additional rewards at the end of the activity."
+    },
+    {
+        "hash": "2432579025",
+        "name": "Legacy: Zero Hour",
+        "description": "This activity's difficulty has been tuned to approximate the experience of its original release.\n\nCombatants deal significantly more damage and have moderately increased health."
+    },
+    {
+        "hash": "2432720046",
+        "name": "Stasis Singe",
+        "description": "Stasis damage increases slightly from all sources."
+    },
+    {
+        "hash": "2471054449",
+        "name": "Avatara's Psyche",
+        "description": "Supers recharge more quickly."
+    },
+    {
+        "hash": "2475764450",
+        "name": "Champion Foes",
+        "description": "You will face [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+    },
+    {
+        "hash": "2483219497",
+        "name": "Snowstorm",
+        "description": "Defeat combatants to generate snowballs."
+    },
+    {
+        "hash": "2492586271",
+        "name": "PRISM Day",
+        "description": "All collected Elemental Orbs contribute toward the elemental buff counter. Subclass choice determines which elemental buff is applied.\n\nPrismatic orbs from Taken combatants grant a random empowerment buff."
+    },
+    {
+        "hash": "2524382624",
+        "name": "Shielded Foes",
+        "description": "[Void] Void and Strand Shields"
+    },
+    {
+        "hash": "2533375223",
+        "name": "Melee Health Increase",
+        "description": "Melee units have increased health."
+    },
+    {
+        "hash": "2542545137",
+        "name": "Iron Banner Rank Boost",
+        "description": "Iron Banner Rank point gains are increased by: {var:204478713}.{var:542268544}x\n\nChallenges Completed: {var:3685276897} of 4\nIron Banner Gear Equipped: {var:3094895831} of 5\nIron Banner Emblem: {var:334376694} of 1"
+    },
+    {
+        "hash": "2543520884",
+        "name": "Onslaught Rules",
+        "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+    },
+    {
+        "hash": "2567927655",
+        "name": "Expert Modifiers",
+        "description": "Extra Shields"
+    },
+    {
+        "hash": "2585386105",
+        "name": "Shielded Foes",
+        "description": "[Arc] Arc, [Solar] Solar, [Void] Void, and Strand Shields"
+    },
+    {
+        "hash": "2587905069",
+        "name": "Data Buffs",
+        "description": "Potential Data buffs:\n• Chance to spawn an Orb of Power on combatant final blows\n• Chance to spawn a Stasis Crystal on combatant final blows\n• Chance to gain class ability energy combatant final blows"
+    },
+    {
+        "hash": "2592191680",
+        "name": "Secrets",
+        "description": "Within the Dreadnaught there are numerous secrets to be found."
+    },
+    {
+        "hash": "2596648371",
+        "name": "Raid Challenges",
+        "description": "All challenges are active."
+    },
+    {
+        "hash": "2620827383",
+        "name": "Void Singe",
+        "description": "Void damage increases slightly from all sources."
+    },
+    {
+        "hash": "2626004713",
+        "name": "To the Top",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2626834038",
+        "name": "Overcharged Fusion Rifle",
+        "description": "{var:1027206613}% bonus to Fusion Rifle damage."
+    },
+    {
+        "hash": "2650740350",
+        "name": "Shielded Foes",
+        "description": "[Arc] Arc and [Void] Void Shields"
+    },
+    {
+        "hash": "2672226122",
+        "name": "Swift Destruction",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2675177792",
+        "name": "Contestants: The Way of the Hoof",
+        "description": "Round 1: Cabal\nRound 2: Taken\nFinal Round: Crota"
+    },
+    {
+        "hash": "2691200658",
+        "name": "Arc Surge",
+        "description": "{var:2189146210}% bonus to outgoing Arc damage."
+    },
+    {
+        "hash": "2742259563",
+        "name": "Surge Protector",
+        "description": "Super recharge rate is increased."
+    },
+    {
+        "hash": "2743796883",
+        "name": "Overcharged Glaive",
+        "description": "{var:1027206613}% bonus to Glaive damage."
+    },
+    {
+        "hash": "2751349583",
+        "name": "Match Game",
+        "description": "Enemy shields are highly resistant to all unmatched elemental damage."
+    },
+    {
+        "hash": "2759838796",
+        "name": "Weekly Boss",
+        "description": "This week, an Elder Revenant awaits you on wave 50."
+    },
+    {
+        "hash": "2768123075",
+        "name": "Mettle",
+        "description": "The activity is at a fixed difficulty.\n\nYour effective Power is capped at {var:1311088063}."
+    },
+    {
+        "hash": "2787320573",
+        "name": "Delayed Extinguish",
+        "description": "Activates on wave 31.\n\nIf your fireteam falls, everyone is returned to orbit."
+    },
+    {
+        "hash": "2787412174",
+        "name": "Overcharged Submachine Gun",
+        "description": "{var:1027206613}% bonus to Submachine Gun damage."
+    },
+    {
+        "hash": "2814846409",
+        "name": "Out of Its Way",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2821522136",
+        "name": "Varied Geometry Challenge",
+        "description": "\"Salvation's Edge\" raid challenge modes."
+    },
+    {
+        "hash": "2833087500",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+    },
+    {
+        "hash": "2834033523",
+        "name": "Summoning Ritual",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2835296134",
+        "name": "Exotic Drop Rate Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:219516062}"
+    },
+    {
+        "hash": "2841995557",
+        "name": "Gambit Rules",
+        "description": "To win, be the first team to summon and defeat your Primeval. \n\nMotes: Defeated foes will drop Motes you can pick up. Watch out! If you die, you'll lose any Motes you're holding. \n\nBank: Deposit Motes you're holding in the bank. Bank enough Motes, and you'll summon a Primeval. \n\nBlockers: Bank enough Motes at once to summon Blockers that lock the opposing team's bank. \n\nInvasions: As your team banks Motes, an invasion portal will open, allowing you to enter the opposing team's area. Take them out to make them drop their Motes!"
+    },
+    {
+        "hash": "2874799584",
+        "name": "Mettle",
+        "description": "The activity is at a fixed difficulty.\n\nYour effective Power is capped at {var:1311088063}."
+    },
+    {
+        "hash": "2889256157",
+        "name": "Extinguish",
+        "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+    },
+    {
+        "hash": "2890753840",
+        "name": "Gaze Amaze",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2936050162",
+        "name": "Under Construction",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "2960104736",
+        "name": "Countdown Rules",
+        "description": "To win, your team must detonate or defuse both charges.\n\nAttackers: Arm the charge at one of two sites and guard it until it detonates. \n\nDefenders (Arming Phase): Prevent the attacking team from arming any charges until the round ends.  \n\nDefenders (Defusing Phase): Defuse the armed charge.\n\nRespawns Enabled: Defeated Guardians will respawn after a short time."
+    },
+    {
+        "hash": "2965677044",
+        "name": "Shielded Foes",
+        "description": "[Solar] Solar Shields"
+    },
+    {
+        "hash": "2975928611",
+        "name": "Promotion Series",
+        "description": "Win 2 of the next 3 matches to be promoted to the next Rank.\n\nMatch results (W-L): {var:3036110002}-{var:2130373872}"
+    },
+    {
+        "hash": "2984170047",
+        "name": "Overcharged Pulse Rifle",
+        "description": "{var:1027206613}% bonus to Pulse Rifle damage."
+    },
+    {
+        "hash": "3021161702",
+        "name": "Arach-NO!",
+        "description": "When defeated, Fallen Vandals spawn a web mine at their feet."
+    },
+    {
+        "hash": "3032884941",
+        "name": "Shaxx's Training Weights",
+        "description": "Ability Cooldowns Increased"
+    },
+    {
+        "hash": "3037208116",
+        "name": "Subclass Locked",
+        "description": "You will not be able to change your equipped subclass during this activity."
+    },
+    {
+        "hash": "3042462389",
+        "name": "Nether Rules",
+        "description": "Health Recovery is disabled, and you have significantly greater health and overshields. Healing Orbs can be occasionally found throughout the activity."
+    },
+    {
+        "hash": "3076996298",
+        "name": "Exotic Drop Rate Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:3177264920}"
+    },
+    {
+        "hash": "3101164718",
+        "name": "Chaff",
+        "description": "Radar is disabled."
+    },
+    {
+        "hash": "3114697541",
+        "name": "Escalating Difficulty",
+        "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+    },
+    {
+        "hash": "3119075764",
+        "name": "Raid Challenges",
+        "description": "All challenges are active."
+    },
+    {
+        "hash": "3119632620",
+        "name": "Shielded Foes",
+        "description": "[Arc] Arc and [Solar] Solar Shields"
+    },
+    {
+        "hash": "3132780533",
+        "name": "Overcharged Shotgun",
+        "description": "{var:1027206613}% bonus to Shotgun damage."
+    },
+    {
+        "hash": "3135466059",
+        "name": "Wait For It…",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "3139381566",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Arc] Arc shields.\n\nActivity modifiers may add more shield types."
+    },
+    {
+        "hash": "3171609188",
+        "name": "Shielded Foes",
+        "description": "[Arc] Arc Shields"
+    },
+    {
+        "hash": "3186900190",
+        "name": "Bonfire Bash Rules",
+        "description": "Stoke the bonfire!\n\nIgnition Carriers: Glowing combatants that drop Igniters when dealt final blows.\n\nIgniters: Objects that can be picked up and thrown into the bonfire to stoke the flames.\n\nBonfire: Stoke the bonfire with Igniters to make the flames grow.\n\nTaken Interference: Taken will disrupt the bonfire throughout the activity. Defeat them to reignite the bonfire!"
+    },
+    {
+        "hash": "3192928767",
+        "name": "Quickplay 6v6 Rules",
+        "description": "This playlist contains Control and Clash. When you launch, it will randomly select one of the modes for you to play.\n\nControl: Capture the zones and defeat your opponents for points. The more zones you control, the more points you get for each opponent defeated. The team with the most points wins!\n\nClash: To win, defeat your opponents to score more points than them!"
+    },
+    {
+        "hash": "3193240035",
+        "name": "Contest Mode Rules",
+        "description": "• Combatants have higher aggression and shields.\n• Encounters feature resurrection tokens.\n• Encounters will enrage."
+    },
+    {
+        "hash": "3196075844",
+        "name": "Void Surge",
+        "description": "{var:2189146210}% bonus to outgoing Void damage."
+    },
+    {
+        "hash": "3206202148",
+        "name": "Matchmaking",
+        "description": "Matchmaking does not utilize skill."
+    },
+    {
+        "hash": "3207332887",
+        "name": "Lockdown Rules",
+        "description": "To win the round, reach the scoring threshold by capture zones, or capture all zones completely."
+    },
+    {
+        "hash": "3212721586",
+        "name": "Strangers in Time",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "3224024504",
+        "name": "Longer Respawns",
+        "description": "Increased respawn times."
+    },
+    {
+        "hash": "3228023383",
+        "name": "Increased Gambit Rank",
+        "description": "All Gambit Rank point gains are increased!"
+    },
+    {
+        "hash": "3230561446",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Arc] Arc and [Solar] Solar shields.\n\nActivity modifiers may add more shield types."
+    },
+    {
+        "hash": "3240131679",
+        "name": "Advanced Modifiers",
+        "description": "Extra Shields"
+    },
+    {
+        "hash": "3244996239",
+        "name": "Elimination Rules",
+        "description": "To win, your team must become the last Guardian(s) standing by defeating the entire opposing team.\n\nTiebreaker: A capture zone appears when a round reaches overtime. Win the round by capturing the zone before the other team."
+    },
+    {
+        "hash": "3256101957",
+        "name": "Contest Mode Rules",
+        "description": "• Enemies have higher aggression and shields.\n• Encounters feature resurrection tokens.\n• Encounters will enrage."
+    },
+    {
+        "hash": "3282103678",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:2223847550}"
+    },
+    {
+        "hash": "3283187796",
+        "name": "Mettle",
+        "description": "The activity is at a fixed difficulty.\n\nYour effective Power is capped at {var:1311088063}."
+    },
+    {
+        "hash": "3296644900",
+        "name": "Supremacy Rules",
+        "description": "Defeated Guardians drop a crest. Secure opposing crests to score points. Secure allied crests to deny your opponents points."
+    },
+    {
+        "hash": "3303073618",
+        "name": "Raid Challenges",
+        "description": "All challenges are active."
+    },
+    {
+        "hash": "3307318061",
+        "name": "Champion Foes",
+        "description": "You will face [Disruption] Overload and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+    },
+    {
+        "hash": "3320264005",
+        "name": "Escalating Difficulty",
+        "description": "Combatant power increases after each set."
+    },
+    {
+        "hash": "3320777106",
+        "name": "Overcharged Linear Fusion Rifle",
+        "description": "{var:1027206613}% bonus to Linear Fusion Rifle damage."
+    },
+    {
+        "hash": "3346897368",
+        "name": "Attrition",
+        "description": "Regeneration is greatly impaired. Defeating enemies may create wells of Light."
+    },
+    {
+        "hash": "3361897360",
+        "name": "Copies of Copies",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "3388053151",
+        "name": "Showdown Rules",
+        "description": "Win the match by winning more rounds than your opponents. Defeat them to score points; the team with the most points wins a round."
+    },
+    {
+        "hash": "3388957297",
+        "name": "Trickle",
+        "description": "Abilities recharge at a reduced rate."
+    },
+    {
+        "hash": "3398421092",
+        "name": "Multiplicity",
+        "description": "Greater fireteam size scales combatant difficulty and adds limitations on revives."
+    },
+    {
+        "hash": "3398572761",
+        "name": "Data Buffs",
+        "description": "Potential Data buffs:\n• Chance to spawn an Orb of Power on combatant final blows\n• Chance to Jolt on Arc Damage\n• Chance to gain melee energy on combatant final blows"
+    },
+    {
+        "hash": "3398790191",
+        "name": "Martyr",
+        "description": "Exploding units have more health."
+    },
+    {
+        "hash": "3406250074",
+        "name": "Overcharged Auto Rifle",
+        "description": "{var:1027206613}% bonus to Auto Rifle damage."
+    },
+    {
+        "hash": "3425521520",
+        "name": "Base Information",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "3450476141",
+        "name": "Respawns Enabled",
+        "description": "Defeated Guardians will respawn after a short time."
+    },
+    {
+        "hash": "3456379103",
+        "name": "Iron Banner: Tribute",
+        "description": "To win, defeat your opponents, collect their crests, and deposit them at Cabal beacons.\n\nCabal Beacons: Beacons appear at various locations on the map, two at a time. They have limited duration before they switch to another position. Collect crests and deposit them at beacons for points.\n\nThe Hunt: Activates when the score threshold is met. This is a limited, special state when Caiatl sends a high-value beacon protected with turrets. The high-value beacon awards a bonus score for each crest deposited."
+    },
+    {
+        "hash": "3461252634",
+        "name": "Champion Foes",
+        "description": "You will face [Disruption] Overload Champions."
+    },
+    {
+        "hash": "3486817119",
+        "name": "Team Scorched Rules",
+        "description": "To win, defeat your opponents to score more points than them! Every player is equipped with a Scorch Cannon.\n\nScorch Cannon: A heavy-impact weapon borrowed from the Eliksni. Shots can detonate on impact or can be charged by holding and releasing the actuator for a larger explosion."
+    },
+    {
+        "hash": "3492492287",
+        "name": "Special Ammo Rules (Alpha)",
+        "description": "Players do not respawn with Special ammo."
+    },
+    {
+        "hash": "3507208337",
+        "name": "Data Buffs",
+        "description": "Depositing data will award one of the following buffs:\n• Chance to create Threadlings on Strand damage\n• Chance to apply Suppressed on Void damage\n• Chance to gain grenade energy on combatant final blows"
+    },
+    {
+        "hash": "3517267764",
+        "name": "Solar Threat",
+        "description": "{var:4005007457}% increase to incoming Solar damage."
+    },
+    {
+        "hash": "3520387869",
+        "name": "Zone Control Rules",
+        "description": "To win, score more points than your opponent by capturing and controlling zones.\n\nZones: Score points for each zone your team controls."
+    },
+    {
+        "hash": "3538098588",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Void] Void shields.\n\nActivity modifiers may add more shield types."
+    },
+    {
+        "hash": "3566681029",
+        "name": "Raider Shield",
+        "description": "Scorn Raiders now have Void shields."
+    },
+    {
+        "hash": "3577304467",
+        "name": "The Grass Is Always Greener",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "3619879173",
+        "name": "Double Crucible Drops",
+        "description": "All Crucible loot drops are doubled on wins."
+    },
+    {
+        "hash": "3620565640",
+        "name": "Contest Mode",
+        "description": "The activity is at a fixed difficulty. Test your might."
+    },
+    {
+        "hash": "3620773775",
+        "name": "Data Buffs",
+        "description": "Potential Data buffs:\n• Spawn an ammo crate\n• Chance to spawn Threadlings on combatant final blows\n• Chance to gain grenade energy on combatant final blows"
+    },
+    {
+        "hash": "3621023005",
+        "name": "Scenic Route Challenge",
+        "description": "\"Salvation's Edge\" raid challenge modes."
+    },
+    {
+        "hash": "3623371497",
+        "name": "Master Modifiers",
+        "description": "Extra Champions\nLocked Loadout\nExtra Shields"
+    },
+    {
+        "hash": "3629079662",
+        "name": "Togetherness",
+        "description": "Base health regen is reduced. If near another player, health regen is increased."
+    },
+    {
+        "hash": "3632655552",
+        "name": "Forever Fight",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "3652821947",
+        "name": "Void Threat",
+        "description": "{var:4005007457}% increase to incoming Void damage."
+    },
+    {
+        "hash": "3666600199",
+        "name": "Iron Banner: Fortress",
+        "description": "To win, score more points that your opponent by capturing and defending the zones. The Hunt activates twice per match.\n\nZones: Gain 2 points for each zone your team controls at each time interval.\n\nZone Advantage: The state when your team controls 2 zones. Your team gains 4 points at each time interval.\n\nPower Play: The state when your team controls all 3 zones. Your team gains 6 points at each time interval.\n\nThe Hunt: Occurs twice per match. Caiatl sends a high-value zone via Drop Pod. This zone is quick to capture and awards a large number of points over a shorter period of time."
+    },
+    {
+        "hash": "3674616727",
+        "name": "Exotic Modifiers",
+        "description": "Power Level: All combatants in this activity will be at least {var:3112783658} points over your current Power level."
+    },
+    {
+        "hash": "3746163602",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:3104627285}"
+    },
+    {
+        "hash": "3758645512",
+        "name": "Overcharged Grenade Launcher",
+        "description": "{var:1027206613}% bonus to damage for all Grenade Launchers."
+    },
+    {
+        "hash": "3787716856",
+        "name": "Daodan Surge",
+        "description": "Melee abilities deal more damage and recharge much faster."
+    },
+    {
+        "hash": "3792281695",
+        "name": "Notswap",
+        "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+    },
+    {
+        "hash": "3805176141",
+        "name": "Durandal's Edge",
+        "description": "When you're holding a Sword, damage from nearby combatants is reduced."
+    },
+    {
+        "hash": "3809788899",
+        "name": "Stasis Surge",
+        "description": "{var:2189146210}% bonus to outgoing Stasis damage."
+    },
+    {
+        "hash": "3810297122",
+        "name": "Strand Surge",
+        "description": "{var:2189146210}% bonus to outgoing Strand damage."
+    },
+    {
+        "hash": "3874605433",
+        "name": "Increased Crucible Rank",
+        "description": "All Crucible Rank point gains are increased!"
+    },
+    {
+        "hash": "3893690555",
+        "name": "Slow Capturing Zones",
+        "description": "Zones capture slower, and capturing a zone immediately scores. Reduced score limits are in place for the slow capturing variant."
+    },
+    {
+        "hash": "3897480986",
+        "name": "Expert Modifiers",
+        "description": "Opponent Shields Disabled"
+    },
+    {
+        "hash": "3899751486",
+        "name": "Contestants: Disciples of the Neigh",
+        "description": "Round 1: Hive\nRound 2: Vex\nFinal Round: Valus Ta'aurc"
+    },
+    {
+        "hash": "3901838854",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:733308108}"
+    },
+    {
+        "hash": "3912996116",
+        "name": "Randomized Banes",
+        "description": "Combatants are granted random Banes."
+    },
+    {
+        "hash": "3924377323",
+        "name": "Subclass Requirements",
+        "description": "A fireteam member needs to be equipped with a Light subclass. The other fireteam member needs to be equipped with a Darkness subclass. The Prismatic subclass fulfills either requirement."
+    },
+    {
+        "hash": "3958417570",
+        "name": "Shielded Foes",
+        "description": "You will face combatants with [Solar] Solar and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+    },
+    {
+        "hash": "3970568521",
+        "name": "Special Augmentation Rules",
+        "description": "Combatants may have unique qualities indicated by a flashing effect applied to them.\n\nThese include some Augmentations which reduce incoming damage to bosses but are NOT full immunity shields.  Decide whether to try to deal damage through them, or complete the Augment objective to remove the damage reduction."
+    },
+    {
+        "hash": "3993408768",
+        "name": "Relegation Series",
+        "description": "Win 2 of the next 3 matches to avoid relegation.\n\nMatch results (W-L): {var:1550688411}-{var:3875673079}"
+    },
+    {
+        "hash": "4023623132",
+        "name": "Red Rover",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "4038464106",
+        "name": "Champion Foes",
+        "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+    },
+    {
+        "hash": "4047266548",
+        "name": "Cooperative Focus Campaign",
+        "description": "Heavily shielded and highly aggressive combatants appear more frequently and in greater numbers."
+    },
+    {
+        "hash": "4047923249",
+        "name": "Mettle",
+        "description": "The activity is at a fixed difficulty.\n\nYour effective Power is capped at {var:1311088063}."
+    },
+    {
+        "hash": "4066301271",
+        "name": "Challenge Mode",
+        "description": "All Encounter Challenges Enabled and Required"
+    },
+    {
+        "hash": "4068824296",
+        "name": "Shielded Foes",
+        "description": "Combatants may vary each time you play this activity. You may face combatants with [Arc] Arc, [Solar] Solar, or [Void] Void shields."
+    },
+    {
+        "hash": "4073197101",
+        "name": "Zero to One Hundred",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "4075903438",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:3027371367}"
+    },
+    {
+        "hash": "4087563963",
+        "name": "Master Modifiers",
+        "description": "Extra Champions\nExtra Shields"
+    },
+    {
+        "hash": "4087969162",
+        "name": "Exotic Drop Rate Boosts Gained",
+        "description": "Initial exotic drop rate boosts: {var:1611655700}"
+    },
+    {
+        "hash": "4093484583",
+        "name": "Doubles Rules",
+        "description": "When you and your ally are reunited, your weapon handling and reload speed are greatly increased, and you gain increased flinch resistance.\n\nWhen you and your ally are drifting apart, your sprint and slide abilities are enhanced."
+    },
+    {
+        "hash": "4105691942",
+        "name": "Weekly Boss",
+        "description": "This week, an Elder Revenant awaits you on wave 50."
+    },
+    {
+        "hash": "4115568531",
+        "name": "Mission Is Timed",
+        "description": "When the timer reaches zero, the fireteam will be returned to orbit."
+    },
+    {
+        "hash": "4134002479",
+        "name": "Forced Reboot Timer",
+        "description": "If the timer reaches 0:00, the activity will restart."
+    },
+    {
+        "hash": "4152669757",
+        "name": "Hands Off",
+        "description": "A challenge awaits…"
+    },
+    {
+        "hash": "4162874069",
+        "name": "Arc Singe",
+        "description": "Arc damage increases slightly from all sources."
+    },
+    {
+        "hash": "4190795159",
+        "name": "Champion Foes",
+        "description": "You will face [Shield-Piercing] Barrier Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+    },
+    {
+        "hash": "4211958639",
+        "name": "Rift Rules",
+        "description": "To win, score more points than your opponent by collecting the Spark and igniting your opponent's Rift.\n\nSpark: Spawns in the center of the map at the beginning of the match and after a team scores. Drops at the Spark Runner's location upon death. \n\nRift: Each team has a Rift on their side of the map. Carry the Spark into your opponent's Rift to score. Defend your Rift from opposing Spark Runners."
+    },
+    {
+        "hash": "4226469317",
+        "name": "Overcharged Weapons",
+        "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+    },
+    {
+        "hash": "4230548176",
+        "name": "Pestilence",
+        "description": "When defeated, Psions spawn Void grenades at their feet."
+    },
+    {
+        "hash": "4232900926",
+        "name": "Boosts Gained",
+        "description": "Initial Exotic drop rate boosts: {var:2864503325}"
+    },
+    {
+        "hash": "4239965093",
+        "name": "Limited Revives",
+        "description": "Limited fireteam revives. Gain additional revives by defeating Champions."
+    },
+    {
+        "hash": "4258252763",
+        "name": "Relic Rules",
+        "description": "Score points by defeating your opponents with a relic.\n\nRelics: Mysterious weapons that hold immense power. Defeat your opponents with a relic to score points for your team.\n\nRelic Depot: Each depot can equip you with one of the following relics: Aegis Shield, Synaptic Spear, Solar Scythe.\n\nRelic Energy: Players without an equipped relic must earn energy to gain access to the Relic Depot. Relic energy can be built up by your own actions, your team's actions, and even the opponent's actions throughout the match."
+    },
+    {
+        "hash": "4263658911",
+        "name": "Dominion Rules",
+        "description": "To win, your team must become the last Guardian(s) standing by defeating the entire opposing team or capturing the zone.\n\nDominion: A capture zone appears at the start of each round. Win the round by capturing the zone.\n\nElimination: Wins can also be achieved by defeating the opposing team.\n\nRevives: Teammate revives are enabled."
+    },
+    {
+        "hash": "4265630562",
+        "name": "Extinguish",
+        "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+    },
+    {
+        "hash": "4269081391",
+        "name": "Data Buffs",
+        "description": "Depositing data will award one of the following buffs:\n• Chance to spawn an Orb of Power on combatant final blows\n• Chance to Jolt on Arc Damage\n• Chance to gain melee energy on combatant final blows"
+    },
+    {
+        "hash": "4292382471",
+        "name": "Kell's Vengeance Rules",
+        "description": "Complete a perfect lap of the Warden's twisted game.\n\nWarden's Punishment: Failing to successfully complete secondary objectives will result in the Warden inflicting its punishment on the entire fireteam."
+    }
+]

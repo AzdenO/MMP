@@ -75,7 +75,7 @@ export default class UserPool{
                 return await coach.getProgressionData();
                 break;
             case 6:
-                return await coach.getActivitySkills();
+                return await coach.getActivitySkills(args[0]);
                 break;
             case 7:
                 return await coach.getActivityAnalysis(args[0],args[1]);

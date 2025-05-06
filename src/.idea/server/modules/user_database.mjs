@@ -1,10 +1,36 @@
+/**
+ * @module UserDatabase
+ * @description A module to encapsulate all interaction with the MySQL server instance, and therefore the database. This
+ * module utilizes the MySQL2 package as a driver for this communication
+ * @version 0.2.3
+ * @author Declan Roy Alan Wadsworth (drw8)
+ */
 
+
+/**
+ * Global variable to hold MySQL2 dependency
+ * @type {Object}
+ */
 var driver = null;
-var destiny = null;
+/**
+ * Global variable to hold synchronous console reader dependency provided by the prompts library
+ * @type {function}
+ */
 var console_reader = null;
+/**
+ * Global variable to hold the connection pool created upon module initialisation
+ * @type {Object}
+ */
 var connectionPool = null;
+/**
+ * Global array to hold a list of prompts loaded from a file
+ * @type {Array<string>}
+ */
 var queries = [];
 
+/*
+ * Import defined errors
+ */
 import {AuthError,InitError,UserNotFoundError,InvalidTokenError} from "./utils/errors.mjs";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -18,7 +44,16 @@ import {AuthError,InitError,UserNotFoundError,InvalidTokenError} from "./utils/e
 import fs from "node:fs";
 //import secretiser from "./utils/cryptography.mjs";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function newUser(user_details,progressionData, items){
+/**
+ * Insert a new application user into the database. This takes details and stores them in the corresponding tables
+ * @param {Object} user_details An object containing the core details of a user in the form
+ * {
+ *  displayname: string, accountID: string, membershipid: string, membertype: int, refreshToken: string, refresh_expiry: string,
+ *  accessToken: string, accessExpiry: string, progression: Object, characters: Object
+ * }
+ * @returns {Promise<void>}
+ */
+async function newUser(user_details){
     console.log("Database:// Adding new user to database");
     const connection = await getConnection();
     await connection.execute("CALL newUser(?,?,?,?,?,?,?,?,?,?)",[
@@ -39,7 +74,7 @@ async function newUser(user_details,progressionData, items){
 function refreshUser(userid){
 
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function deleteUser(userid){
 
 }
@@ -64,25 +99,25 @@ async function getUser(token, userObj) {
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* CHECK IF A USER EXISTS IN THE DATABASE
-* Public module method used by server authorisation when no refresh token cookie is present, specifically in the case
-* of when the cookie has expired past its maximum age, indicating the users data may still exist, if it hasnt been longer than
-* 90 days, when the database automatically deletes the users data
-*/
+/**
+ * Check if a user already exists in the database. Utilized mostly for authentication by OAuth2 code with the server which
+ * is generally meant for new users, but edge cases exist where an existing user may authenticate via such.
+ * @param {string} userid The unique bungie global display name which is a primary key in all tables
+ * @returns {Promise<boolean>}
+ */
 async function checkForUser(userid){
     console.log("Database:// Checking for existing user by display name");
     const connection = await getConnection();
     const result = await connection.execute("CALL getUser(?)",[userid]);
     await connection.release();
     if(result[0][0].length==0){
-        return false;
+        return false;//the user does not exist
     }else if(result[0][0][0].userid==userid){
         console.log("Database:// Existing user found");
-        return true;
+        return true;//the user does exist
     }else{
         console.log("Database:// No user found");
-        return false;
+        return false;//edge case
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,27 +139,30 @@ async function queryItem(){
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* INJECT ALL MODULE PRIMARY DEPENDENCIES
-* Private Module setter method used in module initialisation for mysql library and bungie access dependency injection
-*/
-function inject_dependencies(dependency,bungie,reader){
+/**
+ * Inject all module dependencies
+ * @param {Object} dependency The main MySQL2 dependency required for communication and interaction with the database on
+ * the MySQL server instance
+ * @param {Object} reader The prompts dependency that allows for synchronous reading from the console
+ */
+function inject_dependencies(dependency,reader){
     driver = dependency;
-    destiny = bungie;
     console_reader = reader;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* Private module method used in module initialisation to load pre-structured queries
-*/
+/**
+ * Function to load queries from a text file which can configure a new instance of the MentorDB on a MySQL server instance
+ * @returns {Promise<void>}
+ */
 async function load_queries(){
-    const querystream = await fs.readFileSync("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/resources/db_queries.txt", "utf8");
+    const querystream = await fs.readFileSync("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/resources/DatabaseResources/db_queries.txt", "utf8");
     queries = querystream.split("/--/");
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* Private module method to create a new database, as well as creating all tables
-*/
+/**
+ * Method to configure a new instance of the MentorDB
+ * @returns {Promise<void>}
+ */
 async function init_db(){
     const connection = await getConnection();
     for(let x=0; x<3; x++){
@@ -132,33 +170,42 @@ async function init_db(){
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* Private module method to create a connection instance to a running MySQL server instance running locally
-*/
+/**
+ *
+ * @returns {Promise<void>}
+ */
 async function connect(){
     console.log("Database:// Establishing connection to MySQL server instance");
-
+    /*
+     * Configure console input
+     */
     const input = await console_reader({
         type: "password",
-        name: "db_pass",
-        message: "\tINPUT:// Enter MySQL server root password: ",
-        mask: "*"
+        name: "db_pass",//name of property in the constant that will contain the input
+        message: "\tINPUT:// Enter MySQL server root password: ",//message to display to user
+        mask: "*"//input mask, hides input
     })
+    /*
+     * Configuration options for the MySQL2 connection pool object
+     */
     var con_options = {
-        host: "localhost",
-        user: "root",
-        password: input.db_pass,
-        port: 3001,
-        database: "mentor_db",
+        host: "localhost",//address where the MySQL server instance listens
+        user: "root",//the user account of the MySQL server to access it with
+        password: input.db_pass,//password for user
+        port: 3001,//port the MySQL server listens on
+        database: "mentor_db",//name of the database schema
         waitForConnections: true,
-        connectionLimit: 20,
-        queueLimit: 300,
-        idleTimeout: 30
+        connectionLimit: 20,//limit to the number of connection objects the pool will create
+        queueLimit: 300,//the number of connection requests that can be made and waiting concurrently before rejecting anymore
+        idleTimeout: 30//the time in seconds a connection has to resolve before it is cancelled
     }
+    /*
+     * Create connection pool and test configuration validity
+     */
     try{
 
-        connectionPool = driver.createPool(con_options);
-        var testConnect = await connectionPool.getConnection();
+        connectionPool = driver.createPool(con_options);//create a new connection pool with declared configuration
+        var testConnect = await connectionPool.getConnection();//test the connection, ensures configuration options are valid as well as if credentials are valid. Will throw an error if not, which is caught at the top level of the server to cancel server initialisation
         testConnect.release();
         console.log("Database:// Connection pool created, no errors");
     }catch(error){
@@ -168,12 +215,20 @@ async function connect(){
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-async function initialise(dependency,destiny,sync_reading,NEW){
-    inject_dependencies(dependency,destiny,sync_reading);
-    await load_queries();
-    await connect();
-    if(NEW){
+/**
+ * Initialise this module. Injecting necessary dependencies, connection to the MySQL server instance and creating tables if
+ * this is a new database instance
+ * @param {Object} dependency The MySQL2 dependency instantiated at index.mjs for top-level dependency management
+ * @param {Object} sync_reading instance of Prompts which allows for synchronous console input reading, used for MySQL password input
+ * @param {boolean} NEW Boolean indicator to determine whether the database has already been configured, or if tables need
+ * to be created, and will therefore use the stored queries to do so
+ * @returns {Promise<void>} Indicates if this function resolved sucessfully, not really used
+ */
+async function initialise(dependency,sync_reading,NEW){
+    inject_dependencies(dependency, sync_reading);
+    await load_queries();//load queries from text file
+    await connect();//connect to database (a database must already exist regardless of if we are configuring a new one)
+    if(NEW){//switch for new or not
         console.log("Database:// Initialising new database")
         await init_db();
     }else{
@@ -181,29 +236,35 @@ async function initialise(dependency,destiny,sync_reading,NEW){
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function to encapsulate interaction with global connection pool. Makes handling race conditions more centralized
+ * @returns {Promise<Connection>} A connection object instance from MySQL2
+ */
 async function getConnection(){
     return await connectionPool.getConnection();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-* UPDATE A USERS REFRESH TOKEN AND EXPIRY DATE
-* This function is used by User Services when an authorisation request on the server receives an auth code, not any kind
-* of identifier (refresh token) where we can check the database first. As part of that flow, the user service gets the player
-* data from destiny first which involves asking for new tokens from bungie, invalidating what is stored in the database. Therefore
-* the new refresh token needs adding to the database for requests where the refresh token is used.
-*/
+/**
+ * Function to update the refresh token stored for a user in the tokens table
+ * @param {string} token The new token value
+ * @param {string} expiry The expiration data of this token
+ * @param {string} user The userid to update the token for
+ * @returns {Promise<void>}
+ * @deprecated This function is no longer in use, as a centralized function to update all token types was implemented
+ */
 async function updateRefresh(token, expiry, user){
     const connection = await connectionPool.getConnection();
-    connection.execute("CALL updateRefresh(?,?,?)",[token,expiry,user]);
+    await connection.execute("CALL updateRefresh(?,?,?)",[token,expiry,user]);
     connection.release();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
-* GET ITEMS BELONGING TO PLAYER WITH PROVIDED USERID
-* Method for retrieving all of a players items from the database, a list of arguments can be passed to retrieve only
-* specific item types, power levels, etc. (Currently only retrieves all player items, further implementation at later date)
-*/
-async function getUserItems(userid, args=null){
+ * Retrieve user items from the database
+ * @param {string} userid The user to retrieve items for
+ * @returns {Promise<Array<Object>>} Array of objects, each corresponding to a weapon or armour piece
+ * @deprecated Items are no longer stored in the database, but are left here in case of future use
+ */
+async function getUserItems(userid){
     console.log(`Database:// Item retrieval request for user: ${userid}`);
     const connection = await getConnection();
 
@@ -238,15 +299,21 @@ async function updateTokens(args, type){
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Function used to retrieve a userid with a provided refresh token.
+ * @param {string} refresh The refresh token to query the database with
+ * @returns {Promise<string>} The userid found
+ * @throws InvalidTokenError If the refresh token is invalid, i.e., this token does not exist and likely expired
+ */
 async function getUserIDByRefresh(refresh){
-    const connection = await getConnection();
-    const result = connection.execute("CALL getUserIDByRefresh(?)", [refresh]);
-    if(!result[0][0][0]){
-        connection.release();
-        throw new InvalidTokenError();
+    const connection = await getConnection();//retrieve a connection object from the module connection pool
+    const result = connection.execute("CALL getUserIDByRefresh(?)", [refresh]);//call stored procedure and provide list of params
+    if(!result[0][0][0]){//if no userid is present
+        connection.release();//release connection
+        throw new InvalidTokenError();//throw error to be handled at top-level of endpoint processing
     }else{
         connection.release();
-        return result[0][0][0];
+        return result[0][0][0];//return the userid found
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -292,6 +359,11 @@ async function getBungieRequestData(userid){
     };
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Method to retrieve progression tracking data stored in the Progressions table.
+ * @param {string} userid The user to fetch progression for
+ * @returns {Promise<Object>} progression data
+ */
 async function getProgressionData(userid){
     const connection = await getConnection();
     const result = await connection.execute("CALL getProgressions(?)",[userid]);
@@ -299,7 +371,8 @@ async function getProgressionData(userid){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
- * Function to fetch a list of userids for every user on the server
+ * Function to fetch a list of userids for every user this server tracks data for. This does not use a stored procedure,
+ * but also does not pass any parameters, so is safe from SQL injection attack.
  * @returns {Promise<Array<string>>} An array of userids
  */
 async function getAllUsers(){

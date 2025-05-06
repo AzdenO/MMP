@@ -3,19 +3,30 @@
  * @description Module that recieves JSON parsed responses from the bungie_access module, extracts necessary information
  * and converts into an internal object format used server wide
  * @bungieApiVersion 1.20.1
- * @version 0.1.0
- * @testDataLocation server/resources/example_Json
+ * @version 0.5.2
  * @author Declan Roy Alan Wadsworth (drw8)
  */
 
+/*
+ * utility function for converting static data as well as data objects part of large JSON payloads into hash maps for O(1) lookup times
+ */
 import {convertToMap} from "./listUtils.js";
+/*
+ * Utility function for implementing delays
+ */
 import {delay} from "./timeUtils.mjs";
+/*
+ * Constant objects containing game data not retrievable from the Bungie API
+ */
 import {modeTypes,damageTypes, itemSubTypes} from "../constants/BungieConstants.mjs";
+/*
+ * File writing purposes,
+ */
 import * as fs from "node:fs";
-/**
- *
- * @type {null} Global hash map of all activities in destiny. Passed from bungie_access module upon its initialisation. Defined
- * at the top-level for easier readability
+
+
+/*
+ * Collection of global variables to hold hash maps of static game data
  */
 var activityIDs = null;
 
@@ -45,7 +56,7 @@ export function parseWeaponStats(object){
     var prefixes = ["weaponPrecisionKills","weaponKills"];
     //The object provided
     delete object.activitiesEntered;//is the second object in the collection and will mess with iterating through entries
-    var results = [];
+    var results = [];//variable to hold collected results
     for(const [keyVal, weaponType] of Object.entries(object)){//first get all weapon types
         if(keyVal.startsWith(prefixes[0])){
             results.push({
@@ -64,15 +75,17 @@ export function parseWeaponStats(object){
         }
 
     }
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ParsedBungieResponses/ParsedWeaponStats.json",JSON.stringify(results),err => {});
+
     return results;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Function to parse a collection of PGCRs from a players recent activities
  *
- * @param pgcrArray An array containing PGCRs
+ * @param {Array<Object>} pgcrArray An array containing PGCRs (Post Game Carnage Report)
  *
- * @param player The characterId of the player we requested activty results for. This is important for the PGCR,
+ * @param  {string} player The characterId of the player we requested activty results for. This is important for the PGCR,
  * as all players in the activity are identified by the character id, and this method fetches results for our player, not
  * other players
  *
@@ -168,6 +181,7 @@ export function parseActivityHistory(pgcrArray, player){
         }
 
         results.push({
+            Hash: activity.Response.activityDetails.instanceId,
             Date: activity.Response.period,//date of the activity
             Activity: fetched.name,//activity name
             TotalActivityKills: ourPlayer.values.kills.basic.value+participantData.kills,//total kills for this activity across all players
@@ -189,7 +203,7 @@ export function parseActivityHistory(pgcrArray, player){
 
         });
     }
-
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ParsedBungieResponses/ParsedPGCRs.json",JSON.stringify(results),err => {});
     return results;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -285,11 +299,25 @@ export function parseItems(object, key){
         }
         items.push(parseditem);
     }
-    fs.writeFile("O://exampleParsedItems.json",JSON.stringify(items),err => {});
+    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ParsedBungieResponses/ParsedEquippedItems.json",JSON.stringify(items),err => {});
     return items;
 
 
 
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Return an object containing activity details for the hash provided
+ * @param {string} hash Maps to an activity in the game, and therefore what is stored in module memory
+ */
+export function fetchActivity(hash){
+    return{
+        details: {
+            name: activeActivites[hash].name,
+            description: activeActivites[hash].name,
+        },
+        modifiers: activeActivites[hash].modifiers
+    }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -344,7 +372,8 @@ export function parseTokenResponse(object){
  * Parse a subclass configuration
  * @param {string} subclassInstance The instance id of this subclass
  * @param {string} subclassNameHash The hash of this subclasses name in the manifest
- * @param {Map} sockets Map of all sockets from a parseItems instance
+ * @param {Map} sockets Map of all sockets from a parseItems instance, this could be changed in future for parse items to just
+ * pass the sockets object for the subclass, instead of the entire map
  * @returns {Object} subclass configuration
  */
 export function parseSubclass(subclassInstance, subclassNameHash, sockets){
@@ -362,17 +391,4 @@ export function parseSubclass(subclassInstance, subclassNameHash, sockets){
     }
     return subclass;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
- * Function used to externally set this modules debug state. If debug is true, the module instead reads from a directory
- * containing example response data located at LOCATION. This allows module functions to be manually called to test parsing
- * ability and outputs.
- *
- * @param flag boolean indicating module debug state
- */
-export function setDebugFlag(flag){
-    DEBUG = flag;
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

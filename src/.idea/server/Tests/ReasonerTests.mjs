@@ -1,0 +1,7 @@
+/**
+ * @module ReasonerTests
+ * @description Module to quickly generate coaching content for validation test
+ * @version 0.1.0
+ * @author Declan Roy Alan Wadsworth
+ */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

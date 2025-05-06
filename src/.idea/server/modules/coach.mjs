@@ -27,8 +27,11 @@ export default class Coach{
      */
     async get_suggestions_by_activity(activity_id,character) {
         return await this.reasoner.act_build(
-            activity_id,
-            this.userservice.getUserItems(this.getDisplayName()),
+            this.userservice.getActivity(activity_id),
+            {
+                vault: await this.userservice.getVaultItems(this.getDisplayName()),
+                character: await this.userservice.getCharacterConfiguration(this.getDisplayName()),
+            },
             character
         );
     }
@@ -88,11 +91,12 @@ export default class Coach{
      * @returns {Promise<Object>} The generated object from the reasoner
      */
     async getActivityAnalysis(instanceid,characterid){
+        const activity = await this.userservice.getActivitySummary(
+            instanceid,
+            characterid
+        )
         return await this.reasoner.activityAnalysis(
-            await this.userservice.getActivitySummary(
-                instanceid,
-                characterid
-            )
+            activity
         )
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

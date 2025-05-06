@@ -82,7 +82,7 @@ export async function baseAuthentication(coach, code){
     }else{
 
         await dbAuth.newUser(coach.details);
-        console.log("User Authentication://");
+        console.log("User Authentication:// New application user created");
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

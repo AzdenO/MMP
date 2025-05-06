@@ -41,63 +41,10 @@ As well as the following equipped weapons:
 -WEAPONS-
 and their subclass is configured as the following:
 -SUBCLASS-
-They have the following items available to them to switch out:
--ITEMS-
 
-Please analyze this build, producing your response in the following format without deviating:
-Analysis:
-    Overview and explanation of what activities/situations this build is optimized for, if any. If not geared towards any specific abilities, state this:
-    Producable status effects:
-        ability to produce longevity for effect with equipped items including any armor mods and weapon perks:
-    Weapon configuration:
-        for each weapon (put weapon name here):
-            weapon type advantages:
-            any status effect advantages the weapon provides:
-            further advantages with weapon perks(if any):
-            weapon disadvantages with weapon perks(if any):
-            weapon advantages with weapon stats:
-            weapon disadvantages with weapon stats:
-            possible switch of weapon from list of provided items:
-                advantage over currently equipped:
-                disadvantage over currently equipped:
-    Armor configuration:
-        for each piece of equipped armor (put armor name here):
-            for each equipped armor mod (put name here):
-                mod advantage to wider character configuration:
-                any disadvantages to wider character configuration:
-                possible different set of mods:
-                    for each suggestion, explain its advantage for wider character configuration:
-            Armor stat advantages (may not be true for some of this armors statistics):
-                resilience:
-                Mobility:
-                Recovery:
-                Discipline:
-                Intellect:
-                Strength:
-            Armor stat disadvantages (may not be true for some of this armors statistics):
-    Exotic choices (if any exotics are even equipped, if not, then explain the advantage exotics can provide):
-        exotic weapon (weapon name here):
-            perk advantages (briefly relating to different combat environments and wider character configuration if applicable):
-    Subclass configuration:
-        producable status effects (list here):
-            for each producable effect, explain its advantages:
-        melee ability choice:
-            explain advantage this choice provides for certain combat environments:
-        grenade ability choice:
-            explain advantage this choice provides for certain combat environments:
-        class ability choice:
-            explain advantage this choice provides for certain combat environments:
-        aspect choices:
-            for each aspect:
-                explain advantage this choice provides for wider subclass configuration:
-                explain advantage this choice provides to wider character configuration (including considerations for survivability, damage output, advantages for certain combat environments)
-        Fragment choices:
-            for each fragment:
-                explain advantage for wider character configuration (including benefits to overall build stats, damage output, defence ability, if applicable)
-                explain advantage to wider subclass configuration:
-        Chosen super ability:
-            explain advantages this particular super ability provides (including benefits in certain combat environments, activities, and how it could be used in line with wider character configuration)
-        Brief summary of build(including outlining whats good and bad about weapon choices, armor choices, subclass choices):
+Please analyze this build, analysing every indivdual aspect found in the passed response schema, evaluating weapon, armor
+and subclass choices, what combat the build is geared towards. All response elements must be covered within 8192 tokens, be concise
+in your response.
 
 /--/
 A destiny 2 player took part in an activity, with the following summary:

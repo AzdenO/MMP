@@ -49,7 +49,7 @@ const dbAuthServices = db.dbAuthServices;
  * Initialise the database module, catching any error that might occur and safely exiting server startup if so
  */
 try{
-    await dbBaseServices.initialise(mysql,destiny,prompts,false);
+    await dbBaseServices.initialise(mysql,prompts,false);
 }catch(error){
     console.log("Server:// Database initialisation failed, exiting server startup...");
     console.log(error);
@@ -162,7 +162,7 @@ api.get("/server/coach/character/:characterid/played/:instanceid/analysis",async
         const userid = await authServices.authorize(params.header["x-access-token"]);
         console.log("Server (GetActivtyAnalysis):// Request authenticated, processing request");
         const generated = await active_pool.process(userid, RequestCodes.ACTIVITYANALYSIS,[params.path["instanceid"],params.path["characterid"]]);
-        re.status(200);
+        res.status(200);
         res.json({
             success: true,
             message: "",
@@ -171,6 +171,40 @@ api.get("/server/coach/character/:characterid/played/:instanceid/analysis",async
     }catch(error){
         handle(error, res);
     }
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+api.get("/server/coach/character/:characterid/activity-skills", async (req, res) => {
+
+    const params = parseAllParams(
+        req,
+        res,
+        {
+            header: ["x-access-token"],
+            path: ["characterid"]
+        }
+    )
+    if(!params){
+        return;
+    }
+
+
+    try{
+        const userid = await authServices.authorize(params.header["x-access-token"]);
+        console.log("Server (GetWeaponSkills):// Request authenticated, processing request");
+        const generated = await active_pool.process(userid, RequestCodes.ACTIVITYSKILLS,[params.path["characterid"]]);
+        res.json({
+            success: true,
+            message: "You`re a wall around these zones guardian, take that iron will beyond the crucible",
+            content: generated
+        });
+
+    }catch(err){
+
+        handle(err, res);
+
+    }
+
+
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 api.get("/server/coach/weapon-skills", async (req, res) => {
@@ -222,9 +256,9 @@ api.get('/server/bungie/character/:characterid/recent-activities',async(req, res
     }
 
     try{
-        const userid = await authServices.authorize(token);
+        const userid = await authServices.authorize(params.header["x-access-token"]);
         console.log("Server (GetRecentActivities):// Request authenticated, fetching past 30 activities");
-        const generated = await active_pool.process(userid, RequestCodes.RECENTACTIVITIES,[charid]);
+        const generated = await active_pool.process(userid, RequestCodes.RECENTACTIVITIES,[params.path["characterid"]]);
         res.status(200);
         res.json({
             success: true,
@@ -349,7 +383,7 @@ api.post('/server/authorize', async (req, res) => {
             /*
              * MANUAL TESTING AREA, INSERT CODE HERE
              */
-            UserService.getVaultItems(newuser.getDisplayName());
+
             /*
              * END OF MANUAL TESTING AREA
              */
@@ -386,4 +420,4 @@ api_https.createServer(httpsOptions, api).listen(PORT, "0.0.0.0",() =>{//create 
 /*
  * MANUAL TESTING AREA FOR TESTING NOT REQUIRING BUNGIE ACCESS
  */
-
+generativeModel.loadSchemas();

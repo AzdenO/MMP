@@ -1,0 +1,2960 @@
+[
+    {
+        "hash": "1374392663",
+        "name": "King's Fall: Standard",
+        "description": "Long live the King…",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Devious Thievery",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:2223847550}"
+            }
+        ]
+    },
+    {
+        "hash": "313828469",
+        "name": "Ghosts of the Deep: Standard",
+        "description": "Drown in the deep, or rise from it.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Exotic Drop Rate Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:219516062}"
+            }
+        ]
+    },
+    {
+        "hash": "2582501063",
+        "name": "Pit of Heresy: Standard",
+        "description": "Deep beneath Sorrow's Harbor, the Hive keep their darkest secrets.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "1077850348",
+        "name": "Prophecy",
+        "description": "Enter the realm of the Nine and ask the question: \"What is the nature of the Darkness?\"",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "1262462921",
+        "name": "Spire of the Watcher: Standard",
+        "description": "Machinations run wild in this dust-ridden ruin. Bring them to heel.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:3104627285}"
+            }
+        ]
+    },
+    {
+        "hash": "107319834",
+        "name": "Crota's End: Standard",
+        "description": "He waits in the dark below.",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Solar] Solar shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Solar] Solar Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "910380154",
+        "name": "Deep Stone Crypt",
+        "description": "The chains of legacy must be broken.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Red Rover",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:733308108}"
+            }
+        ]
+    },
+    {
+        "hash": "1957660400",
+        "name": "Elimination",
+        "description": "Achieve victory by eliminating all opponents in this round-based mode.",
+        "modifiers": [
+            {
+                "name": "Elimination Rules",
+                "description": "To win, your team must become the last Guardian(s) standing by defeating the entire opposing team.\n\nTiebreaker: A capture zone appears when a round reaches overtime. Win the round by capturing the zone before the other team."
+            },
+            {
+                "name": "Notswap",
+                "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            }
+        ]
+    },
+    {
+        "hash": "2259621230",
+        "name": "Rumble",
+        "description": "Achieve victory by defeating opponents. No teams. No allegiance. A free-for-all where the leader had better watch their back.",
+        "modifiers": [
+            {
+                "name": "Rumble Rules",
+                "description": "To win, defeat your opponents to get the most points! This is a free-for-all mode where no one is an ally."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            }
+        ]
+    },
+    {
+        "hash": "3787302650",
+        "name": "Team Scorched",
+        "description": "Everyone on both teams has a Scorch Cannon. Be brave.",
+        "modifiers": [
+            {
+                "name": "Team Scorched Rules",
+                "description": "To win, defeat your opponents to score more points than them! Every player is equipped with a Scorch Cannon.\n\nScorch Cannon: A heavy-impact weapon borrowed from the Eliksni. Shots can detonate on impact or can be charged by holding and releasing the actuator for a larger explosion."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "2754695317",
+        "name": "Competitive",
+        "description": "Matches in this playlist affect your Competitive Division placement. Wins will lead to Promotions, increasing your Division placement. Losses will lead to Relegations, lowering your Division placement.",
+        "modifiers": [
+            {
+                "name": "Competitive Division Rules",
+                "description": "This playlist contains Collision and Survival. When you launch, it will randomly select one of the modes for you to play.\n\nCollision: To win, score more points than your opponents by capturing and controlling the zone. There will be one zone active at a time. Defeating your opponents does not directly grant points.\n\nSurvival: To win, your team must become the last Guardian(s) standing by defeating the opposing team to exhaust their revives."
+            },
+            {
+                "name": "Placement Series",
+                "description": "Complete placement matches to determine your starting position on the current Season's Ranked ladder.\n\nMatches played: {var:4027254163} of {var:2701182729}"
+            },
+            {
+                "name": "Notswap",
+                "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking prefers players with similar Competitive Rank."
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "135431604",
+        "name": "Gambit",
+        "description": "Defeat the enemies of humanity, collect their Motes, and bank them to summon a Primeval. First team to destroy their Primeval wins.",
+        "modifiers": [
+            {
+                "name": "Gambit Rules",
+                "description": "To win, be the first team to summon and defeat your Primeval. \n\nMotes: Defeated foes will drop Motes you can pick up. Watch out! If you die, you'll lose any Motes you're holding. \n\nBank: Deposit Motes you're holding in the bank. Bank enough Motes, and you'll summon a Primeval. \n\nBlockers: Bank enough Motes at once to summon Blockers that lock the opposing team's bank. \n\nInvasions: As your team banks Motes, an invasion portal will open, allowing you to enter the opposing team's area. Take them out to make them drop their Motes!"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "743628305",
+        "name": "Vanguard Ops",
+        "description": "The Vanguard seeks Guardians to undertake high-priority missions against the City's enemies.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "3029388711",
+        "name": "Nightfall: Advanced",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Advanced Modifiers",
+                "description": "Extra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            }
+        ]
+    },
+    {
+        "hash": "3029388710",
+        "name": "Nightfall: Expert",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Expert Modifiers",
+                "description": "Locked Loadout\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Equipment Locked",
+                "description": "You will not be able to change your equipment after this activity starts."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            }
+        ]
+    },
+    {
+        "hash": "3029388705",
+        "name": "Nightfall: Master",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nLocked Loadout\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            },
+            {
+                "name": "Chaff",
+                "description": "Radar is disabled."
+            }
+        ]
+    },
+    {
+        "hash": "3029388704",
+        "name": "Nightfall: Grandmaster",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Grandmaster Modifiers",
+                "description": "Extinguish\nLimited Revives\nContest\nJoin In Progress Disabled\nExtra Champions\nLocked Loadout\nExtra Shields"
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Limited Revives",
+                "description": "Limited fireteam revives. Gain additional revives by defeating Champions."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Chaff",
+                "description": "Radar is disabled."
+            }
+        ]
+    },
+    {
+        "hash": "1957660400",
+        "name": "Elimination",
+        "description": "Achieve victory by eliminating all opponents in this round-based mode.",
+        "modifiers": [
+            {
+                "name": "Elimination Rules",
+                "description": "To win, your team must become the last Guardian(s) standing by defeating the entire opposing team.\n\nTiebreaker: A capture zone appears when a round reaches overtime. Win the round by capturing the zone before the other team."
+            },
+            {
+                "name": "Notswap",
+                "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            }
+        ]
+    },
+    {
+        "hash": "2259621230",
+        "name": "Rumble",
+        "description": "Achieve victory by defeating opponents. No teams. No allegiance. A free-for-all where the leader had better watch their back.",
+        "modifiers": [
+            {
+                "name": "Rumble Rules",
+                "description": "To win, defeat your opponents to get the most points! This is a free-for-all mode where no one is an ally."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            }
+        ]
+    },
+    {
+        "hash": "3787302650",
+        "name": "Team Scorched",
+        "description": "Everyone on both teams has a Scorch Cannon. Be brave.",
+        "modifiers": [
+            {
+                "name": "Team Scorched Rules",
+                "description": "To win, defeat your opponents to score more points than them! Every player is equipped with a Scorch Cannon.\n\nScorch Cannon: A heavy-impact weapon borrowed from the Eliksni. Shots can detonate on impact or can be charged by holding and releasing the actuator for a larger explosion."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "2754695317",
+        "name": "Competitive",
+        "description": "Matches in this playlist affect your Competitive Division placement. Wins will lead to Promotions, increasing your Division placement. Losses will lead to Relegations, lowering your Division placement.",
+        "modifiers": [
+            {
+                "name": "Competitive Division Rules",
+                "description": "This playlist contains Collision and Survival. When you launch, it will randomly select one of the modes for you to play.\n\nCollision: To win, score more points than your opponents by capturing and controlling the zone. There will be one zone active at a time. Defeating your opponents does not directly grant points.\n\nSurvival: To win, your team must become the last Guardian(s) standing by defeating the opposing team to exhaust their revives."
+            },
+            {
+                "name": "Placement Series",
+                "description": "Complete placement matches to determine your starting position on the current Season's Ranked ladder.\n\nMatches played: {var:4027254163} of {var:2701182729}"
+            },
+            {
+                "name": "Notswap",
+                "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking prefers players with similar Competitive Rank."
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "135431604",
+        "name": "Gambit",
+        "description": "Defeat the enemies of humanity, collect their Motes, and bank them to summon a Primeval. First team to destroy their Primeval wins.",
+        "modifiers": [
+            {
+                "name": "Gambit Rules",
+                "description": "To win, be the first team to summon and defeat your Primeval. \n\nMotes: Defeated foes will drop Motes you can pick up. Watch out! If you die, you'll lose any Motes you're holding. \n\nBank: Deposit Motes you're holding in the bank. Bank enough Motes, and you'll summon a Primeval. \n\nBlockers: Bank enough Motes at once to summon Blockers that lock the opposing team's bank. \n\nInvasions: As your team banks Motes, an invasion portal will open, allowing you to enter the opposing team's area. Take them out to make them drop their Motes!"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "743628305",
+        "name": "Vanguard Ops",
+        "description": "The Vanguard seeks Guardians to undertake high-priority missions against the City's enemies.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "3029388711",
+        "name": "Nightfall: Advanced",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Advanced Modifiers",
+                "description": "Extra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            }
+        ]
+    },
+    {
+        "hash": "3029388710",
+        "name": "Nightfall: Expert",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Expert Modifiers",
+                "description": "Locked Loadout\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Equipment Locked",
+                "description": "You will not be able to change your equipment after this activity starts."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            }
+        ]
+    },
+    {
+        "hash": "3029388705",
+        "name": "Nightfall: Master",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nLocked Loadout\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            },
+            {
+                "name": "Chaff",
+                "description": "Radar is disabled."
+            }
+        ]
+    },
+    {
+        "hash": "3029388704",
+        "name": "Nightfall: Grandmaster",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Grandmaster Modifiers",
+                "description": "Extinguish\nLimited Revives\nContest\nJoin In Progress Disabled\nExtra Champions\nLocked Loadout\nExtra Shields"
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Limited Revives",
+                "description": "Limited fireteam revives. Gain additional revives by defeating Champions."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Chaff",
+                "description": "Radar is disabled."
+            }
+        ]
+    },
+    {
+        "hash": "1957660400",
+        "name": "Elimination",
+        "description": "Achieve victory by eliminating all opponents in this round-based mode.",
+        "modifiers": [
+            {
+                "name": "Elimination Rules",
+                "description": "To win, your team must become the last Guardian(s) standing by defeating the entire opposing team.\n\nTiebreaker: A capture zone appears when a round reaches overtime. Win the round by capturing the zone before the other team."
+            },
+            {
+                "name": "Notswap",
+                "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            }
+        ]
+    },
+    {
+        "hash": "2259621230",
+        "name": "Rumble",
+        "description": "Achieve victory by defeating opponents. No teams. No allegiance. A free-for-all where the leader had better watch their back.",
+        "modifiers": [
+            {
+                "name": "Rumble Rules",
+                "description": "To win, defeat your opponents to get the most points! This is a free-for-all mode where no one is an ally."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            }
+        ]
+    },
+    {
+        "hash": "3787302650",
+        "name": "Team Scorched",
+        "description": "Everyone on both teams has a Scorch Cannon. Be brave.",
+        "modifiers": [
+            {
+                "name": "Team Scorched Rules",
+                "description": "To win, defeat your opponents to score more points than them! Every player is equipped with a Scorch Cannon.\n\nScorch Cannon: A heavy-impact weapon borrowed from the Eliksni. Shots can detonate on impact or can be charged by holding and releasing the actuator for a larger explosion."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking does not utilize skill."
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "2754695317",
+        "name": "Competitive",
+        "description": "Matches in this playlist affect your Competitive Division placement. Wins will lead to Promotions, increasing your Division placement. Losses will lead to Relegations, lowering your Division placement.",
+        "modifiers": [
+            {
+                "name": "Competitive Division Rules",
+                "description": "This playlist contains Collision and Survival. When you launch, it will randomly select one of the modes for you to play.\n\nCollision: To win, score more points than your opponents by capturing and controlling the zone. There will be one zone active at a time. Defeating your opponents does not directly grant points.\n\nSurvival: To win, your team must become the last Guardian(s) standing by defeating the opposing team to exhaust their revives."
+            },
+            {
+                "name": "Placement Series",
+                "description": "Complete placement matches to determine your starting position on the current Season's Ranked ladder.\n\nMatches played: {var:4027254163} of {var:2701182729}"
+            },
+            {
+                "name": "Notswap",
+                "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking prefers players with similar Competitive Rank."
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "135431604",
+        "name": "Gambit",
+        "description": "Defeat the enemies of humanity, collect their Motes, and bank them to summon a Primeval. First team to destroy their Primeval wins.",
+        "modifiers": [
+            {
+                "name": "Gambit Rules",
+                "description": "To win, be the first team to summon and defeat your Primeval. \n\nMotes: Defeated foes will drop Motes you can pick up. Watch out! If you die, you'll lose any Motes you're holding. \n\nBank: Deposit Motes you're holding in the bank. Bank enough Motes, and you'll summon a Primeval. \n\nBlockers: Bank enough Motes at once to summon Blockers that lock the opposing team's bank. \n\nInvasions: As your team banks Motes, an invasion portal will open, allowing you to enter the opposing team's area. Take them out to make them drop their Motes!"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "743628305",
+        "name": "Vanguard Ops",
+        "description": "The Vanguard seeks Guardians to undertake high-priority missions against the City's enemies.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "3029388711",
+        "name": "Nightfall: Advanced",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Advanced Modifiers",
+                "description": "Extra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            }
+        ]
+    },
+    {
+        "hash": "3029388710",
+        "name": "Nightfall: Expert",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Expert Modifiers",
+                "description": "Locked Loadout\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Equipment Locked",
+                "description": "You will not be able to change your equipment after this activity starts."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            }
+        ]
+    },
+    {
+        "hash": "3029388705",
+        "name": "Nightfall: Master",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nLocked Loadout\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            },
+            {
+                "name": "Chaff",
+                "description": "Radar is disabled."
+            }
+        ]
+    },
+    {
+        "hash": "3029388704",
+        "name": "Nightfall: Grandmaster",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Grandmaster Modifiers",
+                "description": "Extinguish\nLimited Revives\nContest\nJoin In Progress Disabled\nExtra Champions\nLocked Loadout\nExtra Shields"
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Limited Revives",
+                "description": "Limited fireteam revives. Gain additional revives by defeating Champions."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Chaff",
+                "description": "Radar is disabled."
+            }
+        ]
+    },
+    {
+        "hash": "300092127",
+        "name": "Vesper's Host: Normal",
+        "description": "Defy the algorithm. Cut through its web.",
+        "modifiers": [
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:2774921993}"
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc, [Solar] Solar, and [Void] Void shields."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc, [Solar] Solar, and [Void] Void Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "4293676253",
+        "name": "Vesper's Host: Master",
+        "description": "Defy the algorithm. Cut through its web.",
+        "modifiers": [
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:2774921993}"
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc, [Solar] Solar, and [Void] Void shields."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc, [Solar] Solar, and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Disruption] Overload Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Disruption] Overload Champions."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            }
+        ]
+    },
+    {
+        "hash": "2032534090",
+        "name": "The Shattered Throne",
+        "description": "Strike back at the curse that plagues the Dreaming City.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "3881495763",
+        "name": "Vault of Glass: Standard",
+        "description": "Beneath Venus, evil stirs…",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Out of Its Way",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:3027371367}"
+            }
+        ]
+    },
+    {
+        "hash": "3029388711",
+        "name": "Nightfall: Advanced",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Advanced Modifiers",
+                "description": "Extra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            }
+        ]
+    },
+    {
+        "hash": "3029388710",
+        "name": "Nightfall: Expert",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Expert Modifiers",
+                "description": "Locked Loadout\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Equipment Locked",
+                "description": "You will not be able to change your equipment after this activity starts."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            }
+        ]
+    },
+    {
+        "hash": "3029388705",
+        "name": "Nightfall: Master",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nLocked Loadout\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Empath",
+                "description": "Enhanced radar. Take increased damage from melee."
+            },
+            {
+                "name": "Chaff",
+                "description": "Radar is disabled."
+            }
+        ]
+    },
+    {
+        "hash": "3029388704",
+        "name": "Nightfall: Grandmaster",
+        "description": "The Insight Terminus",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Threat",
+                "description": "{var:4005007457}% increase to incoming Void damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            },
+            {
+                "name": "Grandmaster Modifiers",
+                "description": "Extinguish\nLimited Revives\nContest\nJoin In Progress Disabled\nExtra Champions\nLocked Loadout\nExtra Shields"
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Limited Revives",
+                "description": "Limited fireteam revives. Gain additional revives by defeating Champions."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Chaff",
+                "description": "Radar is disabled."
+            }
+        ]
+    },
+    {
+        "hash": "3834447244",
+        "name": "Sundered Doctrine: Normal",
+        "description": "Power lies in the deepest vault.",
+        "modifiers": [
+            {
+                "name": "Exotic Drop Rate Boosts Gained",
+                "description": "Initial exotic drop rate boosts: {var:1611655700}"
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Solar] Solar shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Solar] Solar Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "3521648250",
+        "name": "Sundered Doctrine: Master",
+        "description": "Power lies in the deepest vault.",
+        "modifiers": [
+            {
+                "name": "Exotic Drop Rate Boosts Gained",
+                "description": "Initial exotic drop rate boosts: {var:1611655700}"
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc and [Solar] Solar shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc and [Solar] Solar Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            }
+        ]
+    },
+    {
+        "hash": "1441982566",
+        "name": "Vow of the Disciple: Standard",
+        "description": "The disciple beckons…",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Swift Destruction",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Base Information",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Defenses Down",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Looping Catalyst",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:1968703538}"
+            }
+        ]
+    },
+    {
+        "hash": "3889634515",
+        "name": "Vow of the Disciple: Master",
+        "description": "The disciple beckons…",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Raid Challenges",
+                "description": "All challenges are active."
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:1968703538}"
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc, [Solar] Solar, and [Void] Void shields."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc, [Solar] Solar, and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nExtra Shields"
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Disruption] Overload and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Disruption] Overload and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Overcharged Fusion Rifle",
+                "description": "{var:1027206613}% bonus to Fusion Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            }
+        ]
+    },
+    {
+        "hash": "1042180643",
+        "name": "Garden of Salvation",
+        "description": "\"The Garden calls out to you.\"",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "To the Top",
+                "description": "A challenge awaits…"
+            }
+        ]
+    },
+    {
+        "hash": "647593269",
+        "name": "Onslaught: Playlist",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 10 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. If the ADU is destroyed, the activity will end.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after defeating the boss wave.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Solar Surge",
+                "description": "{var:2189146210}% bonus to outgoing Solar damage."
+            },
+            {
+                "name": "Stasis Surge",
+                "description": "{var:2189146210}% bonus to outgoing Stasis damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "1852884874",
+        "name": "Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Delayed Extinguish",
+                "description": "Activates on wave 31.\n\nIf your fireteam falls, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "952872983",
+        "name": "Expert: Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Boss Rotation",
+                "description": "A Fallen Warpriest awaits you on wave 50."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Martyr",
+                "description": "Exploder units have more health."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Brawler",
+                "description": "Melee abilities deal more damage and recharge much faster."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "647593269",
+        "name": "Onslaught: Playlist",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 10 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. If the ADU is destroyed, the activity will end.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after defeating the boss wave.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Solar Surge",
+                "description": "{var:2189146210}% bonus to outgoing Solar damage."
+            },
+            {
+                "name": "Stasis Surge",
+                "description": "{var:2189146210}% bonus to outgoing Stasis damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "1852884874",
+        "name": "Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Delayed Extinguish",
+                "description": "Activates on wave 31.\n\nIf your fireteam falls, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "952872983",
+        "name": "Expert: Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Boss Rotation",
+                "description": "A Fallen Warpriest awaits you on wave 50."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Martyr",
+                "description": "Exploder units have more health."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Brawler",
+                "description": "Melee abilities deal more damage and recharge much faster."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "647593269",
+        "name": "Onslaught: Playlist",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 10 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. If the ADU is destroyed, the activity will end.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after defeating the boss wave.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Solar Surge",
+                "description": "{var:2189146210}% bonus to outgoing Solar damage."
+            },
+            {
+                "name": "Stasis Surge",
+                "description": "{var:2189146210}% bonus to outgoing Stasis damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "1852884874",
+        "name": "Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Delayed Extinguish",
+                "description": "Activates on wave 31.\n\nIf your fireteam falls, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "952872983",
+        "name": "Expert: Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Boss Rotation",
+                "description": "A Fallen Warpriest awaits you on wave 50."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Martyr",
+                "description": "Exploder units have more health."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Brawler",
+                "description": "Melee abilities deal more damage and recharge much faster."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "2754695317",
+        "name": "Competitive",
+        "description": "Matches in this playlist affect your Competitive Division placement. Wins will lead to Promotions, increasing your Division placement. Losses will lead to Relegations, lowering your Division placement.",
+        "modifiers": [
+            {
+                "name": "Competitive Division Rules",
+                "description": "This playlist contains Collision and Survival. When you launch, it will randomly select one of the modes for you to play.\n\nCollision: To win, score more points than your opponents by capturing and controlling the zone. There will be one zone active at a time. Defeating your opponents does not directly grant points.\n\nSurvival: To win, your team must become the last Guardian(s) standing by defeating the opposing team to exhaust their revives."
+            },
+            {
+                "name": "Placement Series",
+                "description": "Complete placement matches to determine your starting position on the current Season's Ranked ladder.\n\nMatches played: {var:4027254163} of {var:2701182729}"
+            },
+            {
+                "name": "Notswap",
+                "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking prefers players with similar Competitive Rank."
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "2754695317",
+        "name": "Competitive",
+        "description": "Matches in this playlist affect your Competitive Division placement. Wins will lead to Promotions, increasing your Division placement. Losses will lead to Relegations, lowering your Division placement.",
+        "modifiers": [
+            {
+                "name": "Competitive Division Rules",
+                "description": "This playlist contains Collision and Survival. When you launch, it will randomly select one of the modes for you to play.\n\nCollision: To win, score more points than your opponents by capturing and controlling the zone. There will be one zone active at a time. Defeating your opponents does not directly grant points.\n\nSurvival: To win, your team must become the last Guardian(s) standing by defeating the opposing team to exhaust their revives."
+            },
+            {
+                "name": "Placement Series",
+                "description": "Complete placement matches to determine your starting position on the current Season's Ranked ladder.\n\nMatches played: {var:4027254163} of {var:2701182729}"
+            },
+            {
+                "name": "Notswap",
+                "description": "Swapping Exotic armor or ammo type in the Kinetic or Energy weapon slot drains all ability energy."
+            },
+            {
+                "name": "Increased Crucible Rank",
+                "description": "All Crucible Rank point gains are increased!"
+            },
+            {
+                "name": "Matchmaking",
+                "description": "Matchmaking prefers players with similar Competitive Rank."
+            },
+            {
+                "name": "Shaxx's Training Weights",
+                "description": "Ability Cooldowns Increased"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "2122313384",
+        "name": "Last Wish: Standard",
+        "description": "\"The opportunity of a lifetime.\"",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Summoning Ritual",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Which Witch",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Forever Fight",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Keep Out",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Strength of Memory",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:1641349362}"
+            }
+        ]
+    },
+    {
+        "hash": "2823159265",
+        "name": "Duality: Standard",
+        "description": "Dive into the depths of the exiled emperor's mind in search of dark secrets.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:2864503325}"
+            }
+        ]
+    },
+    {
+        "hash": "2381413764",
+        "name": "Root of Nightmares: Standard",
+        "description": "A sinister threat has taken root.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Crossfire Challenge",
+                "description": "A challenge awaits…"
+            },
+            {
+                "name": "Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:2935433793}"
+            }
+        ]
+    },
+    {
+        "hash": "1852884874",
+        "name": "Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Delayed Extinguish",
+                "description": "Activates on wave 31.\n\nIf your fireteam falls, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "952872983",
+        "name": "Expert: Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Boss Rotation",
+                "description": "A Fallen Warpriest awaits you on wave 50."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Martyr",
+                "description": "Exploder units have more health."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Brawler",
+                "description": "Melee abilities deal more damage and recharge much faster."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "1852884874",
+        "name": "Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Delayed Extinguish",
+                "description": "Activates on wave 31.\n\nIf your fireteam falls, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "952872983",
+        "name": "Expert: Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Boss Rotation",
+                "description": "A Fallen Warpriest awaits you on wave 50."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Martyr",
+                "description": "Exploder units have more health."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Brawler",
+                "description": "Melee abilities deal more damage and recharge much faster."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "1852884874",
+        "name": "Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Delayed Extinguish",
+                "description": "Activates on wave 31.\n\nIf your fireteam falls, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "952872983",
+        "name": "Expert: Mothyards: Onslaught",
+        "description": "Defend Vanguard forces with the Advanced Defensive Unit against an onslaught of 50 combatant waves.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Onslaught Rules",
+                "description": "Defend and repair the ADU against waves of combatants. There are 10 waves to a set. If the ADU is destroyed, the activity is over.\n\nScraps: Activity currency used to purchase and upgrade defenses at the start of every set and after waves 3 and 6.\n\nRewards: Received after every set upon defeating the boss wave. Subsequent sets provide better rewards. Expert mode increases rewards.\n\nBonus Objectives: These reward resources and armaments."
+            },
+            {
+                "name": "Escalating Difficulty",
+                "description": "Power is disabled in this activity. Combatant difficulty increases with each set."
+            },
+            {
+                "name": "Extinguish",
+                "description": "If your fireteam falls in a Restricted Zone, everyone is returned to orbit."
+            },
+            {
+                "name": "Galvanized",
+                "description": "Combatants have more health and are more difficult to stun."
+            },
+            {
+                "name": "Boss Rotation",
+                "description": "A Fallen Warpriest awaits you on wave 50."
+            },
+            {
+                "name": "Arc Threat",
+                "description": "{var:4005007457}% increase to incoming Arc damage."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Scorched Earth",
+                "description": "Enemies throw grenades significantly more often."
+            },
+            {
+                "name": "Martyr",
+                "description": "Exploder units have more health."
+            },
+            {
+                "name": "Overcharged Rocket Launcher",
+                "description": "{var:1027206613}% bonus to Rocket Launcher damage."
+            },
+            {
+                "name": "Overcharged Trace Rifle",
+                "description": "{var:1027206613}% bonus to Trace Rifle damage."
+            },
+            {
+                "name": "Randomized Banes",
+                "description": "Combatants are granted random Banes."
+            },
+            {
+                "name": "Brawler",
+                "description": "Melee abilities deal more damage and recharge much faster."
+            },
+            {
+                "name": "Haste",
+                "description": "Moving quickly slowly regenerates your health. Standing still slowly deals damage."
+            }
+        ]
+    },
+    {
+        "hash": "2004855007",
+        "name": "Warlord's Ruin: Standard",
+        "description": "Nestled deep in the mountains of the EDZ, Scorn lay claim to a Dark Age castle containing dangerous relics, and a blighted vengeance festers in the dirt.",
+        "modifiers": [
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Exotic Drop Rate Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:1510191578}"
+            }
+        ]
+    },
+    {
+        "hash": "2534833093",
+        "name": "Warlord's Ruin: Master",
+        "description": "Nestled deep in the mountains of the EDZ, Scorn lay claim to a Dark Age castle containing dangerous relics, and a blighted vengeance festers in the dirt.",
+        "modifiers": [
+            {
+                "name": "Exotic Drop Rate Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:1510191578}"
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Arc] Arc, [Solar] Solar, and [Void] Void shields."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Arc] Arc, [Solar] Solar, and [Void] Void Shields"
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nExtra Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Disruption] Overload and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Disruption] Overload and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            }
+        ]
+    },
+    {
+        "hash": "1541433876",
+        "name": "Salvation's Edge: Standard",
+        "description": "Free the Light.",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Solar] Solar and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Solar] Solar and [Void] Void Shields"
+            },
+            {
+                "name": "Coordinated Efforts Challenge",
+                "description": "\"Salvation's Edge\" raid challenge modes."
+            },
+            {
+                "name": "Exotic Drop Rate Boosts Gained",
+                "description": "Initial Exotic drop rate boosts: {var:3177264920}"
+            },
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "hash": "4129614942",
+        "name": "Salvation's Edge: Master",
+        "description": "Free the Light.",
+        "modifiers": [
+            {
+                "name": "Shielded Foes",
+                "description": "You will face combatants with [Solar] Solar and [Void] Void shields.\n\nActivity modifiers may add more shield types."
+            },
+            {
+                "name": "Shielded Foes",
+                "description": "[Solar] Solar and [Void] Void Shields"
+            },
+            {
+                "name": "",
+                "description": ""
+            },
+            {
+                "name": "Raid Challenges",
+                "description": "All challenges are active."
+            },
+            {
+                "name": "Overcharged Weapons",
+                "description": "Weapon overcharges from the Seasonal Artifact are active in this activity.\n\nKinetic weapons do increased damage when your Super element matches an active surge."
+            },
+            {
+                "name": "Master Modifiers",
+                "description": "Extra Champions\nExtra Shields"
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions.\n\nVisit the Character or Mod Customization screen to view your active anti-Champion perks."
+            },
+            {
+                "name": "Champion Foes",
+                "description": "You will face [Shield-Piercing] Barrier, [Disruption] Overload, and [Stagger] Unstoppable Champions."
+            },
+            {
+                "name": "Overcharged Fusion Rifle",
+                "description": "{var:1027206613}% bonus to Fusion Rifle damage."
+            },
+            {
+                "name": "Void Surge",
+                "description": "{var:2189146210}% bonus to outgoing Void damage."
+            },
+            {
+                "name": "Strand Surge",
+                "description": "{var:2189146210}% bonus to outgoing Strand damage."
+            }
+        ]
+    }
+]
