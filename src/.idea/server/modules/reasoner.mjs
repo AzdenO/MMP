@@ -1,6 +1,6 @@
 import {GoogleGenAI, Type} from "@google/genai";
 import fs from "node:fs";
-import env from "dotenv";
+import env from "dotenv";//external library (not developed by me) to load environment variables
 import {replaceMultiple} from "./utils/stringUtils.js";
 import {PromptIndexes} from "./Enums/PromptIndexes.mjs";
 import {ReasonerError} from "./utils/errors.mjs";
@@ -50,7 +50,6 @@ export default class Reasoner{
             schema,
             0
         );
-        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/ActivitySkills.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +74,6 @@ export default class Reasoner{
             this.schemas.activityBuildSchema,
             1
         );
-        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/ActivityBuild_1.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +87,6 @@ export default class Reasoner{
             this.schemas.weaponSkills,
             0
         )
-        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/WeaponSkills.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,7 +145,6 @@ export default class Reasoner{
             this.schemas.characterAnalysis,
             0
         );
-        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/CharacterAnalysis.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +164,6 @@ export default class Reasoner{
             this.schemas.ActivityAnalysis,
             0
         );
-        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/ActivityAnalysis_1.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -189,7 +184,6 @@ export default class Reasoner{
             this.schemas.generatedTargets,
             0
         );
-        fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ReasonerResponses/Targets.json", JSON.stringify(result,null,4), (err) => {})
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -948,7 +942,6 @@ export default class Reasoner{
             required:["characterSummary","producableEffects","weaponConfiguration","armorConfiguration","exoticChoices","subclassConfiguration","summary"],
         }
         this.schemas = schemas;
-        fs.writeFile('O://Dev/Level_4/VanguardMentorServer/src/.idea/server/resources/ReasonerResources/ResponseSchemas.json', JSON.stringify(schemas, null, 4), (err) => {});
         /////////////////////////////////////////////////////
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

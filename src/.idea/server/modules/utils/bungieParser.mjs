@@ -75,7 +75,6 @@ export function parseWeaponStats(object){
         }
 
     }
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ParsedBungieResponses/ParsedWeaponStats.json",JSON.stringify(results),err => {});
 
     return results;
 }
@@ -203,7 +202,6 @@ export function parseActivityHistory(pgcrArray, player){
 
         });
     }
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ParsedBungieResponses/ParsedPGCRs.json",JSON.stringify(results),err => {});
     return results;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,7 +297,6 @@ export function parseItems(object, key){
         }
         items.push(parseditem);
     }
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/ParsedBungieResponses/ParsedEquippedItems.json",JSON.stringify(items),err => {});
     return items;
 
 

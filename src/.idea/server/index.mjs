@@ -4,11 +4,10 @@ import api_https from "https";//https server module, allows for communication ov
 
 import fs from "node:fs";//for reading files on the system the server runs on
 
-import cors from "cors";//cross origin resource sharing module
+import cors from "cors";//cross origin resource sharing module, external module, not my own work
 
 import dayjs from "dayjs";//time module
 
-import cookieParser from "cookie-parser";
 
 ////////////////////////////////////////////////SERVER-WIDE DEPENDENCY CONFIGURATION////////////////////////////////////
 /*Main Server File Dependencies*/
@@ -417,7 +416,4 @@ api_https.createServer(httpsOptions, api).listen(PORT, "0.0.0.0",() =>{//create 
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
- * MANUAL TESTING AREA FOR TESTING NOT REQUIRING BUNGIE ACCESS
- */
-generativeModel.loadSchemas();
+

@@ -194,7 +194,6 @@ async function getCharacterItems(characterid,membershipid,membertype,access_toke
     const final_url = replaceMultiple(/TYPE|MEMBERID|CHARACTERID/g,pathParams,Endpoints.user_inventory_url)+"?components=300,304,302,305,"+locationComponent;
 
     const res = await protectedRequest(access_token,final_url,"Character Equipped Items Request");
-    await fs.writeFile("O://exampleEquippedItems.json",JSON.stringify(res,null,4),err => {});
     return parseItems(res,key);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -241,7 +240,6 @@ async function getAccountWeaponStats(membershipid,membertype,access_token, pve){
         requested = result.allPvP.allTime;
     }
     const results = parseWeaponStats(requested);
-    fs.writeFile("O://exampleWeaponStatsParsed.txt",JSON.stringify(results,null,4),"utf8",(err) => {})
     return results;
 
 
@@ -734,14 +732,6 @@ async function moduleInit(){
     await getMilestoneActivities();
 
     await  getActivityModeDefinitions();
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/StaticActivities.json",JSON.stringify(staticActivities,null,4),function(err){});
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/ActivityModifiers.json",JSON.stringify(activityModifiers,null,4),function(err){});
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/ActiveActivities.json",JSON.stringify(activeActivities,null,4),function(err){});
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/ItemHashes.json",JSON.stringify(itemNameHashes,null,4),function(err){});
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/PerkHashes.json",JSON.stringify(perkHashes,null,4),function(err){});
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/StatHashes.json",JSON.stringify(statHashes,null,4),function(err){});
-    fs.writeFile("O://Dev/Level_4/VanguardMentorServer/src/.idea/server/TestData/StaticGameData/BucketHashes.json",JSON.stringify(bucketHashes,null,4),function(err){});
-
     //pass bungie parser all static game data to be used in parsing all future responses from user requests
     setGameData(staticActivities,activityModifiers,activeActivities,itemNameHashes,perkHashes,statHashes,bucketHashes);
 
